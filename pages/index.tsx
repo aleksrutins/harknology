@@ -1,3 +1,4 @@
+import Banner from '@component:Banner'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -13,9 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <Banner/>
 
         <p className={styles.description}>
           Get started by editing{' '}

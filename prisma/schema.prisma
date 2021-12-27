@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nexusPrisma {
+  provider = "nexus-prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Class {
+  id           Int          @id @default(autoincrement())
+  name         String
+  description  String
+  teacherEmail String       @db.VarChar(255)
+  teacher      User         @relation(fields: [teacherEmail], references: [email])
+  discussions  Discussion[]
+  students     User[]       @relation("ClassStudents")
+}
+
+model Discussion {
+  id          Int        @id @default(autoincrement())
+  classId     Int
+  description String
+  name        String     @db.VarChar(255)
+  Class       Class      @relation(fields: [classId], references: [id])
+  Response    Response[]
+}
+
+model Response {
+  id           Int         @id @default(autoincrement())
+  userEmail    String      @db.VarChar(255)
+  content      String
+  discussionId Int?
+  parentId     Int?
+  Discussion   Discussion? @relation(fields: [discussionId], references: [id])
+  parent       Response?   @relation("ResponseToResponse_parentId", fields: [parentId], references: [id])
+  User         User        @relation(fields: [userEmail], references: [email])
+  responses    Response[]  @relation("ResponseToResponse_parentId")
+}
+
+model User {
+  email           String     @id @db.VarChar(255)
+  type            String     @default("student")
+  password        String     @db.VarChar(1024)
+  name            String     @default("Anonymous Borscht") @db.VarChar(255)
+  classes         Class[]    @relation("ClassStudents")
+  teachingClasses Class[]
+  responses       Response[]
+}
