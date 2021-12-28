@@ -98,10 +98,6 @@
   font-size: 1.5rem;
 }
 
-.card h2:not(~ p) {
-    margin: 0;
-}
-
 .card p {
   margin: 0;
   font-size: 1.25rem;

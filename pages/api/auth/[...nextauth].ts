@@ -1,6 +1,5 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
-
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
@@ -10,4 +9,10 @@ export default NextAuth({
     })
     // ...add more providers here
   ],
+  theme: {
+    colorScheme: 'auto',
+    brandColor: 'rgb(0, 157, 53)',
+    logo: '/banner.svg'
+  },
+  secret: process.env.NEXT_AUTH_SECRET
 })

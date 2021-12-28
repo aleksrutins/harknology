@@ -33,7 +33,7 @@ body {
     --button-cursor: pointer; 
 
     /* Default font */
-    --font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, 'Cantarell', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     /* Font for `h1.title` */
     --title-font: "Quicksand", var(--font-family);
     /* Font for `h2.subtitle` */
