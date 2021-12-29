@@ -1,0 +1,33 @@
+.loadingIndicator {
+    display: block;
+    border: 2px solid white;
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    animation: loading .5s linear 0s infinite;
+    animation-play-state: running;
+    justify-self: center;
+    align-self: center;
+}
+
+.center {
+    margin: auto;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate3d(0, 0, 0, 0);
+    }
+    /* 25% {
+        transform: rotate(120deg)
+    }
+    50% {
+        transform: rotate(180deg)
+    }
+    75% {
+        transform: rotate(270deg);
+    } */
+    100% {
+        transform: rotate3d(2, 3, 3, 360deg);
+    }
+}

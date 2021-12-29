@@ -1,0 +1,18 @@
+.mainArea {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: stretch;
+}
+
+.contentView {
+    overflow-y: auto;
+    padding-top: 5px;
+    flex: 1;
+}

@@ -1,19 +1,23 @@
 @import url("your.css");
 html,
 body {
-  --color-primary: rgb(0, 157, 53);
-  --border-radius: 5px;
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    --color-primary: rgb(0, 157, 53);
+    --border-radius: 5px;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+div#__next {
+    height: 100vh;
 }
