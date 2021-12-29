@@ -3,6 +3,7 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { ComponentType } from "react";
 import LoadingIndicator from "./LoadingIndicator";
+import Image from 'next/image';
 
 export type NavProps = {
 }
@@ -20,7 +21,7 @@ const AppNav: ComponentType<NavProps> = dynamic(async () => (props) => {
             <LoadingIndicator borderColor="white"/>
             : 
                     <>
-                    <img src={session!.user?.image!} className={styles.profileImg} alt={session!.user?.name!} tabIndex={0}></img>
+                    <Image src={session!.user?.image!} className={styles.profileImg} alt={session!.user?.name!} tabIndex={0}></Image>
                     <div className={styles.authPopup}>
                         <span>{session!.user?.name}</span>
                         <button onClick={() => signOut()}>Log Out</button>
