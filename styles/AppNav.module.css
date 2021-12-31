@@ -54,6 +54,7 @@
 
 .authPopup button:hover {
     background-color: #d1d1d1;
+    color: black;
 }
 
 .profileImg:focus~.authPopup,
