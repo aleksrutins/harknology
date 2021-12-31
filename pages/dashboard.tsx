@@ -1,8 +1,7 @@
-import DashboardLayout from "@/components/DashboardLayout";
+import { useAuth } from "@/auth";
 import LoadingIndicator from "@/components/LoadingIndicator";
 
 export default function Dashboard() {
-    return <DashboardLayout>
-        <LoadingIndicator borderColor="black" center/>
-    </DashboardLayout>
+    const {session, status} = useAuth();
+    return <LoadingIndicator borderColor="black" center/>
 }

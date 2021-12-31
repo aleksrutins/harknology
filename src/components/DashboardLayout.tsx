@@ -8,7 +8,7 @@ import styles from '@~/styles/DashboardLayout.module.css';
 
 const DashboardLayout: FunctionComponent = (props) => {
     let {status} = useSession();
-    if(status == 'unauthenticated') signIn();
+    // if(status == 'unauthenticated') signIn();
     return <div className={styles.content}>
         <Head>
             <title>Dashboard | Harknology</title>

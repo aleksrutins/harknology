@@ -1,4 +1,10 @@
-[
-    ["Dashboard", "/dashboard"],
-    ["Classes", "/classes"]
-]
+{
+    "top": [
+        ["Dashboard", "/dashboard"],
+        ["Classes", "/classes"]
+    ],
+    "bottom": [
+        ["Welcome", "/"],
+        ["About", "/about"]
+    ]
+}

@@ -29,7 +29,7 @@
     right: 15px;
     top: 56px;
     border-radius: var(--border-radius);
-    box-shadow: 2px 3px 16px -3px #C1C1C1;
+    box-shadow: var(--shadow) #C1C1C1;
     padding-top: var(--border-radius);
     padding-bottom: var(--border-radius);
     background-color: #ffffff;
@@ -60,4 +60,22 @@
 .authPopup:hover,
 .authPopup:focus {
     display: flex;
+}
+
+.btn {
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--text-primary);
+    transition-property: box-shadow color background-color;
+    transition-duration: .2s;
+    padding: 10px 20px;
+    font-family: 'Raleway';
+    font-weight: 300;
+}
+
+.btn:hover {
+    background-color: white;
+    color: black;
+    box-shadow: var(--shadow) #383838;
 }

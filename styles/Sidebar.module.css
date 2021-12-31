@@ -1,8 +1,13 @@
 .sidebar {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     border-right: 1px solid var(--color-primary);
-    height: 100%;
+}
+
+.sidebarSection {
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar a {

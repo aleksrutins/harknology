@@ -15,7 +15,7 @@ const AppNav: ComponentType<NavProps> = dynamic(async () => (props) => {
             harknology
         </h2>
         <div>
-            {status == 'unauthenticated' ? <button onClick={() => signIn()}>Sign In</button> :
+            {status == 'unauthenticated' ? <button onClick={() => signIn()} className={styles.btn}>Sign In</button> :
                 (status == 'loading' ?
                     <LoadingIndicator borderColor="white" />
                     :

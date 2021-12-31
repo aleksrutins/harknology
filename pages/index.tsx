@@ -26,21 +26,21 @@ const Home: NextPage = () => {
           {status == "authenticated"?
             <div className={styles.cardStack}>
             <Link href="/dashboard">
-                <a className={styles.card}><h2>Dashboard &rarr;</h2></a>
+                <a className="card headerOnly"><h2>Dashboard</h2></a>
             </Link>
-            <a onClick={() => signOut()} className={styles.card}>
-                <h2>Sign out &rarr;</h2>
+            <a onClick={() => signOut()} className="card headerOnly">
+                <h2>Sign out</h2>
             </a>
             </div>
             :
-            <a onClick={() => signIn()} className={styles.card}>
-                <h2>Sign In &rarr;</h2>
+            <a onClick={() => signIn()} className="card">
+                <h2>Sign In</h2>
                 <p>Sign in with Google to start using Harknology.</p>
             </a>
           }
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn More&rarr;</h2>
+          <a href="https://nextjs.org/learn" className="card">
+            <h2>Learn More</h2>
             <p>Learn more about Harknology, and whether it would be right for you.</p>
           </a>
         </div>

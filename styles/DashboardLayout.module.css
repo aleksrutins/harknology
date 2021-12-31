@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     flex: 1;
+    overflow-y: hidden;
 }
 
 .content {
@@ -13,6 +14,6 @@
 
 .contentView {
     overflow-y: auto;
-    padding-top: 5px;
+    padding: 5px;
     flex: 1;
 }

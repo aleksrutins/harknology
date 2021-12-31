@@ -3,6 +3,7 @@ import styles from "@~/styles/Sidebar.module.css";
 import { useRouter } from "next/router";
 import { FunctionComponent } from "react";
 import links from "@/links.json";
+import { useSession } from "next-auth/react";
 
 const SidebarLink: FunctionComponent<{href: string}> = (props) => {
     const router = useRouter();
@@ -10,7 +11,13 @@ const SidebarLink: FunctionComponent<{href: string}> = (props) => {
 }
 
 export default function Sidebar() {
-    return <div className={styles.sidebar}>
-        {links.map(link => <SidebarLink key={link[1]} href={link[1]}>{link[0]}</SidebarLink>)}
-    </div>
+    const {status} = useSession();
+    return status == 'authenticated'? <div className={styles.sidebar}>
+        <div className={styles.sidebarSection}>
+        {links.top.map(link => <SidebarLink key={link[1]} href={link[1]}>{link[0]}</SidebarLink>)}
+        </div>
+        <div className={styles.sidebarSection}>
+        {links.bottom.map(link => <SidebarLink key={link[1]} href={link[1]}>{link[0]}</SidebarLink>)}
+        </div>
+    </div> : null;
 }
