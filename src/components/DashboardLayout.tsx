@@ -11,7 +11,7 @@ const DashboardLayout: FunctionComponent = (props) => {
     // if(status == 'unauthenticated') signIn();
     return <div className={styles.content}>
         <Head>
-            <title>Dashboard | Harknology</title>
+            <title>Harknology</title>
         </Head>
         <AppNav></AppNav>
         <main className={styles.mainArea}>

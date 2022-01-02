@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 
 const SidebarLink: FunctionComponent<{href: string}> = (props) => {
     const router = useRouter();
-    return <Link href={props.href}><a className={router.asPath == props.href ? styles.active : undefined}>{props.children}</a></Link>;
+    return <Link href={props.href}><a className={router.asPath.startsWith(props.href) ? styles.active : undefined}>{props.children}</a></Link>;
 }
 
 export default function Sidebar() {

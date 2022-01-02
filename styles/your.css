@@ -158,8 +158,7 @@ input:not([type=hidden]) {
 
 /* Any non-hidden input anywhere, when focused. */
 input:not([type=hidden]):focus {
-    outline: none;
-    border-width: var(--focus-border-width);
+    outline: calc(var(--focus-border-width) - var(--border-width)) var(--border-style) var(--color-primary);
 }
 
 /* A button, hovered or focused */

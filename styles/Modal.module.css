@@ -30,3 +30,12 @@
 .content {
     padding: 10px;
 }
+
+.buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 10px;
+}
+.buttons button {
+    margin-left: 6px;
+}

@@ -8,10 +8,11 @@ export function useClasses() {
     const {data: classes, error} = useSWR('/api/classes', json);
     const {session} = useAuth();
     return {
-        classes: (classes as Class[]),
+        data: (classes as {classes: Class[], classesTeaching: Class[]}),
         error,
-        async createClass(data: {name: string, description: string, teacherEmail: string}) {
+        async createClass(data: {name: string, description: string}) {
             return await fetch('/api/createClass', {
+                method: 'POST',
                 body: JSON.stringify(data)
             });
         }

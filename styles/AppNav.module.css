@@ -62,21 +62,3 @@
 .authPopup:focus {
     display: flex;
 }
-
-.btn {
-    background-color: var(--color-primary);
-    border: none;
-    border-radius: var(--border-radius);
-    color: var(--text-primary);
-    transition-property: box-shadow color background-color;
-    transition-duration: .2s;
-    padding: 10px 20px;
-    font-family: 'Raleway';
-    font-weight: 300;
-}
-
-.btn:hover {
-    background-color: white;
-    color: black;
-    box-shadow: var(--shadow) #383838;
-}

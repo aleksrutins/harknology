@@ -14,7 +14,10 @@ export default async function handler(
   }
   try {
       await prisma.class.create({
-          data: JSON.parse(req.body)
+          data: {
+            ...JSON.parse(req.body),
+            teacherEmail: session.user?.email
+          }
       });
   } catch(e) {
       res.status(500).send('Error');

@@ -61,7 +61,22 @@ h2 {
     border-radius: 10px;
     transition: color 0.15s ease, border-color 0.15s ease;
     max-width: 300px;
+    min-width: 300px;
     cursor: pointer;
+    flex-grow: 1;
+}
+.card.dashed {
+    border-style: dashed;
+    transition-property: all;
+}
+.card.placeholder {
+    color: #bdbdbd
+}
+.card.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 a.card:hover,
@@ -69,16 +84,27 @@ a.card:focus,
 a.card:active {
     color: var(--color-primary);
     border-color: var(--color-primary);
+    border-style: solid;
 }
 
-.card:not(.headerOnly) h2 {
+.card h2 {
+    display: grid;
+    width: 100%;
+    grid-template-areas: 
+        'title arrow'
+        'subtitle arrow';
+}
+
+.card:not(.headerOnly) h2 .title {
     margin: 0 0 1rem 0;
     font-size: 1.5rem;
+    grid-area: title;
 }
 
 .card h2::after {
-    float: right;
     content: "→";
+    grid-area: arrow;
+    text-align: end;
 }
 
 .card p {
@@ -87,7 +113,66 @@ a.card:active {
     line-height: 1.5;
 }
 
+.card.class-card p {
+    font-size: 0.9rem;
+}
+.card h2 .subtitle {
+    display: block;
+    font-size: 0.75rem;
+    grid-area: subtitle;
+}
+
 .cardStack {
     display: flex;
     flex-direction: column;
+}
+.btn {
+    border: none;
+    border-radius: var(--border-radius);
+    transition-property: box-shadow color background-color;
+    transition-duration: .2s;
+    padding: 10px 20px;
+    font-family: 'Raleway';
+    font-weight: 300;
+}
+
+.btn:hover {
+    box-shadow: var(--shadow) #383838;
+}
+
+.primary {
+    background-color: var(--color-primary);
+    color: var(--text-primary);
+}
+
+.hover-white:hover {
+    background-color: white;
+    color: black;
+}
+.hover-primary:hover {
+    background-color: var(--color-primary);
+    color: var(--text-primary);
+}
+
+.white {
+    background-color: white;
+    color: black;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form * {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+textarea {
+    font-family: var(--font-family);
+    border-radius: var(--border-radius);
+    border: var(--border-width) var(--border-style) var(--color-primary);
+}
+textarea:focus {
+    outline: calc(var(--focus-border-width) - var(--border-width)) var(--border-style) var(--color-primary);
 }

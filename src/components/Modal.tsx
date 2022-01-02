@@ -20,4 +20,8 @@ const Modal: FunctionComponent<Props> = (props) => {
     </> : null);
 };
 
+export const ModalButtons: FunctionComponent<{}> = (props) => {
+    return <div className={styles.buttons}>{props.children}</div>
+}
+
 export default Modal;
