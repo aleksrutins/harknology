@@ -38,7 +38,7 @@ export default function ClassView() {
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [joinOpen, setJoinOpen] = useState(false);
     const [joinCode, setJoinCode] = useState('');
-    const [joinExpires, setJoinExpires] = useState(new Date());
+    const [joinExpires, setJoinExpires] = useState(new Date().toString());
 
     async function joinClass() {
         const code: any = await (await fetch(`/api/classes/${data?.id}/join/code`)).json();
