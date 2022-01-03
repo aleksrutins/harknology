@@ -10,6 +10,7 @@ import Head from "next/head";
 import { useState } from "react";
 import Link from "next/link";
 import UserDisplay from "@/components/UserDisplay";
+import Card from "@/components/Card";
 
 export default function Classes() {
     const {session, status} = useAuth();
@@ -28,19 +29,12 @@ export default function Classes() {
         <Loader depends={classes} borderColor="black" center>
             <div className="grid">
             {classes?.classesTeaching.map(classroom => <Link key={classroom.id} href={"/classes/view?id=" + classroom.id}>
-            <a className="card class-card">
-                <h2>
-                <span className="title">{classroom.name}</span>
-                <span className="subtitle">
-                    <UserDisplay email={classroom.teacherEmail}/>
-                </span>
-                </h2>
+            <Card title={classroom.name} href={`/classes/view?id=${classroom.id}`}>
+                <UserDisplay email={classroom.teacherEmail}/>
                 <p>{truncate(classroom.description, 100)}</p>
-            </a>
+            </Card>
             </Link>)}
-            <a className="card dashed center-content placeholder" onClick={() => setCreateClassOpen(true)}>
-                Create Class
-            </a>
+            <Card onClick={() => setCreateClassOpen(true)} title="Create Class" cardType="placeholder"/>
             </div>
         </Loader>
 

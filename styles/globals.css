@@ -1,4 +1,7 @@
-@import url("your.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 html,
 body {
     --color-primary: rgb(0, 157, 53);

@@ -4,60 +4,41 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import Head from 'next/head'
 import Link from 'next/link';
 import Image from 'next/image'
-import styles from '@~/styles/Home.module.css'
+import Card from '@/components/Card';
 
 const Home: NextPage = () => {
     const {data: session, status} = useSession();
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Welcome | Harknology</title>
         <meta name="description" content="Manage your class discussions easily." />
       </Head>
 
-      <main className={styles.main}>
+      <main className="max-w-[600px] mx-auto">
         <Banner/>
 
-        <p className={styles.description}>
+        <p className="text-lg mt-2 text-center">
           Manage your class discussions easily.
         </p>
 
-        <div className={styles.grid}>
+        <div className="flex flex-row flex-wrap">
           {status == "authenticated"?
-            <div className={styles.cardStack}>
-            <Link href="/dashboard">
-                <a className="card headerOnly"><h2>Dashboard</h2></a>
-            </Link>
-            <a onClick={() => signOut()} className="card headerOnly">
-                <h2>Sign out</h2>
-            </a>
+            <div className="flex flex-col">
+            <Card href='/dashboard' title='Dashboard'/>
+            <Card onClick={() => signOut()} title='Sign Out'/>
             </div>
             :
-            <a onClick={() => signIn()} className="card">
-                <h2>Sign In</h2>
+            <Card onClick={() => signIn()} title="Sign In">
                 <p>Sign in with Google to start using Harknology.</p>
-            </a>
+            </Card>
           }
 
-          <a href="https://nextjs.org/learn" className="card">
-            <h2>Learn More</h2>
-            <p>Learn more about Harknology, and whether it would be right for you.</p>
-          </a>
+          <Card href="https://nextjs.org/learn" title="Learn More">
+            Learn more about Harknology, and whether it would be right for you.
+          </Card>
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   )
 }
