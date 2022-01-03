@@ -8,31 +8,32 @@ datasource db {
 }
 
 model Class {
-  id           Int          @id @default(autoincrement())
+  id           String          @id @default(cuid())
   name         String
   description  String
   teacherEmail String       @db.VarChar(255)
   teacher      User         @relation(fields: [teacherEmail], references: [email])
   discussions  Discussion[]
   students     User[]       @relation("ClassStudents")
+  joinCodes JoinCode[]
 }
 
 model Discussion {
-  id          Int        @id @default(autoincrement())
-  classId     Int
+  id          String        @id @default(cuid())
+  classId     String
   description String
   name        String     @db.VarChar(255)
-  Class       Class      @relation(fields: [classId], references: [id])
-  Response    Response[]
+  class       Class      @relation(fields: [classId], references: [id])
+  responses    Response[]
 }
 
 model Response {
   id           Int         @id @default(autoincrement())
   userEmail    String      @db.VarChar(255)
   content      String
-  discussionId Int?
+  discussionId String?
   parentId     Int?
-  Discussion   Discussion? @relation(fields: [discussionId], references: [id])
+  discussion   Discussion? @relation(fields: [discussionId], references: [id])
   parent       Response?   @relation("ResponseToResponse_parentId", fields: [parentId], references: [id])
   User         User        @relation(fields: [userEmail], references: [email])
   responses    Response[]  @relation("ResponseToResponse_parentId")
@@ -86,4 +87,11 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model JoinCode {
+  code String @id @default(cuid())
+  classId String
+  expires DateTime
+  class Class @relation(fields: [classId], references: [id])
 }

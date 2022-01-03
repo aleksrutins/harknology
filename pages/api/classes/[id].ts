@@ -23,7 +23,7 @@ export default async function handler(
   }
   const cls = prisma.class.findUnique({
       where: {
-          id: parseInt(req.query.id as string)
+          id: req.query.id as string
       }
   });
   if(!( (await cls)?.teacherEmail == session.user?.email || 

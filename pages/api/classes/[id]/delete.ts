@@ -14,7 +14,7 @@ export default async function handler(
   try {
       const cls = await prisma.class.findUnique({
         where: {
-          id: parseInt(req.query.id as string)
+          id: req.query.id as string
         }
       });
       if(cls?.teacherEmail != session.user?.email) {
