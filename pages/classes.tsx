@@ -37,6 +37,18 @@ export default function Classes() {
             <Card onClick={() => setCreateClassOpen(true)} title="Create Class" cardType="placeholder"/>
             </div>
         </Loader>
+        <h2 className="text-xl font-light text-center">Your Classes</h2>
+        <Loader depends={classes} borderColor="black" center>
+            <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
+            {classes?.classes.map(classroom => <Link key={classroom.id} href={"/classes/view?id=" + classroom.id}>
+            <Card title={classroom.name} href={`/classes/view?id=${classroom.id}`}>
+                <UserDisplay email={classroom.teacherEmail}/>
+                <p>{truncate(classroom.description, 100)}</p>
+            </Card>
+            </Link>)}
+            <Card onClick={() => setCreateClassOpen(true)} title="Join Class" cardType="placeholder"/>
+            </div>
+        </Loader>
 
         <CreateClassDialog open={createClassOpen} onSubmit={createClass} onCancel={() => setCreateClassOpen(false)}/>
         </>

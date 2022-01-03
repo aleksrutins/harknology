@@ -11,7 +11,7 @@ export function useClasses() {
         data: (classes as {classes: Class[], classesTeaching: Class[]}),
         error,
         async createClass(data: {name: string, description: string}) {
-            return await fetch('/api/createClass', {
+            return await fetch('/api/classes/create', {
                 method: 'POST',
                 body: JSON.stringify(data)
             });

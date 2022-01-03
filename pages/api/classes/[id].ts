@@ -5,11 +5,11 @@ import { getSession } from 'next-auth/react';
 import prisma from '@/prisma';
 
 export type ClassResponse = Class & {
-    teacher: {
+    students: {
         name: string,
         email: string,
         image: string
-    }
+    }[]
 }
 
 export default async function handler(
@@ -32,10 +32,10 @@ export default async function handler(
         }
   res.status(200).send({
       ...(await cls)!,
-      teacher: {
-        name: (await cls.teacher())?.name!,
-        email: (await cls)!.teacherEmail,
-        image: (await cls.teacher())?.image!
-      }
+      students: (await cls.students()).map(student => ({
+        name: student.name!,
+        email: student.email!,
+        image: student.image!
+      }))
   });
 }
