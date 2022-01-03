@@ -40,6 +40,8 @@ export default function ClassView() {
         <p className="max-w-xl mx-auto flex flex-row flex-wrap justify-center">
             {data?.students?.length! > 0? data?.students.map(student => <UserDisplay key={student.email} email={student.email} badge />) : <span className="text-gray-400">No students</span>}
         </p>
+        
+
         <DeleteClassDialog name={data?.name!} open={deleteOpen} onCancel={() => setDeleteOpen(false)} onDelete={async () => {
             await fetch(`/api/classes/${data?.id}/delete`);
             setDeleteOpen(false);
