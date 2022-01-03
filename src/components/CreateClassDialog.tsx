@@ -15,7 +15,7 @@ export const CreateClassDialog: FunctionComponent<{ open: boolean, onSubmit: (na
         <textarea name="description" value={description} onChange={descriptionChange} className="block w-full rounded-md border border-gray-200 focus:border-green-500 focus:ring focus:ring-green-400/50 p-2 transition"></textarea>
         </form>
         <ModalButtons>
-            <Button onClick={props.onCancel}>Close</Button>
+            <Button onClick={props.onCancel}>Cancel</Button>
             <Button buttonStyle="primary" onClick={() => props.onSubmit(name, description)}>Create</Button>
         </ModalButtons>
     </Modal>

@@ -16,7 +16,7 @@ const DeleteClassDialog: FunctionComponent<{name: string, open?: boolean, onDele
     return <Modal title="Delete Class" {...props}>
         Are you sure that you want to delete the class &ldquo;{props.name}&rdquo;?
         <ModalButtons>
-            <Button onClick={props.onCancel}>Close</Button>
+            <Button onClick={props.onCancel}>Cancel</Button>
             <Button onClick={props.onDelete} buttonStyle="danger">Delete</Button>
         </ModalButtons>
     </Modal>
