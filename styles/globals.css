@@ -1,8 +1,8 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html,
+
+/* html,
 body {
     --color-primary: rgb(0, 157, 53);
     --border-radius: 5px;
@@ -178,4 +178,4 @@ textarea {
 }
 textarea:focus {
     outline: calc(var(--focus-border-width) - var(--border-width)) var(--border-style) var(--color-primary);
-}
+} */

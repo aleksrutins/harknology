@@ -1,10 +1,10 @@
 {
     "top": [
-        ["Dashboard", "/dashboard"],
-        ["Classes", "/classes"]
+        ["Dashboard", "/dashboard", "^/dashboard$"],
+        ["Classes", "/classes", "/classes(/.*)?"]
     ],
     "bottom": [
-        ["Welcome", "/"],
-        ["About", "/about"]
+        ["Welcome", "/", "^/$"],
+        ["About", "/about", "^/about$"]
     ]
 }

@@ -24,10 +24,10 @@ export default function Classes() {
         <Head>
             <title>Classes | Harknology</title>
         </Head>
-        <h1 className="pageTitle">Classes</h1>
-        <h2>Classes You Teach</h2>
+        <h1 className="text-2xl font-light text-center">Classes</h1>
+        <h2 className="text-xl font-light text-center">Classes You Teach</h2>
         <Loader depends={classes} borderColor="black" center>
-            <div className="grid">
+            <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
             {classes?.classesTeaching.map(classroom => <Link key={classroom.id} href={"/classes/view?id=" + classroom.id}>
             <Card title={classroom.name} href={`/classes/view?id=${classroom.id}`}>
                 <UserDisplay email={classroom.teacherEmail}/>

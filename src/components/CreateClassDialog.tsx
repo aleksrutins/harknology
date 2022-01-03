@@ -8,13 +8,15 @@ export const CreateClassDialog: FunctionComponent<{ open: boolean, onSubmit: (na
     const [description, descriptionChange] = useInput('');
 
     return <Modal title="Create Class" open={props.open}>
-        <form>
-        <input placeholder="Name" value={name} onChange={nameChange} />
-        <textarea placeholder="Description" value={description} onChange={descriptionChange}></textarea>
+        <form className="mx-5 mb-2">
+        <label htmlFor="name" className="block">Name</label>
+        <input name="name" value={name} onChange={nameChange} className="block rounded-md border border-gray-200 focus:border-green-500 focus:ring-green-400/50 focus:ring appearance-none focus:outline-none transition p-2"/>
+        <label htmlFor="description" className="mt-3 block">Description</label>
+        <textarea name="description" value={description} onChange={descriptionChange} className="block rounded-md border border-gray-200 focus:border-green-500 focus:ring focus:ring-green-400/50 p-2 transition"></textarea>
         </form>
         <ModalButtons>
-            <button className="btn white hover-primary" onClick={props.onCancel}>Close</button>
-            <button className="btn primary hover-primary" onClick={() => props.onSubmit(name, description)}>Create</button>
+            <button className="hover:bg-gray-200 rounded-md transition p-2 m-1" onClick={props.onCancel}>Close</button>
+            <button className="text-white bg-green-500 hover:bg-green-600 transition hover:shadow-md hover:shadow-green-600/50 rounded-md p-2 m-1" onClick={() => props.onSubmit(name, description)}>Create</button>
         </ModalButtons>
     </Modal>
 }

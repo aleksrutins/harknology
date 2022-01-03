@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient, Class } from '@prisma/client';
 import { getSession } from 'next-auth/react';
-const prisma = new PrismaClient();
+import prisma from '@/prisma';
 
 export type UserResponse = {
     name: string,

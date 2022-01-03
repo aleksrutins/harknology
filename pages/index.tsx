@@ -15,14 +15,14 @@ const Home: NextPage = () => {
         <meta name="description" content="Manage your class discussions easily." />
       </Head>
 
-      <main className="max-w-[600px] mx-auto">
+      <main className="max-w-[800px] mx-auto">
         <Banner/>
 
         <p className="text-lg mt-2 text-center">
           Manage your class discussions easily.
         </p>
 
-        <div className="flex flex-row flex-wrap">
+        <div className="flex flex-row flex-wrap justify-center">
           {status == "authenticated"?
             <div className="flex flex-col">
             <Card href='/dashboard' title='Dashboard'/>
