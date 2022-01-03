@@ -23,7 +23,7 @@ export default async function handler(
       }
       await prisma.class.delete({
         where: {
-          id: parseInt(req.query.id as string)
+          id: req.query.id as string
         }
       });
   } catch(e) {
