@@ -8,23 +8,23 @@ datasource db {
 }
 
 model Class {
-  id           String          @id @default(cuid())
+  id           String       @id @default(cuid())
   name         String
   description  String
   teacherEmail String       @db.VarChar(255)
   teacher      User         @relation(fields: [teacherEmail], references: [email])
   discussions  Discussion[]
   students     User[]       @relation("ClassStudents")
-  joinCodes JoinCode[]
+  joinCodes    JoinCode[]
 }
 
 model Discussion {
-  id          String        @id @default(cuid())
+  id          String     @id @default(cuid())
   classId     String
   description String
   name        String     @db.VarChar(255)
   class       Class      @relation(fields: [classId], references: [id])
-  responses    Response[]
+  responses   Response[]
 }
 
 model Response {
@@ -45,12 +45,12 @@ model Account {
   type               String
   provider           String
   providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
   expires_at         Int?
   token_type         String?
   scope              String?
-  id_token           String?  @db.Text
+  id_token           String? @db.Text
   session_state      String?
   oauth_token_secret String?
   oauth_token        String?
@@ -69,13 +69,13 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id              String     @id @default(cuid())
+  name            String?
+  email           String?    @unique
+  emailVerified   DateTime?
+  image           String?
+  accounts        Account[]
+  sessions        Session[]
   classes         Class[]    @relation("ClassStudents")
   teachingClasses Class[]
   responses       Response[]
@@ -90,8 +90,8 @@ model VerificationToken {
 }
 
 model JoinCode {
-  code String @id @default(cuid())
+  code    String   @id @default(cuid())
   classId String
   expires DateTime
-  class Class @relation(fields: [classId], references: [id])
+  class   Class    @relation(fields: [classId], references: [id])
 }

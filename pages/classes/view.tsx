@@ -22,21 +22,42 @@ const DeleteClassDialog: FunctionComponent<{name: string, open?: boolean, onDele
     </Modal>
 }
 
+const JoinCodeDialog: FunctionComponent<{code: string, expires: string, open?: boolean, setOpen: (isOpen: boolean) => any}> = props => {
+    return <Modal title="Join Class" open={props.open}>
+        <p className="block text-center">Here is your join code. It expires in {new Date(new Date(props.expires).getTime() - new Date().getTime()).getMinutes()} minutes.</p>
+        <span className="block text-center text-3xl mt-4 mx-4">{props.code}</span>
+        <ModalButtons>
+            <Button onClick={() => props.setOpen(false)}>Close</Button>
+        </ModalButtons>
+    </Modal>
+}
+
 export default function ClassView() {
     const router = useRouter();
     const {data, error} = useSWR<ClassResponse>('/api/classes/' + router.query.id, json);
     const [deleteOpen, setDeleteOpen] = useState(false);
+    const [joinOpen, setJoinOpen] = useState(false);
+    const [joinCode, setJoinCode] = useState('');
+    const [joinExpires, setJoinExpires] = useState(new Date());
+
+    async function joinClass() {
+        const code: any = await (await fetch(`/api/classes/${data?.id}/join/code`)).json();
+        setJoinCode(code.code);
+        setJoinExpires(code.expires);
+        setJoinOpen(true);
+    }
     
     return <Loader borderColor="black" depends={data} center>
         <Head>
             <title>{data?.name} | Harknology</title>
         </Head>
-        <h1 className="text-2xl text-center font-light mb-0 pb-0">{data?.name}</h1>
-        
-        <div className="block float-right mt-[-32px] flex flex-col">
-            <Button buttonStyle="primary"><UserAddIcon className="h-5 w-5"/></Button>
+
+        <div className="block fixed right-[2px] mt-[-13px] flex flex-col">
+            <Button buttonStyle="primary" onClick={joinClass}><UserAddIcon className="h-5 w-5"/></Button>
             <Button buttonStyle="danger" onClick={() => setDeleteOpen(true)}><TrashIcon className="h-5 w-5"/></Button>
         </div>
+
+        <h1 className="text-2xl text-center font-light mb-0 pb-0">{data?.name}</h1>
 
         <span className="text-center block mb-4 text-[0.75rem]">
             <UserDisplay email={data?.teacherEmail!} />
@@ -52,5 +73,7 @@ export default function ClassView() {
             setDeleteOpen(false);
             router.push('/classes');
         }}/>
+
+        <JoinCodeDialog code={joinCode} open={joinOpen} setOpen={setJoinOpen} expires={joinExpires}/>
     </Loader>
 }

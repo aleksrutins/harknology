@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
   <SessionProvider session={session}>
     <Head>
         <link rel="icon" href="/logo.svg" />
+        <meta name="theme-color" content="rgb(22 163 74)" />
     </Head>
     <DashboardLayout>
     <Component {...pageProps} />

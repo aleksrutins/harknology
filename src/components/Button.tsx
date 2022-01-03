@@ -7,6 +7,7 @@ const Button: FunctionComponent<{[name: string]: any, buttonStyle?: 'base' | 'pr
         danger: 'text-white bg-red-500 hover:bg-red-600 transition hover:shadow-md hover:shadow-red-600/50 rounded-md p-2 m-1'
     };
     const styleChosen = props.buttonStyle || 'base';
+    
     return <button {...props} className={style[styleChosen] + ' ' + (props.className || '')}>{props.children}</button>
 }
 export default Button;
