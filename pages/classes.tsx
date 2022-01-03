@@ -28,7 +28,7 @@ export default function Classes() {
         <h2 className="text-xl font-light text-center">Classes You Teach</h2>
         <Loader depends={classes} borderColor="black" center>
             <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
-            {classes?.classesTeaching.map(classroom => <Link key={classroom.id} href={"/classes/view?id=" + classroom.id}>
+            {classes?.classesTeaching.map(classroom => <Link key={classroom.id} href={"/classes/view?id=" + classroom.id} passHref>
             <Card title={classroom.name} href={`/classes/view?id=${classroom.id}`}>
                 <UserDisplay email={classroom.teacherEmail}/>
                 <p>{truncate(classroom.description, 100)}</p>
@@ -40,7 +40,7 @@ export default function Classes() {
         <h2 className="text-xl font-light text-center">Your Classes</h2>
         <Loader depends={classes} borderColor="black" center>
             <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
-            {classes?.classes.map(classroom => <Link key={classroom.id} href={"/classes/view?id=" + classroom.id}>
+            {classes?.classes.map(classroom => <Link key={classroom.id} href={"/classes/view?id=" + classroom.id} passHref>
             <Card title={classroom.name} href={`/classes/view?id=${classroom.id}`}>
                 <UserDisplay email={classroom.teacherEmail}/>
                 <p>{truncate(classroom.description, 100)}</p>
