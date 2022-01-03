@@ -14,7 +14,7 @@ import Modal, { ModalButtons } from "@/components/Modal";
 
 const DeleteClassDialog: FunctionComponent<{name: string, open?: boolean, onDelete: (...args: any) => any, onCancel: (...args: any) => any}> = props => {
     return <Modal title="Delete Class" {...props}>
-        Are you sure that you want to delete the class "{props.name}"?
+        Are you sure that you want to delete the class &ldquo;{props.name}&rdquo;?
         <ModalButtons>
             <Button onClick={props.onCancel}>Close</Button>
             <Button onClick={props.onDelete} buttonStyle="danger">Delete</Button>
