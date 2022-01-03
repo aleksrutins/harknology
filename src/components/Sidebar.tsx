@@ -13,8 +13,8 @@ export default function Sidebar() {
     const {status} = useSession();
     const router = useRouter();
     return status == 'authenticated'? <div className="flex flex-col p-3 justify-between border-r border-green-600">
-        {links.map(section =>
-        <div className="flex flex-col">
+        {links.map((section, i) =>
+        <div className="flex flex-col" key={i}>
             {section.map(link => <SidebarLink key={link[1]} href={link[1]} isActive={new RegExp(link[2]).test(router.asPath)}>{link[0]}</SidebarLink>)}
         </div>
         )}
