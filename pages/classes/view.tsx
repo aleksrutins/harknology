@@ -12,6 +12,7 @@ import Button from "@/components/Button";
 import { FunctionComponent, useState } from "react";
 import Modal, { ModalButtons } from "@/components/Modal";
 import { useAuth } from "@/auth";
+import Link from "next/link";
 
 const DeleteClassDialog: FunctionComponent<{name: string, open?: boolean, onDelete: (...args: any) => any, onCancel: (...args: any) => any}> = props => {
     return <Modal title="Delete Class" {...props}>
@@ -24,9 +25,10 @@ const DeleteClassDialog: FunctionComponent<{name: string, open?: boolean, onDele
 }
 
 const JoinCodeDialog: FunctionComponent<{code: string, expires: string, open?: boolean, setOpen: (isOpen: boolean) => any}> = props => {
+    const timeDifference = new Date(new Date(props.expires).getTime() - new Date().getTime());
     return <Modal title="Join Class" open={props.open}>
-        <p className="block text-center">Here is your join code. It expires in {new Date(new Date(props.expires).getTime() - new Date().getTime()).getMinutes()} minutes.</p>
-        <span className="block text-center text-3xl mt-4 mx-4">{props.code}</span>
+        <p className="block text-center">Here is your join link. It expires in {timeDifference.getHours()} hours and {timeDifference.getMinutes()} minutes.</p>
+        <span className="block text-center text-3xl mt-4 mx-4"><Link href={`/classes/join?code=${props.code}`}>Join Class</Link></span>
         <ModalButtons>
             <Button onClick={() => props.setOpen(false)}>Close</Button>
         </ModalButtons>

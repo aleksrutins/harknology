@@ -40,7 +40,7 @@ export default async function handler(
         activeCodes.push(await prisma.joinCode.create({
           data: {
             classId: req.query.id as string,
-            expires: new Date(new Date().getTime() + 30 * 60 * 1000) // 30 minutes from now
+            expires: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000) // 2 days from now
           }
         }));
       }
