@@ -11,6 +11,7 @@ import { TrashIcon, UserAddIcon } from "@heroicons/react/outline";
 import Button from "@/components/Button";
 import { FunctionComponent, useState } from "react";
 import Modal, { ModalButtons } from "@/components/Modal";
+import { useAuth } from "@/auth";
 
 const DeleteClassDialog: FunctionComponent<{name: string, open?: boolean, onDelete: (...args: any) => any, onCancel: (...args: any) => any}> = props => {
     return <Modal title="Delete Class" {...props}>
@@ -35,6 +36,7 @@ const JoinCodeDialog: FunctionComponent<{code: string, expires: string, open?: b
 export default function ClassView() {
     const router = useRouter();
     const {data, error} = useSWR<ClassResponse>('/api/classes/' + router.query.id, json);
+    useAuth();
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [joinOpen, setJoinOpen] = useState(false);
     const [joinCode, setJoinCode] = useState('');
