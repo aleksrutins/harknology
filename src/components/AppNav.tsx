@@ -21,12 +21,12 @@ const AppNav: ComponentType<NavProps> = dynamic(async () => (props) => {
                     :
                     <>
                         <img src={session!.user?.image!} className='rounded-full h-[32px] cursor-pointer' alt={session!.user?.email!} onClick={() => setAuthPopupVisible(!authPopupVisible)}></img>
-                        <div className={authPopupVisible? 'flex flex-col py-2 rounded-md shadow-lg bg-white absolute top-[56px] right-[15px] text-black' : 'hidden'}>
+                        <div className={authPopupVisible? 'z-30 flex flex-col py-2 rounded-md shadow-lg bg-white absolute top-[56px] right-[15px] text-black' : 'hidden'}>
                             <span className="m-2 block">
                                 <img src={session!.user?.image!} className='inline rounded-full h-[1rem] align-middle' alt={session!.user?.email!}></img>
                                 <span className="ml-[3px] text-[1rem] align-middle">{session!.user?.name}</span>
                             </span>
-                            <button className="z-10 text-[0.8rem] hover:bg-gray-200 transition cursor-pointer p-1" onClick={() => signOut()}>Log Out</button>
+                            <button className="text-[0.8rem] hover:bg-gray-200 transition cursor-pointer p-1" onClick={() => signOut()}>Log Out</button>
                         </div>
                     </>
                 )
