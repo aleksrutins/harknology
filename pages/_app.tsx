@@ -4,18 +4,18 @@ import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import DashboardLayout from '@/components/DashboardLayout';
 
-function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
-  return (
-  <SessionProvider session={session}>
-    <Head>
-        <link rel="icon" href="/logo.svg" />
-        <meta name="theme-color" content="rgb(22 163 74)" />
-    </Head>
-    <DashboardLayout>
-    <Component {...pageProps} />
-    </DashboardLayout>
-  </SessionProvider>
-  );
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+    return (
+        <SessionProvider session={session}>
+            <Head>
+                <link rel="icon" href="/logo.svg" />
+                <meta name="theme-color" content="rgb(22 163 74)" />
+            </Head>
+            <DashboardLayout>
+                <Component {...pageProps} />
+            </DashboardLayout>
+        </SessionProvider>
+    );
 }
 
 export default MyApp

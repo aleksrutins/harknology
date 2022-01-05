@@ -1,5 +1,15 @@
-.teacherName {
-    display: block; 
-    text-align: center;
-    font-size: 0.75rem;
+.resizeLeft::after {
+    position: relative;
+    right: 0px;
+    top: 0px;
+    width: 2px;
+    background-color: #767676;
+    height: 100%;
+    cursor: ew-resize;
+    display: block;
+    content: '';
+}
+.resizeLeft::after:hover {
+    right: -2px;
+    width: 4px;
 }
