@@ -9,9 +9,9 @@ import useSWR from "swr";
 import { JoinInfo } from "../api/classes/join/[code]/info";
 
 export default function Dashboard() {
-    const {session, status} = useAuth();
+    useAuth();
     const router = useRouter();
-    const {data, error} = useSWR<JoinInfo>(`/api/classes/join/${router.query.code}/info`, json);
+    const { data } = useSWR<JoinInfo>(`/api/classes/join/${router.query.code}/info`, json);
     async function join() {
         await fetch('/api/classes/join/' + router.query.code);
         router.push('/classes/view?id=' + data?.class.id);
@@ -21,10 +21,10 @@ export default function Dashboard() {
             <div className="text-center">
                 <h1 className="text-xl font-light text-center">Joining &ldquo;{data?.class.name}&rdquo;</h1>
                 <span className="text-[0.75rem]">Taught by</span>
-                <span className="flex flex-row justify-center text-[0.75rem]"> <UserDisplay email={data?.teacher.email!}/></span>
+                <span className="flex flex-row justify-center text-[0.75rem]"> <UserDisplay email={data?.teacher.email!} /></span>
                 <p>Would you like to join this class?</p>
                 <Button buttonStyle="primary" onClick={join}>Join</Button>
-                <Link href="/classes"><Button buttonStyle="danger">Cancel</Button></Link>
+                <Link href="/classes" passHref><Button buttonStyle="danger">Cancel</Button></Link>
             </div>
         </div>
     </Loader>

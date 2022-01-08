@@ -53,36 +53,39 @@ export default function ClassView() {
         setJoinOpen(true);
     }
 
-    return <Loader borderColor="black" depends={data} center>
-        <Head>
-            <title>{data?.name} | Harknology</title>
-        </Head>
+    return <>
+        {error && <span className="block text-center pt-3">Error loading class</span>}
+        <Loader borderColor="black" depends={data} center>
+            <Head>
+                <title>{data?.name} | Harknology</title>
+            </Head>
 
-        <div className="block fixed right-[2px] mt-[-13px] flex flex-col">
-            <Button buttonStyle="primary" onClick={joinClass}><UserAddIcon className="h-5 w-5" /></Button>
-            <Button buttonStyle="danger" onClick={() => setDeleteOpen(true)}><TrashIcon className="h-5 w-5" /></Button>
-        </div>
-        <div className="h-full p-0 m-0 flex flex-row">
-            <div className={`overflow-auto h-full p-3 ${styles.resizeLeft}`}>
-                <h1 className="text-2xl text-center font-light mb-0 pb-0">{data?.name}</h1>
-
-                <span className="text-center block mb-4 text-[0.75rem]">
-                    <UserDisplay email={data?.teacherEmail!} />
-                </span>
-                <p className="max-w-2xl mx-auto whitespace-pre-wrap">{data?.description}</p>
+            <div className="block fixed right-[2px] mt-[-13px] flex flex-col">
+                <Button buttonStyle="primary" onClick={joinClass}><UserAddIcon className="h-5 w-5" /></Button>
+                <Button buttonStyle="danger" onClick={() => setDeleteOpen(true)}><TrashIcon className="h-5 w-5" /></Button>
             </div>
-            <div className="overflow-auto h-full p-3 grow shrink border-l border-green-500">
-                <h1 className="text-xl text-center font-light mb-0 pb-0">Students</h1>
-                {data?.students?.length! > 0 ? data?.students.map(student => <UserDisplay key={student.email} email={student.email} />) : <span className="text-gray-400 text-center">No students</span>}
+            <div className="h-full p-0 m-0 grow flex flex-row">
+                <div className={`overflow-auto h-full p-3 grow resize-x`}>
+                    <h1 className="text-2xl text-center font-light mb-0 pb-0">{data?.name}</h1>
+
+                    <span className="text-center block mb-4 text-[0.75rem]">
+                        <UserDisplay email={data?.teacherEmail!} />
+                    </span>
+                    <p className="max-w-2xl mx-auto whitespace-pre-wrap">{data?.description}</p>
+                </div>
+                <div className="h-full p-3 grow shrink border-l border-green-500">
+                    <h1 className="text-xl text-center font-light mb-0 pb-0">Students</h1>
+                    {data?.students?.length! > 0 ? data?.students.map(student => <UserDisplay key={student.email} email={student.email} />) : <span className="text-gray-400 text-center">No students</span>}
+                </div>
             </div>
-        </div>
 
-        <DeleteClassDialog name={data?.name!} open={deleteOpen} onCancel={() => setDeleteOpen(false)} onDelete={async () => {
-            await fetch(`/api/classes/${data?.id}/delete`);
-            setDeleteOpen(false);
-            router.push('/classes');
-        }} />
+            <DeleteClassDialog name={data?.name!} open={deleteOpen} onCancel={() => setDeleteOpen(false)} onDelete={async () => {
+                await fetch(`/api/classes/${data?.id}/delete`);
+                setDeleteOpen(false);
+                router.push('/classes');
+            }} />
 
-        <JoinCodeDialog code={joinCode} open={joinOpen} setOpen={setJoinOpen} expires={joinExpires} />
-    </Loader>
+            <JoinCodeDialog code={joinCode} open={joinOpen} setOpen={setJoinOpen} expires={joinExpires} />
+        </Loader>
+    </>
 }
