@@ -61,12 +61,15 @@ export default function ClassView() {
             </Head>
 
             <div className="block fixed right-[2px] mt-[-13px] flex flex-col">
-                <Button buttonStyle="primary" onClick={joinClass}><UserAddIcon className="h-5 w-5" /></Button>
-                <Button buttonStyle="danger" onClick={() => setDeleteOpen(true)}><TrashIcon className="h-5 w-5" /></Button>
+
+                
             </div>
             <div className="h-full p-0 m-0 grow flex flex-row">
                 <div className={`overflow-auto h-full p-3 grow resize-x`}>
-                    <h1 className="text-2xl text-center font-light mb-0 pb-0">{data?.name}</h1>
+                    <h1 className="text-2xl text-center font-light mb-0 pb-0">
+                        {data?.name}
+                        <Button buttonStyle="danger" className="float-right" onClick={() => setDeleteOpen(true)}><TrashIcon className="h-5 w-5" /></Button>
+                    </h1>
 
                     <span className="text-center block mb-4 text-[0.75rem]">
                         <UserDisplay email={data?.teacherEmail!} />
@@ -74,7 +77,10 @@ export default function ClassView() {
                     <p className="max-w-2xl mx-auto whitespace-pre-wrap">{data?.description}</p>
                 </div>
                 <div className="h-full p-3 grow shrink border-l border-green-500">
-                    <h1 className="text-xl text-center font-light mb-0 pb-0">Students</h1>
+                    <h1 className="text-xl text-center font-light mb-0 pb-0">
+                        Students
+                        <Button buttonStyle="primary" className="float-right" onClick={joinClass}><UserAddIcon className="h-5 w-5" /></Button>
+                    </h1>
                     {data?.students?.length! > 0 ? data?.students.map(student => <UserDisplay key={student.email} email={student.email} />) : <span className="text-gray-400 text-center">No students</span>}
                 </div>
             </div>
