@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient, Class } from '@prisma/client';
 import { getSession } from 'next-auth/react';
 import prisma from '@/prisma';
+import checkClassAuth from '%checkClassAuth';
 
 export type ClassResponse = Class & {
     students: {
@@ -21,18 +22,12 @@ export default async function handler(
     res.status(403).send('Not authorized');
     return;
   }
-  const cls = prisma.class.findUnique({
-      where: {
-          id: req.query.id as string
-      }
-  });
-  if(!( (await cls)?.teacherEmail == session.user?.email || 
-        (await cls.students()).map(student => student.email).includes(session.user?.email!))) {
-            res.status(403).send('Unauthorized');
-        }
+  const [data, status] = await checkClassAuth(req.query.id as string, session);
+  if(status == false) res.status(403).send('Not authorized');
+  const [cls, role] = data!;
   res.status(200).send({
-      ...(await cls)!,
-      students: (await cls.students()).map(student => ({
+      ...cls!,
+      students: cls!.students.map(student => ({
         name: student.name!,
         email: student.email!,
         image: student.image!

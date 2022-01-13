@@ -20,6 +20,7 @@
       "@component:*": [ "src/components/*" ],
       "@res:*": [ "public/*" ],
       "@type:*": [ "src/types/*" ],
+      "%*": ["src/functions/*"],
       "@~/*": ["./*"]
     }
   },
