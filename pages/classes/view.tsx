@@ -14,6 +14,7 @@ import Modal, { ModalButtons } from "@/components/Modal";
 import { useAuth } from "@/auth";
 import Link from "next/link";
 import styles from "@~/styles/ClassView.module.css";
+import Card from "@component:Card";
 
 const DeleteClassDialog: FunctionComponent<{ name: string, open?: boolean, onDelete: (...args: any) => any, onCancel: (...args: any) => any }> = props => {
     return <Modal title="Delete Class" {...props}>
@@ -65,6 +66,7 @@ export default function ClassView() {
                 
             </div>
             <div className="h-full p-0 m-0 grow flex flex-row">
+                {/* Main class view */}
                 <div className={`overflow-auto h-full p-3 grow resize-x`}>
                     <h1 className="text-2xl text-center font-light mb-0 pb-0">
                         {data?.name}
@@ -75,7 +77,19 @@ export default function ClassView() {
                         <UserDisplay email={data?.teacherEmail!} />
                     </span>
                     <p className="max-w-2xl mx-auto whitespace-pre-wrap">{data?.description}</p>
+
+                    <h2 className="text-xl font-light text-center mt-3">Discussions</h2>
+                    {data?.discussions.length ?? 0 > 0? <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
+                    {data?.discussions.map(discussion => {
+                        <Card key={discussion.id} title={discussion.name}>
+                            <p>{discussion.description}</p>
+                        </Card>
+                    })}
+                    </div>
+                    : 
+                    <span className="text-gray-400 text-center block">No discussions</span>}
                 </div>
+                {/* Student list */}
                 <div className="h-full p-3 grow shrink border-l border-green-500">
                     <h1 className="text-xl text-center font-light mb-0 pb-0">
                         Students

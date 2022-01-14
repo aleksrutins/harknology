@@ -1,13 +1,17 @@
 import prisma from "@/prisma";
-import { Class, User } from "@prisma/client";
+import { Class, Discussion, User } from "@prisma/client";
 import { Session } from "next-auth";
-export default async (id: string, session: Session): Promise<[[(Class & { students: User[] }) | null, 'teacher' | 'student'] | null, boolean]> => {
+
+export type Result = [[(Class & { students: User[], discussions: Discussion[] }) | null, 'teacher' | 'student'] | null, boolean];
+
+export default async (id: string, session: Session): Promise<Result> => {
     const cls = prisma.class.findUnique({
         where: {
             id: id
         },
         include: {
-            students: true
+            students: true,
+            discussions: true
         }
     });
     if((await cls)?.teacherEmail == session.user?.email) {

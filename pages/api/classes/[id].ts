@@ -1,16 +1,18 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient, Class } from '@prisma/client';
+import { Class, Discussion } from '@prisma/client';
 import { getSession } from 'next-auth/react';
 import prisma from '@/prisma';
 import checkClassAuth from '%checkClassAuth';
+import discussions from './[id]/discussions';
 
 export type ClassResponse = Class & {
     students: {
         name: string,
         email: string,
         image: string
-    }[]
+    }[],
+    discussions: Discussion[]
 }
 
 export default async function handler(
@@ -31,6 +33,7 @@ export default async function handler(
         name: student.name!,
         email: student.email!,
         image: student.image!
-      }))
+      })),
+      discussions: cls!.discussions
   });
 }
