@@ -41,7 +41,7 @@ export default function ClassView() {
     const router = useRouter();
 
     const { data, error } = useSWR<ClassResponse>('/api/classes/' + router.query.id, json);
-    useAuth();
+    const { role } = useAuth(router.query.id as string);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [joinOpen, setJoinOpen] = useState(false);
     const [joinCode, setJoinCode] = useState('');
@@ -88,6 +88,7 @@ export default function ClassView() {
                     </div>
                     : 
                     <span className="text-gray-400 text-center block">No discussions</span>}
+                    {role == 'teacher' ? <span>Add class</span> : null}
                 </div>
                 {/* Student list */}
                 <div className="h-full p-3 grow shrink border-l border-green-500">
