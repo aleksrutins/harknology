@@ -24,9 +24,8 @@ export default async function handler(
     res.status(403).send('Not authorized');
     return;
   }
-  const [data, status] = await checkClassAuth(req.query.id as string, session);
-  if(status == false) res.status(403).send('Not authorized');
-  const [cls, role] = data!;
+  const [[cls,], status] = await checkClassAuth(req.query.id as string, session);
+  if(status == false) { res.status(403).send('Not authorized'); return; }
   res.status(200).send({
       ...cls!,
       students: cls!.students.map(student => ({

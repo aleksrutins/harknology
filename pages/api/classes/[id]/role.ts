@@ -1,15 +1,19 @@
+import checkClassAuth from "%checkClassAuth";
 import apiRoute from "@/util/apiRoute";
+import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 
-export default apiRoute<string>(['checkClassAuth'], async ({ id }, { req }, checkClassAuth) => {
+export default async function _handler(req: NextApiRequest, res: NextApiResponse<string>) {
     const session = await getSession({ req });
     if(!session) {
-        return [403, 'Not authorized'];
+        res.status(403).send('Not authorized');
+        return;
     }
     try {
-        const [_, role] = await checkClassAuth(id, session);
-        return [200, role];
+        const [[,role],] = await checkClassAuth(req.query.id as string, session!);
+        res.status(200).send(role);
     } catch(e) {
-        return [200, 'none'];
+        console.log(e);
+        res.status(200).send('none');
     }
-})
+}
