@@ -11,6 +11,7 @@ import { useState } from "react";
 import Link from "next/link";
 import UserDisplay from "@/components/UserDisplay";
 import Card from "@/components/Card";
+import { AcademicCapIcon, PlusIcon } from "@heroicons/react/outline";
 
 export default function Classes() {
     const { session, status } = useAuth();
@@ -34,7 +35,7 @@ export default function Classes() {
                         <p>{truncate(classroom.description, 100)}</p>
                     </Card>
                 </Link>)}
-                <Card onClick={() => setCreateClassOpen(true)} title="Create Class" cardType="placeholder" />
+                <Card onClick={() => setCreateClassOpen(true)} title="Create Class" cardType="placeholder" icon={PlusIcon} />
             </div>
         </Loader>
         <h2 className="text-xl font-light text-center">Your Classes</h2>
@@ -46,7 +47,6 @@ export default function Classes() {
                         <p>{truncate(classroom.description, 100)}</p>
                     </Card>
                 </Link>)}
-                <Card onClick={() => setCreateClassOpen(true)} title="Join Class" cardType="placeholder" />
             </div>
         </Loader>
 

@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { ClassResponse } from "../api/classes/[id]";
 import UserDisplay from "@/components/UserDisplay";
-import { TrashIcon, UserAddIcon } from "@heroicons/react/outline";
+import { PlusCircleIcon, TrashIcon, UserAddIcon } from "@heroicons/react/outline";
 import Button from "@/components/Button";
 import { FunctionComponent, useState } from "react";
 import Modal, { ModalButtons } from "@/components/Modal";
@@ -54,6 +54,10 @@ export default function ClassView() {
         setJoinOpen(true);
     }
 
+    async function createDiscussion() {
+
+    }
+
     return <>
         {error && <span className="block text-center pt-3">Error loading class</span>}
         <Loader borderColor="black" depends={data} center>
@@ -61,13 +65,9 @@ export default function ClassView() {
                 <title>{data?.name} | Harknology</title>
             </Head>
 
-            <div className="block fixed right-[2px] mt-[-13px] flex flex-col">
-
-                
-            </div>
-            <div className="h-full p-0 m-0 grow flex flex-row">
+            <div className="h-full p-0 m-0 grow flex flex-col sm:flex-row">
                 {/* Main class view */}
-                <div className={`overflow-auto h-full p-3 grow resize-x`}>
+                <div className={`overflow-auto h-full p-3 grow resize-y sm:resize-x`}>
                     <h1 className="text-2xl text-center font-light mb-0 pb-0">
                         {data?.name}
                         <Button buttonStyle="danger" className="float-right" onClick={() => setDeleteOpen(true)}><TrashIcon className="h-5 w-5" /></Button>
@@ -79,19 +79,23 @@ export default function ClassView() {
                     <p className="max-w-2xl mx-auto whitespace-pre-wrap">{data?.description}</p>
 
                     <h2 className="text-xl font-light text-center mt-3">Discussions</h2>
-                    {data?.discussions.length ?? 0 > 0? <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
+                    <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
                     {data?.discussions.map(discussion => {
                         <Card key={discussion.id} title={discussion.name}>
                             <p>{discussion.description}</p>
                         </Card>
                     })}
+                    {
+                        role == 'teacher' ? 
+                        <Card title="Create Discussion" icon={PlusCircleIcon} cardType="placeholder"/>
+                        : (
+                            (data?.discussions.length ?? 0) == 0 && <span className="text-gray-700 font-light text-center block">No discussions</span>
+                        )
+                    }
                     </div>
-                    : 
-                    <span className="text-gray-400 text-center block">No discussions</span>}
-                    {role == 'teacher' ? <span>Add class</span> : null}
                 </div>
                 {/* Student list */}
-                <div className="h-full p-3 grow shrink border-l border-green-500">
+                <div className="h-full p-3 sm:grow shrink border-t sm:border-l sm:border-t-0 border-green-500 h-2xl sm:h-full">
                     <h1 className="text-xl text-center font-light mb-0 pb-0">
                         Students
                         <Button buttonStyle="primary" className="float-right" onClick={joinClass}><UserAddIcon className="h-5 w-5" /></Button>
