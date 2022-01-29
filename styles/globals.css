@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    --ui-layout: horizontal;
+}
+
+@media screen and (max-width: 640px) {
+    body {
+        --ui-layout: vertical;
+    }
+}
+
 /* html,
 body {
     --color-primary: rgb(0, 157, 53);
