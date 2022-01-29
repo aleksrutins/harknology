@@ -16,6 +16,7 @@ import Link from "next/link";
 import styles from "@~/styles/ClassView.module.css";
 import Card from "@component:Card";
 import Splitter, { SplitDirection } from "@devbookhq/splitter";
+import { Toast } from "@/components/Toast";
 
 const DeleteClassDialog: FunctionComponent<{ name: string, open?: boolean, onDelete: (...args: any) => any, onCancel: (...args: any) => any }> = props => {
     return <Modal title="Delete Class" {...props}>
@@ -66,7 +67,7 @@ export default function ClassView() {
     }
 
     return <>
-        {error && <span className="block text-center pt-3">Error loading class</span>}
+        {error && <Toast background="#ef4444">Error loading class</Toast>}
         <Loader borderColor="black" depends={data} center>
             <Head>
                 <title>{data?.name} | Harknology</title>
