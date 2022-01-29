@@ -17,6 +17,7 @@ import styles from "@~/styles/ClassView.module.css";
 import Card from "@component:Card";
 import Splitter, { SplitDirection } from "@devbookhq/splitter";
 import { Toast } from "@/components/Toast";
+import useUiLayout from "@/functions/useUiLayout";
 
 const DeleteClassDialog: FunctionComponent<{ name: string, open?: boolean, onDelete: (...args: any) => any, onCancel: (...args: any) => any }> = props => {
     return <Modal title="Delete Class" {...props}>
@@ -48,12 +49,7 @@ export default function ClassView() {
     const [joinOpen, setJoinOpen] = useState(false);
     const [joinCode, setJoinCode] = useState('');
     const [joinExpires, setJoinExpires] = useState(new Date().toString());
-    const [uiLayout, setUiLayout] = useState('horizontal');
-    useEffect(() => {
-        new ResizeObserver(() => {
-            setUiLayout(getComputedStyle(document.body).getPropertyValue('--ui-layout').trim());
-        }).observe(document.body);
-    }, []);
+    const uiLayout = useUiLayout();
 
     async function joinClass() {
         const code: any = await (await fetch(`/api/classes/${data?.id}/join/code`)).json();
@@ -78,7 +74,7 @@ export default function ClassView() {
             } gutterClassName="bg-green-600" draggerClassName="bg-green-500">
                 {/* Main class view */}
                 {/* className={`overflow-auto h-full p-3 grow resize-y sm:resize-x`} */}
-                <div className="overflow-auto h-full">
+                <div className="overflow-auto h-full p-3">
                     <h1 className="text-2xl text-center font-light mb-0 pb-0">
                         {data?.name}
                         <Button buttonStyle="danger" className="float-right" onClick={() => setDeleteOpen(true)}><TrashIcon className="h-5 w-5" /></Button>
@@ -107,12 +103,14 @@ export default function ClassView() {
                 </div>
                 {/* Student list */}
                 {/*className="h-full p-3 sm:grow shrink border-t sm:border-l sm:border-t-0 border-green-500 h-2xl sm:h-full"*/}
-                <div className="overflow-auto h-full">
+                <div className="overflow-auto h-full p-3">
                     <h1 className="text-xl text-center font-light mb-0 pb-0">
                         Students
                         <Button buttonStyle="primary" className="float-right" onClick={joinClass}><UserAddIcon className="h-5 w-5" /></Button>
                     </h1>
-                    {data?.students?.length! > 0 ? data?.students.map(student => <UserDisplay key={student.email} email={student.email} />) : <span className="text-gray-400 text-center">No students</span>}
+                    <div className="max-w-2xl mx-auto">
+                        {data?.students?.length! > 0 ? data?.students.map(student => <UserDisplay key={student.email} email={student.email} />) : <span className="text-gray-400 text-center">No students</span>}
+                    </div>
                 </div>
             </Splitter>
 
