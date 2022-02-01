@@ -12,6 +12,7 @@ import Link from "next/link";
 import UserDisplay from "@/components/UserDisplay";
 import Card from "@/components/Card";
 import { AcademicCapIcon, PlusIcon } from "@heroicons/react/outline";
+import { DashboardContent } from "@/components/DashboardLayout";
 
 export default function Classes() {
     const { session, status } = useAuth();
@@ -21,7 +22,7 @@ export default function Classes() {
         await apiCreateClass({ name, description })
         setCreateClassOpen(false);
     }
-    return <>
+    return <DashboardContent>
         <Head>
             <title>Classes | Harknology</title>
         </Head>
@@ -51,5 +52,5 @@ export default function Classes() {
         </Loader>
 
         <CreateClassDialog open={createClassOpen} onSubmit={createClass} onCancel={() => setCreateClassOpen(false)} />
-    </>
+    </DashboardContent>
 }

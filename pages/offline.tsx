@@ -1,3 +1,5 @@
+import { DashboardContent } from "@/components/DashboardLayout";
+
 export default function Offline() {
-    return <div>You are offline.</div>
+    return <DashboardContent>You are offline.</DashboardContent>
 }

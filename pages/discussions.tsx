@@ -1,5 +1,7 @@
+import { DashboardContent } from "@/components/DashboardLayout";
+
 export default function DiscussionsList() {
-    return <div>
+    return <DashboardContent>
         <h1>Discussions</h1>
-    </div>
+    </DashboardContent>
 }

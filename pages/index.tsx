@@ -5,11 +5,12 @@ import Head from 'next/head'
 import Link from 'next/link';
 import Image from 'next/image'
 import Card from '@/components/Card';
+import { DashboardContent } from '@/components/DashboardLayout';
 
 const Home: NextPage = () => {
     const {data: session, status} = useSession();
   return (
-    <div>
+    <DashboardContent>
       <Head>
         <title>Welcome | Harknology</title>
         <meta name="description" content="Manage your class discussions easily." />
@@ -39,7 +40,7 @@ const Home: NextPage = () => {
           </Card>
         </div>
       </main>
-    </div>
+    </DashboardContent>
   )
 }
 

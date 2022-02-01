@@ -5,6 +5,7 @@ import { FunctionComponent, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import styles from '@~/styles/DashboardLayout.module.css';
 
+export const DashboardContent: FunctionComponent = (props) => <div className="overflow-auto p-3 h-full">{props.children}</div> 
 
 const DashboardLayout: FunctionComponent = (props) => {
     let {status} = useSession();
