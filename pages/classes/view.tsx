@@ -92,11 +92,11 @@ export default function ClassView() {
 
                     <h2 className="text-xl font-light text-center mt-3">Discussions</h2>
                     <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
-                    {data?.discussions.map(discussion => {
+                    {data?.discussions.map(discussion =>
                         <Card key={discussion.id} title={discussion.name} href={`/discussions/view?id=${discussion.id}`}>
                             <p>{discussion.description}</p>
                         </Card>
-                    })}
+                    )}
                     {
                         role == 'teacher' ? 
                         <Card title="Create Discussion" icon={PlusCircleIcon} cardType="placeholder" onClick={() => setCreateDiscussionOpen(true)}/>

@@ -14,7 +14,6 @@ module.exports = withPWA({
    * @returns 
    */
   webpack(config, options) {
-    
     return config;
   }
 })

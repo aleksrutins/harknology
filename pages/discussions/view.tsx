@@ -2,6 +2,7 @@ import { useAuth } from "@/auth";
 import Loader from "@/components/Loader";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { Toast } from "@/components/Toast";
+import json from "@/json";
 import { Discussion } from "@prisma/client";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -9,7 +10,7 @@ import useSWR from "swr";
 export default function DiscussionView() {
     const { session, status } = useAuth();
     const router = useRouter();
-    const { data, error } = useSWR<Discussion>(`/api/discussions/${router.query.id}`);
+    const { data, error } = useSWR<Discussion>(`/api/discussions/${router.query.id}`, json);
     return <>
         {error && <Toast background="#ef4444">Error loading discussion</Toast>}
         <Loader depends={data} borderColor="black" center>
