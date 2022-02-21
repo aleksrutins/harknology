@@ -12,6 +12,13 @@ body {
     }
 }
 
+.ProseMirror {
+    appearance: none;
+}
+.ProseMirror-focused:focus {
+    outline: none;
+}
+
 /* html,
 body {
     --color-primary: rgb(0, 157, 53);
