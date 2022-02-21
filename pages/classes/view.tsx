@@ -8,17 +8,18 @@ import useSWR from "swr";
 import { ClassResponse } from "../api/classes/[id]";
 import UserDisplay from "@/components/UserDisplay";
 import { PlusCircleIcon, TrashIcon, UserAddIcon } from "@heroicons/react/outline";
-import Button from "@/components/Button";
+import Button from "@component:Basic/Button";
 import { FunctionComponent, useEffect, useState } from "react";
-import Modal, { ModalButtons } from "@/components/Modal";
+import Modal, { ModalButtons } from "@/components/Basic/Modal";
 import { useAuth } from "@/auth";
 import Link from "next/link";
 import styles from "@~/styles/ClassView.module.css";
-import Card from "@component:Card";
+import Card from "@component:Basic/Card";
 import Splitter, { SplitDirection } from "@devbookhq/splitter";
 import { Toast } from "@/components/Toast";
 import useUiLayout from "@/functions/useUiLayout";
 import { DashboardContent } from "@/components/DashboardLayout";
+import { CreateDiscussionDialog } from "@/components/CreateDiscussionDialog";
 
 const DeleteClassDialog: FunctionComponent<{ name: string, open?: boolean, onDelete: (...args: any) => any, onCancel: (...args: any) => any }> = props => {
     return <Modal title="Delete Class" {...props}>
@@ -47,9 +48,11 @@ export default function ClassView() {
     const { data, error } = useSWR<ClassResponse>('/api/classes/' + router.query.id, json);
     const { role } = useAuth(router.query.id as string);
     const [deleteOpen, setDeleteOpen] = useState(false);
+    const [createDiscussionOpen, setCreateDiscussionOpen] = useState(false);
     const [joinOpen, setJoinOpen] = useState(false);
     const [joinCode, setJoinCode] = useState('');
     const [joinExpires, setJoinExpires] = useState(new Date().toString());
+    const [otherError, setOtherError] = useState<string | undefined>(undefined);
     const uiLayout = useUiLayout();
 
     async function joinClass() {
@@ -65,6 +68,7 @@ export default function ClassView() {
 
     return <>
         {error && <Toast background="#ef4444">Error loading class</Toast>}
+        {otherError && <Toast background="#ef4444">{otherError}</Toast>}
         <Loader borderColor="black" depends={data} center>
             <Head>
                 <title>{data?.name} | Harknology</title>
@@ -89,13 +93,13 @@ export default function ClassView() {
                     <h2 className="text-xl font-light text-center mt-3">Discussions</h2>
                     <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
                     {data?.discussions.map(discussion => {
-                        <Card key={discussion.id} title={discussion.name}>
+                        <Card key={discussion.id} title={discussion.name} href={`/discussions/view?id=${discussion.id}`}>
                             <p>{discussion.description}</p>
                         </Card>
                     })}
                     {
                         role == 'teacher' ? 
-                        <Card title="Create Discussion" icon={PlusCircleIcon} cardType="placeholder"/>
+                        <Card title="Create Discussion" icon={PlusCircleIcon} cardType="placeholder" onClick={() => setCreateDiscussionOpen(true)}/>
                         : (
                             (data?.discussions.length ?? 0) == 0 && <span className="text-gray-700 font-light text-center block">No discussions</span>
                         )
@@ -119,6 +123,21 @@ export default function ClassView() {
                 await fetch(`/api/classes/${data?.id}/delete`);
                 setDeleteOpen(false);
                 router.push('/classes');
+            }} />
+
+            <CreateDiscussionDialog open={createDiscussionOpen} onCancel={() => setCreateDiscussionOpen(false)} onSubmit={async (name, description) => {
+                const response = await fetch(`/api/classes/${data?.id}/discussions/create`, {
+                    method: 'post',
+                    body: JSON.stringify({
+                        name, description
+                    })
+                });
+                setCreateDiscussionOpen(false);
+                if(response.status == 200) {
+                    router.push(`/discussions/view?id=${await response.text()}`);
+                } else {
+                    setOtherError("Error creating discussion: " + await response.text());
+                }
             }} />
 
             <JoinCodeDialog code={joinCode} open={joinOpen} setOpen={setJoinOpen} expires={joinExpires} />

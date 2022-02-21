@@ -3,11 +3,11 @@ import { FunctionComponent, MouseEventHandler } from "react";
 import Button from "./Basic/Button";
 import Modal, { ModalButtons } from "./Basic/Modal";
 
-export const CreateClassDialog: FunctionComponent<{ open: boolean, onSubmit: (name: string, description: string) => void, onCancel: MouseEventHandler<HTMLButtonElement> }> = (props) => {
+export const CreateDiscussionDialog: FunctionComponent<{ open: boolean, onSubmit: (name: string, description: string) => void, onCancel: MouseEventHandler<HTMLButtonElement> }> = (props) => {
     const [name, nameChange] = useInput('');
     const [description, descriptionChange] = useInput('');
 
-    return <Modal title="Create Class" open={props.open}>
+    return <Modal title="Create Discussion" open={props.open}>
         <form className="mx-5 mb-2">
         <label htmlFor="name" className="block">Name</label>
         <input name="name" value={name} onChange={nameChange} className="block w-full rounded-md border border-gray-200 focus:border-green-500 focus:ring-green-400/50 focus:ring appearance-none focus:outline-none transition p-2"/>

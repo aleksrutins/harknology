@@ -24,15 +24,19 @@ model Discussion {
   description String
   name        String     @db.VarChar(255)
   class       Class      @relation(fields: [classId], references: [id])
+  createdAt   DateTime   @default(now())
+  lastModified DateTime  @default(now())
   responses   Response[]
 }
 
 model Response {
-  id           Int         @id @default(autoincrement())
+  id           String      @id @default(cuid())
   userEmail    String      @db.VarChar(255)
   content      String
   discussionId String?
-  parentId     Int?
+  parentId     String?
+  createdAt    DateTime    @default(now())
+  lastModified  DateTime    @default(now())
   discussion   Discussion? @relation(fields: [discussionId], references: [id])
   parent       Response?   @relation("ResponseToResponse_parentId", fields: [parentId], references: [id])
   User         User        @relation(fields: [userEmail], references: [email])

@@ -1,16 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react';
 import prisma from '@/prisma';
-import { Result } from '%checkClassAuth';
+import checkClassAuth, { Result } from '%checkClassAuth';
 import apiRoute from '@/util/apiRoute';
 
-export default apiRoute<string>(['checkClassAuth'], async ({ id }, { req }, checkClassAuth) => {
+export default apiRoute<string>(['checkClassAuth'], async ({ id }, { req }, _) => {
   const session = await getSession({ req });
   if(!session) {
     return [403, 'Not authorized'];
   }
   try {
-      const [data, status]: Result = await checkClassAuth(id, session);
+      const [data, status]: Result = await checkClassAuth(id as string, session);
       if(!status) {
           return [403, 'Not authorized'];
       }
@@ -22,6 +22,7 @@ export default apiRoute<string>(['checkClassAuth'], async ({ id }, { req }, chec
       });
       return [200, discussion.id];
   } catch(e) {
+      console.log(e);
       return [500, 'Error'];
   }
 });

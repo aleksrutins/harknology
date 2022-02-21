@@ -2,7 +2,7 @@ import { useClasses } from "@/api";
 import { useAuth } from "@/auth";
 import { CreateClassDialog } from "@/components/CreateClassDialog";
 import Loader from "@/components/Loader";
-import Modal, { ModalButtons } from "@/components/Modal";
+import Modal, { ModalButtons } from "@/components/Basic/Modal";
 import { useInput } from "@/input";
 import truncate from "@/truncate";
 import { Session } from "next-auth";
@@ -10,7 +10,7 @@ import Head from "next/head";
 import { useState } from "react";
 import Link from "next/link";
 import UserDisplay from "@/components/UserDisplay";
-import Card from "@/components/Card";
+import Card from "@component:Basic/Card";
 import { AcademicCapIcon, PlusIcon } from "@heroicons/react/outline";
 import { DashboardContent } from "@/components/DashboardLayout";
 

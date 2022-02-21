@@ -5,7 +5,7 @@ import links from "@/links.json";
 import { useSession } from "next-auth/react";
 import useUiLayout from "@/functions/useUiLayout";
 import { PopupMenu } from "./PopupMenu";
-import Button from "./Button";
+import Button from "./Basic/Button";
 import { MenuIcon } from "@heroicons/react/outline";
 
 const SidebarLink: FunctionComponent<{href: string, isActive: boolean, isMobile: boolean}> = (props) => {

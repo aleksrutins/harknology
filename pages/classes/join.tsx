@@ -1,5 +1,5 @@
 import { useAuth } from "@/auth";
-import Button from "@/components/Button";
+import Button from "@component:Basic/Button";
 import Loader from "@/components/Loader";
 import UserDisplay from "@/components/UserDisplay";
 import json from "@/json";
