@@ -1,0 +1,10 @@
+[ 
+    [
+        ["Dashboard", "/dashboard", "^/dashboard$"],
+        ["Classes", "/classes", "/classes(/.*)?"]
+    ],
+    [
+        ["Welcome", "/", "^/$"],
+        ["About", "/about", "^/about$"]
+    ]
+]

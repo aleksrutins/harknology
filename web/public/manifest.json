@@ -1,0 +1,16 @@
+{
+    "name": "Harknology",
+    "short_name": "Harknology",
+    "lang": "en-US",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#16a34a",
+    "icons": [
+      {
+        "src": "/logo.svg",
+        "sizes": "256x256",
+        "type": "image/svg+xml",
+        "purpose": "any maskable"
+      }
+    ]
+  }
