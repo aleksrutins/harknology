@@ -1,9 +1,10 @@
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent, Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline';
 import ToggleButton from './Basic/ToggleButton'
+import { PropsWithChildren } from 'react';
 
-const Tiptap = () => {
+const Tiptap = (props: PropsWithChildren<{setEditor: (editor: Editor) => void}>) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -11,6 +12,8 @@ const Tiptap = () => {
     ],
     content: '',
   })
+  
+  props.setEditor(editor!);
 
   return (
     <div className='border rounded-lg m-2 focus-inside:ring-2 transition'>

@@ -15,12 +15,14 @@ const ResponseDisplay: FC<Props> = (props) => {
     const responses = useSWR<Response[]>(`/api/responses/${props.response.id}/responses`, json);
     
     return <div className="rounded border hover:shadow bg-white transition p-3 my-3">
-        <UserDisplay email={props.response.userEmail} badge/>
-        <p>{props.response.content}</p>
-        <Accordion initiallyOpen={false} title="Responses">
+        <UserDisplay email={props.response.userEmail}/>
+        <p dangerouslySetInnerHTML={{__html: props.response.content}}></p>
+        {(responses.data?.length ?? 0 > 0) ?
+        <Accordion initiallyOpen={false} title={`Responses${(responses.data?.length ?? 0) > 0? ` (${responses.data?.length})` : ``}`}>
             {responses.data?.map(response => <ResponseDisplay key={response.id} {...{response}}></ResponseDisplay>)}
         </Accordion>
-        <ResponseEditor discussion={props.response.discussionId!} parent={props.response.id}/>
+        : ''}
+        <ResponseEditor discussion={props.response.discussionId!} parent={props.response.id} swr={responses}/>
     </div>;
 }
 
