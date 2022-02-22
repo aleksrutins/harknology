@@ -7,11 +7,11 @@ import { SWRResponse } from "swr";
 import Button from "./Basic/Button";
 import Tiptap from "./Tiptap";
 
-export default (props: {
+export default function ResponseEditor(props: {
     discussion: string,
     parent?: string,
     swr: SWRResponse<Response[], any>
-}) => {
+}) {
     const [editor, setEditor] = useState<Editor>();
     const {session, status} = useAuth();
     async function createResponse() {
