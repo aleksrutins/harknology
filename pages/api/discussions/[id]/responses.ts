@@ -25,10 +25,8 @@ export default apiRoute<Response[]>(['checkClassAuth'], async ({ id }, { req }, 
                 parentId: null
             }
         });
-        console.log(responses);
         return [200, responses];
     } catch(e) {
-        console.log(e);
         return [500, 'Error'];
     }
 });
