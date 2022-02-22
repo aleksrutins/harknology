@@ -1,0 +1,7 @@
+.editor .toolbar {
+    display: none;
+}
+
+.editor:focus-within .toolbar {
+    display: block;
+}

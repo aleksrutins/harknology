@@ -23,7 +23,7 @@ export default (props: {
         props.swr.mutate();
     }
     return <>
-        <Tiptap setEditor={setEditor}/>
+        <Tiptap setEditor={setEditor} placeholder="Enter your response..."/>
         <Button buttonStyle="primary" onClick={createResponse}>Respond</Button>
     </>;
 }
