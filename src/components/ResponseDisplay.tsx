@@ -23,3 +23,5 @@ const ResponseDisplay: FC<Props> = (props) => {
         <ResponseEditor discussion={props.response.discussionId!} parent={props.response.id}/>
     </div>;
 }
+
+export default ResponseDisplay;
