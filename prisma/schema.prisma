@@ -30,17 +30,19 @@ model Discussion {
 }
 
 model Response {
-  id           String      @id @default(cuid())
-  userEmail    String      @db.VarChar(255)
+  id           String       @id @default(cuid())
+  userEmail    String       @db.VarChar(255)
   content      String
   discussionId String?
   parentId     String?
-  createdAt    DateTime    @default(now())
-  lastModified DateTime    @default(now())
-  discussion   Discussion? @relation(fields: [discussionId], references: [id])
-  parent       Response?   @relation("ResponseToResponse_parentId", fields: [parentId], references: [id])
-  User         User        @relation(fields: [userEmail], references: [email])
-  responses    Response[]  @relation("ResponseToResponse_parentId")
+  createdAt    DateTime     @default(now())
+  lastModified DateTime     @default(now())
+  discussion   Discussion?  @relation(fields: [discussionId], references: [id])
+  parent       Response?    @relation("ResponseToResponse_parentId", fields: [parentId], references: [id])
+  User         User         @relation(fields: [userEmail], references: [email])
+  responses    Response[]   @relation("ResponseToResponse_parentId")
+  connectsTo   Connection[] @relation("Response_connectsTo")
+  connectsFrom Connection[] @relation("Response_connectsFrom")
 }
 
 model Account {
@@ -98,4 +100,18 @@ model JoinCode {
   classId String
   expires DateTime
   class   Class    @relation(fields: [classId], references: [id])
+}
+
+model Connection {
+  id     String   @id @default(cuid())
+  fromId String
+  toId   String
+  type   ConnectionType
+  from   Response @relation("Response_connectsTo", fields: [fromId], references: [id])
+  to     Response @relation("Response_connectsFrom", fields: [toId], references: [id])
+}
+
+enum ConnectionType {
+  Evidence
+  ResponseTo
 }

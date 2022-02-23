@@ -18,12 +18,14 @@ export default function ResponseEditor(props: {
     const {session, status} = useAuth();
     async function createResponse() {
         setBusy(true);
-        await fetch(`/api/discussions/${props.discussion}/responses/create/from/${props.parent ?? 'global'}`, {
+        const response = await (await fetch(`/api/discussions/${props.discussion}/responses/create/from/${props.parent ?? 'global'}`, {
             method: 'POST',
             body: editor!.getHTML()
-        });
+        })).json();
         editor?.chain().clearContent().run();
-        props.swr.mutate();
+        props.swr.mutate(async responses => {
+            return [...(responses ?? []), response];
+        });
         setBusy(false);
     }
     return <>

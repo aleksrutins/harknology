@@ -27,7 +27,7 @@ export default apiRoute<string>(['checkClassAuth'], async ({ id, parentId }, { r
               content: req.body
           }
       });
-      return [200, response.id];
+      return [200, JSON.stringify(response)];
   } catch(e) {
       return [500, 'Error'];
   }
