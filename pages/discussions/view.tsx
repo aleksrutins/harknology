@@ -22,7 +22,7 @@ export default function DiscussionView() {
                 <p className="max-w-2xl mx-auto whitespace-pre-wrap">{data?.description}</p>
                 {responses.error && <div className="bg-red-300 rounded-xl p-3">Failed to load responses</div> }
                 <Loader depends={responses} borderColor="black" center>
-                    {(responses.data ?? []).map(resp => <ResponseDisplay key={resp.id} response={resp} swr={responses}/>)}
+                    {(responses.data ?? []).map(resp => <ResponseDisplay key={resp.id} response={resp} swr={responses} depth={0}/>)}
                 </Loader>
                 <ResponseEditor discussion={data?.id!} swr={responses} />
             </div>
