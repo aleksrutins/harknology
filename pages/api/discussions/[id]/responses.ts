@@ -21,8 +21,7 @@ export default apiRoute<Response[]>(['checkClassAuth'], async ({ id }, { req }, 
         }
         const responses = await prisma.response.findMany({
             where: {
-                discussionId: id as string,
-                parentId: null
+                discussionId: id as string
             }
         });
         return [200, responses];
