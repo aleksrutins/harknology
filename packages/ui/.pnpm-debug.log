@@ -1,0 +1,12 @@
+{
+  "0 error pnpm": {
+    "fileName": "/Users/student/Desktop/Projects/harknology/packages/functions/package.json",
+    "code": "ERR_PNPM_JSON_PARSE",
+    "err": {
+      "name": "pnpm",
+      "message": "Unexpected end of JSON input while parsing empty string in /Users/student/Desktop/Projects/harknology/packages/functions/package.json",
+      "code": "ERR_PNPM_JSON_PARSE",
+      "stack": "pnpm: Unexpected end of JSON input while parsing empty string in /Users/student/Desktop/Projects/harknology/packages/functions/package.json\n    at parseJson (/Users/student/.local/lib/node_modules/pnpm/dist/pnpm.cjs:3118:27)\n    at readJsonFile (/Users/student/.local/lib/node_modules/pnpm/dist/pnpm.cjs:19725:42)\n    at async readExactProjectManifest (/Users/student/.local/lib/node_modules/pnpm/dist/pnpm.cjs:19858:34)\n    at async /Users/student/.local/lib/node_modules/pnpm/dist/pnpm.cjs:48721:16"
+    }
+  }
+}
