@@ -1,6 +1,7 @@
 import { useSession, signOut, signIn } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { ComponentType, useState } from "react";
+import OutsideClickHandler from "react-outside-click-handler";
 import LoadingIndicator from "./LoadingIndicator";
 import { PopupMenu } from "./PopupMenu";
 
@@ -22,13 +23,15 @@ const AppNav: ComponentType<NavProps> = dynamic(async () => (props) => {
                     :
                     <>
                         <img src={session!.user?.image!} className='rounded-full h-[32px] cursor-pointer' alt={session!.user?.email!} onClick={() => setAuthPopupVisible(!authPopupVisible)}></img>
-                        <PopupMenu isOpen={authPopupVisible} position={{top: '56px', right: '15px'}}>
-                        <span className="m-2 block">
-                                <img src={session!.user?.image!} className='inline rounded-full h-[1rem] align-middle' alt={session!.user?.email!}></img>
-                                <span className="ml-[3px] text-[1rem] align-middle">{session!.user?.name}</span>
-                            </span>
-                            <button className="text-[0.8rem] hover:bg-gray-200 transition cursor-pointer p-1" onClick={() => signOut()}>Log Out</button>
-                        </PopupMenu>
+                        <OutsideClickHandler useCapture={false} onOutsideClick={() => setAuthPopupVisible(false)}>
+                            <PopupMenu isOpen={authPopupVisible} position={{ top: '56px', right: '15px' }}>
+                                <span className="m-2 block">
+                                    <img src={session!.user?.image!} className='inline rounded-full h-[1rem] align-middle' alt={session!.user?.email!}></img>
+                                    <span className="ml-[3px] text-[1rem] align-middle">{session!.user?.name}</span>
+                                </span>
+                                <button className="text-[0.8rem] hover:bg-gray-200 transition cursor-pointer p-1" onClick={() => signOut()}>Log Out</button>
+                            </PopupMenu>
+                        </OutsideClickHandler>
                     </>
                 )
             }
