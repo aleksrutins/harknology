@@ -1,10 +1,12 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model Class {
@@ -38,7 +40,7 @@ model Response {
   createdAt    DateTime     @default(now())
   lastModified DateTime     @default(now())
   discussion   Discussion?  @relation(fields: [discussionId], references: [id])
-  parent       Response?    @relation("ResponseToResponse_parentId", fields: [parentId], references: [id])
+  parent       Response?    @relation("ResponseToResponse_parentId", fields: [parentId], references: [id], onUpdate: NoAction, onDelete: NoAction)
   User         User         @relation(fields: [userEmail], references: [email])
   responses    Response[]   @relation("ResponseToResponse_parentId")
   connectsTo   Connection[] @relation("Response_connectsTo")
@@ -107,8 +109,8 @@ model Connection {
   fromId String
   toId   String
   type   ConnectionType
-  from   Response @relation("Response_connectsTo", fields: [fromId], references: [id])
-  to     Response @relation("Response_connectsFrom", fields: [toId], references: [id])
+  from   Response @relation("Response_connectsTo", fields: [fromId], references: [id], onUpdate: NoAction)
+  to     Response @relation("Response_connectsFrom", fields: [toId], references: [id], onUpdate: NoAction)
 }
 
 enum ConnectionType {
