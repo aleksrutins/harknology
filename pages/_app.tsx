@@ -6,11 +6,6 @@ import DashboardLayout from '@/components/DashboardLayout';
 import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-    useEffect(() => {
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw/sw.js');
-        }
-    }, [])
     return (
         <SessionProvider session={session}>
             <Head>
