@@ -16,11 +16,12 @@ import { DashboardContent } from "@/components/DashboardLayout";
 
 export default function Classes() {
     const { session, status } = useAuth();
-    const { data: classes, error, createClass: apiCreateClass } = useClasses();
+    const { data: classes, error, createClass: apiCreateClass, mutate } = useClasses();
     const [createClassOpen, setCreateClassOpen] = useState(false);
     const createClass = async (name: string, description: string) => {
         await apiCreateClass({ name, description })
         setCreateClassOpen(false);
+        mutate();
     }
     return <DashboardContent>
         <Head>
