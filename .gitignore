@@ -40,4 +40,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-/public/sw
+/public/sw*
+/public/workbox*

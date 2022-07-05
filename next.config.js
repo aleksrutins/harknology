@@ -5,7 +5,7 @@ module.exports = withPWA({
   pwa: {
     dest: 'public',
     register: true,
-    sw: "/sw/sw.js",
+    sw: "/sw.js",
     scope: "/"
   },
   reactStrictMode: true,
