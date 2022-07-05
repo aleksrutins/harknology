@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function apiRoute<T>(fns: string[], handler: (
-    params: {[k: string]: string | string[]},
+    params: Partial<{[k: string]: string | string[]}>,
     base: {req: NextApiRequest, res: NextApiResponse<string | T>},
     ...functions: Function[]
     ) => [number, T | string] | Promise<[number, T | string]>) {
