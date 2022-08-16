@@ -6,6 +6,9 @@ export type Props = {
     center?: boolean
 }
 
-const LoadingIndicator: FunctionComponent<Props> = (props) => <span className={`${styles.loadingIndicator} ${props.center && styles.center}`} style={{borderColor: props.borderColor}}/>
+const LoadingIndicator: FunctionComponent<Props> = (props) => 
+    <span className={`${styles.loadingIndicator} ${props.center && styles.center}`} style={{borderColor: props.borderColor}}>
+        <span className={styles.loadingIndicatorCenter} style={{borderColor: props.borderColor}}></span>
+    </span>
 
 export default LoadingIndicator;

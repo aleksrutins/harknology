@@ -1,4 +1,5 @@
 import { useAuth } from "@/auth";
+import { DashboardContent } from "@/components/DashboardLayout";
 import Loader from "@/components/Loader";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import ResponseDisplay from "@/components/ResponseDisplay";
@@ -14,7 +15,7 @@ export default function DiscussionView() {
     const router = useRouter();
     const { data, error } = useSWR<Discussion>(`/api/discussions/${router.query.id}`, json);
     const responses = useSWR<Response[]>(`/api/discussions/${router.query.id}/responses`, json);
-    return <>
+    return <DashboardContent>
         {error && <Toast background="#ef4444">Error loading discussion</Toast>}
         <Loader depends={data} borderColor="black" center>
             <div className="max-w-3xl mx-auto px-2">
@@ -27,6 +28,6 @@ export default function DiscussionView() {
                 <ResponseEditor discussion={data?.id!} swr={responses} />
             </div>
         </Loader>
-    </>;
+    </DashboardContent>;
 }
 

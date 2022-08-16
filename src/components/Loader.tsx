@@ -7,7 +7,7 @@ export type Props = IndicatorProps & {
 
 const Loader: FunctionComponent<Props> = (props) => {
     return <>
-        {props.depends == null? <LoadingIndicator {...props}/>
+        {!props.depends? <LoadingIndicator {...props}/>
         : props.children}
     </>;
 }

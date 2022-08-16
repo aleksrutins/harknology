@@ -1,10 +1,24 @@
 .loadingIndicator {
-    display: block;
+    display: flex;
     border: 2px solid white;
-    border-radius: 50%;
+    border-radius: 30%;
     height: 32px;
     width: 32px;
-    animation: loading .5s linear 0s infinite;
+    animation: loading 1s linear 0s infinite;
+    animation-play-state: running;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingIndicatorCenter {
+    display: block;
+    border: 2px solid white;
+    border-radius: 30%;
+    height: 16px;
+    width: 16px;
+    animation: loading 1s reverse 0s infinite;
     animation-play-state: running;
     justify-self: center;
     align-self: center;
@@ -16,7 +30,7 @@
 
 @keyframes loading {
     0% {
-        transform: rotate3d(0, 0, 0, 0);
+        transform: rotate(0deg)
     }
     /* 25% {
         transform: rotate(120deg)
@@ -28,6 +42,6 @@
         transform: rotate(270deg);
     } */
     100% {
-        transform: rotate3d(2, 3, 3, 360deg);
+        transform: rotate(360deg);
     }
 }
