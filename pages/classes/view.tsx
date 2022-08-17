@@ -98,7 +98,7 @@ export default function ClassView() {
                         </Card>
                     )}
                     {
-                        role == 'teacher' ? 
+                        role == 'teacher' ?
                         <Card title="Create Discussion" icon={PlusCircleIcon} cardType="placeholder" onClick={() => setCreateDiscussionOpen(true)}/>
                         : (
                             (data?.discussions.length ?? 0) == 0 && <span className="text-gray-700 font-light text-center block">No discussions</span>

@@ -1,12 +1,11 @@
 import { ChevronDoubleDownIcon, ChevronDoubleLeftIcon } from "@heroicons/react/outline";
-import { ComponentType, ElementRef, FC, useState } from "react";
-import Button from "./Button";
+import { ComponentType, ElementRef, FC, PropsWithChildren, ReactNode, useState } from "react";
 
-const Accordion: FC<{
+const Accordion: FC<PropsWithChildren<{
     initiallyOpen: boolean,
     title: string,
-    action?: ElementRef<typeof Button>
-}> = props => {
+    action?: ReactNode
+}>> = props => {
     const [isOpen, setOpen] = useState(props.initiallyOpen);
     return <div className="rounded-md border">
         <h2 className={`flex flex-row items-center justify-between p-2 cursor-pointer ${isOpen? 'border-b' : ''}`} onClick={() => setOpen(!isOpen)}>

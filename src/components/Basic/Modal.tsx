@@ -1,13 +1,13 @@
-import { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent, PropsWithChildren, ReactNode } from "react";
 import styles from "@~/styles/Modal.module.css";
 import useUiLayout from "@/functions/useUiLayout";
 
-export type Props = {
+export type Props = PropsWithChildren<{
     title: string,
     subtitle?: string,
     buttons?: ReactNode[],
     open?: boolean
-};
+}>;
 
 const Modal: FunctionComponent<Props> = (props) => {
     const uiLayout = useUiLayout()
@@ -22,7 +22,7 @@ const Modal: FunctionComponent<Props> = (props) => {
     </> : null);
 };
 
-export const ModalButtons: FunctionComponent<{}> = (props) => {
+export const ModalButtons: FunctionComponent<PropsWithChildren> = (props) => {
     return <div className="flex flex-row-reverse">{props.children}</div>
 }
 
