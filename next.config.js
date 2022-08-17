@@ -9,12 +9,12 @@ module.exports = withPWA({
     scope: "/"
   },
   reactStrictMode: true,
-  webpack5: true,
+  // webpack5: true,
   /**
-   * 
-   * @param {import('webpack').Configuration} config 
-   * @param {*} options 
-   * @returns 
+   *
+   * @param {import('webpack').Configuration} config
+   * @param {*} options
+   * @returns
    */
   webpack(config, options) {
     return config;
