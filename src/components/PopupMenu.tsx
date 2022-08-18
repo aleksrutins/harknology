@@ -11,6 +11,6 @@ export const PopupMenu: FunctionComponent<PropsWithChildren<{
     }
 }>> = props =>
 
-<div className={props.isOpen? 'z-[102] flex flex-col py-1 rounded-md shadow-2xl bg-white absolute text-black' : 'hidden'} style={props.position}>
+<div className={props.isOpen? 'z-[102] flex flex-col py-1 rounded-md shadow-2xl bg-white absolute border text-black' : 'hidden'} style={props.position}>
     {props.children}
 </div>

@@ -36,13 +36,10 @@ model Response {
   userEmail    String       @db.VarChar(255)
   content      String
   discussionId String?
-  parentId     String?
   createdAt    DateTime     @default(now())
   lastModified DateTime     @default(now())
   discussion   Discussion?  @relation(fields: [discussionId], references: [id])
-  parent       Response?    @relation("ResponseToResponse_parentId", fields: [parentId], references: [id], onUpdate: NoAction, onDelete: NoAction)
   User         User         @relation(fields: [userEmail], references: [email])
-  responses    Response[]   @relation("ResponseToResponse_parentId")
   connectsTo   Connection[] @relation("Response_connectsTo")
   connectsFrom Connection[] @relation("Response_connectsFrom")
 }

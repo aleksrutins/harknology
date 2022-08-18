@@ -10,14 +10,14 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <SessionProvider session={session}>
             <Head>
                 <link rel="icon" href="/logo.svg" />
-                <link rel="manifest" href="manifest.json"/>
+                <link rel="manifest" href="/manifest.json"/>
 
                 <meta name="mobile-web-app-capable" content="yes"/>
                 <meta name="apple-mobile-web-app-capable" content="yes"/>
                 <meta name="application-name" content="Harknology"/>
                 <meta name="apple-mobile-web-app-title" content="Harknology"/>
-                <meta name="theme-color" content="#16a34a"/>
-                <meta name="msapplication-navbutton-color" content="#16a34a"/>
+                <meta name="theme-color" content="rgb(243 244 246)"/>
+                <meta name="msapplication-navbutton-color" content="rgb(243 244 246)"/>
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
                 <meta name="msapplication-starturl" content="/"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>

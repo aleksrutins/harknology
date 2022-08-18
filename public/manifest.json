@@ -4,7 +4,7 @@
     "lang": "en-US",
     "start_url": "/",
     "display": "standalone",
-    "theme_color": "#16a34a",
+    "theme_color": "rgb(243 244 246)",
     "icons": [
       {
         "src": "/logo.svg",
@@ -12,5 +12,6 @@
         "type": "image/svg+xml",
         "purpose": "any maskable"
       }
-    ]
+    ],
+    "display_override": ["window-controls-overlay"]
   }

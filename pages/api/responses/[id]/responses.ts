@@ -1,10 +1,9 @@
-import checkClassAuth, { Result } from "%checkClassAuth";
 import prisma from "@/prisma";
 import apiRoute from "@/util/apiRoute";
 import { Response } from "@prisma/client";
 import { getSession } from "next-auth/react";
 
-export default apiRoute<Response[]>(['checkClassAuth'], async ({ id }, { req }, _) => {
+export default apiRoute<Response[]>(['checkClassAuth'], async ({ id }, { req }, checkClassAuth) => {
     const session = await getSession({ req });
     if(!session) {
         return [401, "Not authorized"]
@@ -18,13 +17,17 @@ export default apiRoute<Response[]>(['checkClassAuth'], async ({ id }, { req }, 
         }
     });
     try {
-        const [data, status]: Result = await checkClassAuth(response?.discussion?.classId!, session);
+        const [data, status] = await checkClassAuth(response?.discussion?.classId!, session);
         if(!status) {
             return [403, 'Not authorized'];
         }
         const responses = await prisma.response.findMany({
             where: {
-                parentId: id as string
+                connectsFrom: {
+                    some: {
+                        fromId: id as string
+                    }
+                }
             }
         });
         return [200, responses];

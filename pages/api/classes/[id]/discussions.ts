@@ -11,7 +11,7 @@ export default apiRoute<Discussion[]>(['checkClassAuth'], async ({ id }, { req }
     return [401, 'Not authorized'];
   }
   try {
-      const [data, status]: Result = await checkClassAuth(id, session);
+      const [data, status]: Result = await checkClassAuth(id as string, session);
       if(!status) {
           return [403, 'Not authorized'];
       }

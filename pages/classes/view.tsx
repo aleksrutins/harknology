@@ -76,7 +76,7 @@ export default function ClassView() {
 
             <Splitter direction={
                 uiLayout == 'vertical'? SplitDirection.Vertical : SplitDirection.Horizontal
-            } gutterClassName="bg-green-600" draggerClassName="bg-green-500">
+            } gutterClassName="bg-gray-100" draggerClassName="bg-gray-400">
                 {/* Main class view */}
                 {/* className={`overflow-auto h-full p-3 grow resize-y sm:resize-x`} */}
                 <DashboardContent>

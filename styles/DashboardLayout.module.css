@@ -15,4 +15,5 @@
 .contentView {
     overflow-y: auto;
     flex: 1;
+    background-color: white;
 }

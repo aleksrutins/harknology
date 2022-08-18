@@ -1,26 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
-.navbar {
-    background-color: var(--color-primary);
-    color: var(--text-primary);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
+.titlebar {
+    height: env(titlebar-area-height, 48px);
+    padding-left: env(titlebar-area-x);
+    width: env(titlebar-area-width, calc(100vw - 15px));
+    app-region: drag;
 }
 
 .navbar h2 {
     margin: 0;
     font-family: Raleway, Cantarell, Arial, Helvetica, sans-serif;
-    font-weight: 300;
 }
 
 .profileImg {
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    vertical-align: middle;
+    app-region: no-drag;
 }
 
 .authPopup {
