@@ -5,6 +5,8 @@ import OutsideClickHandler from "react-outside-click-handler";
 import LoadingIndicator from "./LoadingIndicator";
 import { PopupMenu } from "./PopupMenu";
 import styles from "@~/styles/AppNav.module.css";
+import { ChevronLeftIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 
 export type NavProps = {
 }
@@ -12,12 +14,15 @@ export type NavProps = {
 const AppNav: ComponentType<NavProps> = dynamic(async () => (props) => {
   const { data: session, status } = useSession();
   const [authPopupVisible, setAuthPopupVisible] = useState(false);
+  const router = useRouter();
   return <div className={`bg-gray-100 flex flex-row justify-between items-center ${styles.titlebar}`}>
-    <div></div>
+    <button className="hover:bg-gray-200 block rounded p-1 transition [app-region:no-drag]" onClick={() => router.back()}>
+      <ChevronLeftIcon className="h-5 w-5"></ChevronLeftIcon>
+    </button>
     <h2 className="font-[Raleway]">
       harknology
     </h2>
-    <div>
+    <div className="relative">
       {status == 'unauthenticated' ? <button onClick={() => signIn()} className="bg-gray-200 hover:bg-green-300 py-1 px-2 border-none rounded-md transition [app-region:no-drag]">Sign In</button> :
         (status == 'loading' ?
           <LoadingIndicator borderColor="white" />
@@ -25,7 +30,7 @@ const AppNav: ComponentType<NavProps> = dynamic(async () => (props) => {
           <>
             <img src={session!.user?.image!} className='rounded-full h-[32px] cursor-pointer [app-region:no-drag]' alt={session!.user?.email!} onClick={() => setAuthPopupVisible(!authPopupVisible)}></img>
             <OutsideClickHandler useCapture={false} onOutsideClick={() => setAuthPopupVisible(false)}>
-              <PopupMenu isOpen={authPopupVisible} position={{ top: '56px', right: 'calc(100vw-(env(titlebar-area-x)+env(titlebar-area-width)))' }}>
+              <PopupMenu isOpen={authPopupVisible} position={{ top: '40px', right: '0px', width: 'max-content' }}>
                 <span className="m-2 block">
                   <img src={session!.user?.image!} className='inline rounded-full h-[1rem] align-middle' alt={session!.user?.email!}></img>
                   <span className="ml-[3px] text-[1rem] align-middle">{session!.user?.name}</span>

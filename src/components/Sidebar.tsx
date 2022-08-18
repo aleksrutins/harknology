@@ -29,14 +29,14 @@ export default function Sidebar() {
       </div>
       :
       <>
-        <PopupMenu position={{ left: 'env(titlebar-area-x, 15px)' }} isOpen={isMobileMenuVisible}>
+        <PopupMenu position={{ left: 'calc(env(titlebar-area-x,15px)+30px)' }} isOpen={isMobileMenuVisible}>
           {links.map((section, i) =>
             <div className="flex flex-col" key={i}>
               {section.map(link => <SidebarLink isMobile={true} key={link[1]} href={link[1]} isActive={new RegExp(link[2]).test(router.asPath)}>{link[0]}</SidebarLink>)}
             </div>
           )}
         </PopupMenu>
-        <button className="absolute top-[calc((env(titlebar-area-height,48px)/2)-12px)] left-[env(titlebar-area-x,15px)] hover:bg-gray-200 cursor-pointer transition p-1 rounded [app-region:no-drag]" onClick={() => setMobileMenuVisible(!isMobileMenuVisible)}><MenuIcon className="h-5 w-5"></MenuIcon></button>
+        <button className="absolute top-[calc((env(titlebar-area-height,48px)/2)-14px)] left-[calc(env(titlebar-area-x,15px)+30px)] hover:bg-gray-200 cursor-pointer transition p-1 rounded [app-region:no-drag]" onClick={() => setMobileMenuVisible(!isMobileMenuVisible)}><MenuIcon className="h-5 w-5"></MenuIcon></button>
       </>
   ) : null;
 }

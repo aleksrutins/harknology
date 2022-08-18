@@ -7,7 +7,8 @@ export const PopupMenu: FunctionComponent<PropsWithChildren<{
         top?: string,
         left?: string,
         right?: string,
-        bottom?: string
+        bottom?: string,
+        width?: string
     }
 }>> = props =>
 
