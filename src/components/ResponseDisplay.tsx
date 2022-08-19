@@ -1,9 +1,12 @@
 import { useInput } from "@/input";
 import json from "@/json";
 import { formatDate } from "@/util/dateFmt";
+import { ArrowRightIcon } from "@heroicons/react/outline";
 import { PencilIcon, PlusIcon } from "@heroicons/react/solid";
-import { Response } from "@prisma/client";
-import { FC, useRef, useState } from "react";
+import { Connection, Response } from "@prisma/client";
+import user from "@~/server/user";
+import { Dispatch, FC, SetStateAction, useRef, useState } from "react";
+import { UseQueryResult } from "react-query";
 import useSWR, { SWRResponse } from "swr";
 import Accordion from "./Basic/Accordion";
 import Button from "./Basic/Button";
@@ -11,35 +14,32 @@ import ToggleButton from "./Basic/ToggleButton";
 import ResponseEditor from "./ResponseEditor";
 import UserDisplay from "./UserDisplay";
 
+type Connections = { connectsTo: Connection[], connectsFrom: Connection[] }
+
 export type Props = {
-    response: Response,
-    swr: SWRResponse<Response[]>,
-    depth: number
+    response: Response & Connections,
+    query: UseQueryResult<(Response & Connections)[]>
 };
 const ResponseDisplay: FC<Props> = (props) => {
-    const responses = props.swr.data?.filter(r => r.parentId == props.response.id);;
-    const [editing, setEditing] = useState(false);
+    const responses = props.query.data?.filter(r => r.connectsFrom.some(conn => conn.fromId == props.response.id));
 
-    return <div className={`rounded hover:border-gray-400 bg-white transition my-3 border ${editing && '!border-gray-600'}`}>
-        <div className={`sticky w-100 bg-white backdrop-blur-sm p-3 border-b ${editing && 'border-gray-600'} rounded-t`} style={{ top: props.depth * 40, zIndex: 99 - props.depth }}>
-            <UserDisplay email={props.response.userEmail} />
-            <div className="float-right">
-                <small>{formatDate(new Date(props.response.lastModified))}</small>
-                <ToggleButton active={editing} className="group float-right mt-[-9px] mr-[-9px]" buttonStyle="primary" onClick={(e: MouseEvent) => { e.stopPropagation(); setEditing(!editing) }}>
-                    <PlusIcon className="inline w-5 h-5 align-middle" />
-                    <span className="hidden group-hover:inline align-middle pl-1">Respond</span>
-                </ToggleButton>
-            </div>
+    return <div>
+        <div>
+            {
+                props.response.connectsFrom.map(conn => {
+                    const response = props.query.data?.find((resp) => resp.id == conn.fromId);
+                    if(!response) return <></>
+                    return <a className="text-xs text-green-300 overflow-hidden block" href={`#response-${response.id}`}>
+                    <ArrowRightIcon className="w-2 h-2 mr-1 inline"></ArrowRightIcon>
+                    {response.userEmail}
+                    <span className="text-xs text-gray-600 overflow-ellipsis"> {response.content.replace(/(<([^>]+)>)/ig, "").substring(0, 70)}</span>
+                </a>})
+            }
         </div>
-        <div className="p-2">
-            <p dangerouslySetInnerHTML={{ __html: props.response.content }}></p>
-            {(responses?.length ?? 0 > 0) ?
-                <Accordion initiallyOpen={false} title={`Responses${(responses?.length ?? 0) > 0 ? ` (${responses?.length})` : ``}`}>
-                    {responses?.map(response => <ResponseDisplay key={response.id} {...{ response }} swr={props.swr} depth={props.depth + 1}></ResponseDisplay>)}
-                </Accordion>
-                : ''}
-            {editing && <ResponseEditor discussion={props.response.discussionId!} parent={props.response.id} swr={props.swr} />}
+        <div>
+            <UserDisplay email={props.response.userEmail}></UserDisplay>
         </div>
+        <p dangerouslySetInnerHTML={{__html: props.response.content}}></p>
     </div>;
 }
 

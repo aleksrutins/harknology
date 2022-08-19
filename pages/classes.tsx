@@ -1,24 +1,26 @@
-import { useClasses } from "@/api";
-import { useAuth } from "@/auth";
 import { CreateClassDialog } from "@/components/CreateClassDialog";
 import { DashboardContent } from "@/components/DashboardLayout";
 import Loader from "@/components/Loader";
 import UserDisplay from "@/components/UserDisplay";
 import truncate from "@/truncate";
+import { trpc } from "@/util/trpc";
 import Card from "@component:Basic/Card";
 import { PlusIcon } from "@heroicons/react/outline";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Classes() {
-  const { session, status } = useAuth();
-  const { data: classes, error, createClass: apiCreateClass, mutate } = useClasses();
+  const { data: session, status } = useSession();
+  const classes = trpc.useQuery(['class.all']);
+  const createClassMutation = trpc.useMutation('class.create');
   const [createClassOpen, setCreateClassOpen] = useState(false);
   const createClass = async (name: string, description: string) => {
-    await apiCreateClass({ name, description })
-    setCreateClassOpen(false);
-    mutate();
+    createClassMutation.mutate({ name, description }, { onSuccess(data, variables, context) {
+      setCreateClassOpen(false);
+      classes.refetch();
+    }});
   }
   return <DashboardContent>
     <Head>
@@ -28,8 +30,8 @@ export default function Classes() {
     <h2 className="text-xl font-light text-center">Classes You Teach</h2>
     <Loader depends={classes} borderColor="black" center>
       <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
-        {classes?.classesTeaching.map(classroom => <Link key={classroom.id} href={"/classes/view?id=" + classroom.id} passHref>
-          <Card title={classroom.name} href={`/classes/view?id=${classroom.id}`}>
+        {classes.data?.classesTeaching?.map(classroom => <Link key={classroom.id} href={"/classes/" + classroom.id} passHref>
+          <Card title={classroom.name} href={`/classes/${classroom.id}`}>
             <UserDisplay email={classroom.teacherEmail} />
             <p>{truncate(classroom.description, 100)}</p>
           </Card>
@@ -40,8 +42,8 @@ export default function Classes() {
     <h2 className="text-xl font-light text-center">Your Classes</h2>
     <Loader depends={classes} borderColor="black" center>
       <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
-        {classes?.classes.map(classroom => <Link key={classroom.id} href={"/classes/view?id=" + classroom.id} passHref>
-          <Card title={classroom.name} href={`/classes/view?id=${classroom.id}`}>
+        {classes?.data?.classes?.map(classroom => <Link key={classroom.id} href={"/classes/" + classroom.id} passHref>
+          <Card title={classroom.name} href={`/classes/${classroom.id}`}>
             <UserDisplay email={classroom.teacherEmail} />
             <p>{truncate(classroom.description, 100)}</p>
           </Card>

@@ -6,15 +6,15 @@ import json from "@/json";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { JoinInfo } from "../api/classes/join/[code]/info";
+import { trpc } from "@/util/trpc";
 
-export default function Dashboard() {
-    useAuth();
+export default function JoinClass() {
     const router = useRouter();
-    const { data } = useSWR<JoinInfo>(`/api/classes/join/${router.query.code}/info`, json);
+    const { data } = trpc.useQuery(['joinCode.info', router.query.code as string]);
+    const mutation = trpc.useMutation('joinCode.joinClass');
     async function join() {
-        await fetch('/api/classes/join/' + router.query.code);
-        router.push('/classes/view?id=' + data?.class.id);
+        await mutation.mutateAsync(router.query.code as string);
+        router.push('/classes/' + data?.class.id);
     }
     return <Loader borderColor="black" depends={data} center>
         <div className="flex justify-center items-center w-full h-full">
