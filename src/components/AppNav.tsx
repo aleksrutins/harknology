@@ -15,7 +15,8 @@ const AppNav: ComponentType<NavProps> = dynamic(async () => (props) => {
   const { data: session, status } = useSession();
   const [authPopupVisible, setAuthPopupVisible] = useState(false);
   const router = useRouter();
-  return <div className={`bg-gray-100 flex flex-row justify-between items-center ${styles.titlebar}`}>
+  return <div className="mt-[env(titlebar-area-y)] pb-[env(titlebar-area-height,48px)]">
+  <div className={`bg-gray-100 flex flex-row justify-between items-center ${styles.titlebar}`}>
     <button className="hover:bg-gray-200 block rounded p-1 transition [app-region:no-drag]" onClick={() => router.back()}>
       <ChevronLeftIcon className="h-5 w-5"></ChevronLeftIcon>
     </button>
@@ -42,6 +43,7 @@ const AppNav: ComponentType<NavProps> = dynamic(async () => (props) => {
         )
       }
     </div>
+  </div>
   </div>
 }, { ssr: false });
 export default AppNav;

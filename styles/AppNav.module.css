@@ -1,7 +1,8 @@
 .titlebar {
+    position: fixed;
     height: env(titlebar-area-height, 48px);
-    padding-left: env(titlebar-area-x, 15px);
-    width: env(titlebar-area-width, calc(100vw - 15px));
+    left: env(titlebar-area-x, 15px);
+    width: env(titlebar-area-width, calc(100vw - 30px));
     app-region: drag;
 }
 
