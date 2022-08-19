@@ -1,11 +1,12 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import DashboardLayout from '@/components/DashboardLayout';
 import { useEffect } from 'react';
 import { withTRPC } from '@trpc/next';
 import { AppRouter } from '@~/server/router';
+import Loader from '@/components/Loader';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     return (

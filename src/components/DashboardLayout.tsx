@@ -5,6 +5,7 @@ import { FunctionComponent, PropsWithChildren, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import styles from '@~/styles/DashboardLayout.module.css';
 import useUiLayout from "@/functions/useUiLayout";
+import Loader from "./Loader";
 
 export const DashboardContent: FunctionComponent<PropsWithChildren<{}>> = (props) => <div className="overflow-auto p-3 h-full">{props.children}</div>
 
@@ -20,7 +21,9 @@ const DashboardLayout: FunctionComponent<PropsWithChildren<{}>> = (props) => {
     <main className={styles.mainArea}>
       <Sidebar />
       <div className={`${styles.contentView} ${layout == 'horizontal' && status == 'authenticated' ? 'rounded-tl-xl' : ''} border-l border-t`}>
+      <Loader depends={'isGuest' in (props.children as object) && (props.children as any)?.['isGuest']? true : status != 'loading'} borderColor="black" center>
         {props.children}
+        </Loader>
       </div>
     </main>
   </div>

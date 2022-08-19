@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Card from '@component:Basic/Card';
 import { DashboardContent } from '@/components/DashboardLayout';
 
-const Home: NextPage = () => {
+const Home = () => {
     const {data: session, status} = useSession();
   return (
     <DashboardContent>
@@ -43,5 +43,7 @@ const Home: NextPage = () => {
     </DashboardContent>
   )
 }
+
+Home.isGuest = true
 
 export default Home
