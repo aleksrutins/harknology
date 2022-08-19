@@ -29,7 +29,7 @@ const ResponseDisplay: FC<Props> = (props) => {
                 props.response.connectsFrom.map(conn => {
                     const response = props.query.data?.find((resp) => resp.id == conn.fromId);
                     if(!response) return <></>
-                    return <a className="text-xs text-green-300 overflow-hidden block" href={`#response-${response.id}`}>
+                    return <a key={conn.id} className="text-xs text-green-300 overflow-hidden block" href={`#response-${response.id}`}>
                     <ArrowRightIcon className="w-2 h-2 mr-1 inline"></ArrowRightIcon>
                     {response.userEmail}
                     <span className="text-xs text-gray-600 overflow-ellipsis"> {response.content.replace(/(<([^>]+)>)/ig, "").substring(0, 70)}</span>

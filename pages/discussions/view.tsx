@@ -29,7 +29,7 @@ export default function DiscussionView() {
                 <p className="max-w-2xl mx-auto whitespace-pre-wrap">{data?.description}</p>
                 {responses.error && <div className="bg-red-300 rounded-xl p-3">Failed to load responses</div> }
                 <Loader depends={responses} borderColor="black" center>
-                    {(responses.data ?? []).map(resp => <div className="bg-gray-100 rounded m-2 p-3" id={`response-${resp.id}`}>
+                    {(responses.data ?? []).map(resp => <div key={resp.id} className="bg-gray-100 rounded m-2 p-3" id={`response-${resp.id}`}>
                         <ResponseDisplay key={resp.id} response={resp} query={responses} />
                         <ToggleButton buttonStyle="primary" active={parents.get(resp.id) == true} onClick={() => {
                             setParents(new Map(parents.set(resp.id, !(parents.get(resp.id) ?? false))));
