@@ -1,17 +1,7 @@
-import { useInput } from "@/input";
-import json from "@/json";
-import { formatDate } from "@/util/dateFmt";
 import { ArrowRightIcon } from "@heroicons/react/outline";
-import { PencilIcon, PlusIcon } from "@heroicons/react/solid";
 import { Connection, Response } from "@prisma/client";
-import user from "@~/server/user";
-import { Dispatch, FC, SetStateAction, useRef, useState } from "react";
+import { FC } from "react";
 import { UseQueryResult } from "react-query";
-import useSWR, { SWRResponse } from "swr";
-import Accordion from "./Basic/Accordion";
-import Button from "./Basic/Button";
-import ToggleButton from "./Basic/ToggleButton";
-import ResponseEditor from "./ResponseEditor";
 import UserDisplay from "./UserDisplay";
 
 type Connections = { connectsTo: Connection[], connectsFrom: Connection[] }

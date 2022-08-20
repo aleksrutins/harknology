@@ -1,11 +1,8 @@
-import { useAuth } from "@/auth";
-import { useInput } from "@/input";
 import { trpc } from "@/util/trpc";
 import { Response } from "@prisma/client";
 import { Editor } from "@tiptap/react";
 import { useState } from "react";
 import { UseQueryResult } from "react-query";
-import { SWRResponse } from "swr";
 import Button from "./Basic/Button";
 import LoadingIndicator from "./LoadingIndicator";
 import Tiptap from "./Tiptap";

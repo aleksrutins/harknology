@@ -1,19 +1,13 @@
-import { useAuth } from "@/auth";
 import ToggleButton from "@/components/Basic/ToggleButton";
 import { DashboardContent } from "@/components/DashboardLayout";
 import Loader from "@/components/Loader";
-import LoadingIndicator from "@/components/LoadingIndicator";
 import ResponseDisplay from "@/components/ResponseDisplay";
 import ResponseEditor from "@/components/ResponseEditor";
 import { Toast } from "@/components/Toast";
-import json from "@/json";
 import { trpc } from "@/util/trpc";
-import { Discussion, Response } from "@prisma/client";
-import { SpawnSyncOptionsWithBufferEncoding } from "child_process";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import useSWR from "swr";
 
 export default function DiscussionView() {
     const { data: session, status } = useSession();

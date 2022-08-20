@@ -105,6 +105,6 @@ export default createRouter()
                 }
             }
         });
-        return [200, JSON.stringify(response)];
+        return JSON.stringify(response);
     }
   });

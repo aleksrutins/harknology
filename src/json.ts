@@ -1,1 +1,0 @@
-export default (url: string) => fetch(url).then((body) => body.json());
