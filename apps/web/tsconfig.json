@@ -1,0 +1,35 @@
+{
+  "extends": "tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@component:*": [
+        "src/components/*"
+      ],
+      "@res:*": [
+        "public/*"
+      ],
+      "@type:*": [
+        "src/types/*"
+      ],
+      "%*": [
+        "src/functions/*"
+      ],
+      "@~/*": [
+        "./*"
+      ]
+    },
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+, "../../packages/misc/useUiLayout.ts", "../../packages/util/checkClassAuth.ts"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

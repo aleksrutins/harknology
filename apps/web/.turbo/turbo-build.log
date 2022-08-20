@@ -1,0 +1,22 @@
+[35mweb:build[0m: cache hit, replaying output [2md72f34dcbe1a0d36[0m
+[35mweb:build: [0minfo  - Linting and checking validity of types...
+[35mweb:build: [0m
+[35mweb:build: [0mFailed to compile.
+[35mweb:build: [0m
+[35mweb:build: [0m./pages/_app.tsx
+[35mweb:build: [0m43:9  Error: $VERCEL_URL is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+[35mweb:build: [0m44:25  Error: $VERCEL_URL is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+[35mweb:build: [0m48:9  Error: $RENDER_INTERNAL_HOSTNAME is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+[35mweb:build: [0m49:24  Error: $RENDER_INTERNAL_HOSTNAME is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+[35mweb:build: [0m49:64  Error: $PORT is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+[35mweb:build: [0m53:32  Error: $PORT is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+[35mweb:build: [0m
+[35mweb:build: [0m./pages/api/auth/[...nextauth].ts
+[35mweb:build: [0m12:17  Error: $GOOGLE_ID is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+[35mweb:build: [0m13:21  Error: $GOOGLE_SECRET is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+[35mweb:build: [0m22:11  Error: $NEXT_AUTH_SECRET is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+[35mweb:build: [0m
+[35mweb:build: [0m./src/json.ts
+[35mweb:build: [0m1:1  Warning: Assign arrow function to a variable before exporting as module default  import/no-anonymous-default-export
+[35mweb:build: [0m
+[35mweb:build: [0minfo  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules

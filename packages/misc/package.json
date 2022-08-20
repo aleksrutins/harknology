@@ -1,0 +1,11 @@
+{
+  "name": "misc",
+  "packageManager": "yarn@3.2.2",
+  "main": "index.ts",
+  "files": [
+    "dist/**"
+  ],
+  "dependencies": {
+    "react": "18"
+  }
+}

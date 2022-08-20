@@ -1,0 +1,15 @@
+{
+  "name": "server",
+  "packageManager": "yarn@3.2.2",
+  "main": "router.ts",
+  "files": [
+    "dist/**"
+  ],
+  "dependencies": {
+    "database": "workspace:*",
+    "misc": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^6.2.2"
+  }
+}
