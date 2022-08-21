@@ -9,6 +9,11 @@ import { AppRouter } from '@~/server/router';
 import Loader from '@/components/Loader';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+    useEffect(() => {
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js');
+      }
+    })
     return (
         <SessionProvider session={session}>
             <Head>

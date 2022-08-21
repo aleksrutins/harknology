@@ -29,7 +29,7 @@ const AppNav: ComponentType<NavProps> = dynamic(async () => (props) => {
           <LoadingIndicator borderColor="white" />
           :
           <>
-            <img referrerPolicy="no-referrer" src={session!.user?.image!} className='rounded-full h-[32px] cursor-pointer [app-region:no-drag]' alt={session!.user?.email!} onClick={() => setAuthPopupVisible(!authPopupVisible)}></img>
+            <img referrerPolicy="no-referrer" src={session!.user?.image!} className='rounded-full max-h-[37px] p-[5px] cursor-pointer [app-region:no-drag]' alt={session!.user?.email!} onClick={() => setAuthPopupVisible(!authPopupVisible)}></img>
             <OutsideClickHandler useCapture={false} onOutsideClick={() => setAuthPopupVisible(false)}>
               <PopupMenu isOpen={authPopupVisible} position={{ top: '40px', right: '0px', width: 'max-content' }}>
                 <span className="m-2 block">
