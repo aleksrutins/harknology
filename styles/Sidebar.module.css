@@ -33,3 +33,31 @@
 .sidebar a.active:hover {
     background-color: rgb(11, 122, 11);
 }
+
+.mobileSidebar {
+    height: calc(100vh-env(titlebar-area-height, 48px));
+    bottom: 0;
+    top: env(titlebar-area-height, 48px);
+}
+
+.slideIn {
+    animation: slideIn 0.2s forwards
+}
+.slideOut {
+    animation: slideOut 0.2s forwards
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideOut {
+    100% {
+        transform: translateX(-100%);
+    }
+}
