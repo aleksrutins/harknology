@@ -34,7 +34,7 @@ model Discussion {
 model Response {
   id           String       @id @default(cuid())
   userEmail    String       @db.VarChar(255)
-  content      String
+  content      String       @db.MediumText
   discussionId String?
   createdAt    DateTime     @default(now())
   lastModified DateTime     @default(now())
