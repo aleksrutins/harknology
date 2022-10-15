@@ -22,7 +22,7 @@ export default async function checkClassAuth(id: string, session: Session): Prom
     if ((await cls)?.teacherEmail == session.user?.email) {
       return [[await cls, 'teacher'], true];
     } else if (
-      (await cls.students()).map(student => student.email).includes(session.user?.email!)) {
+      (await cls.students())?.map(student => student.email)?.includes(session.user?.email!)) {
       return [[await cls, 'student'], true];
     }
   } catch { }

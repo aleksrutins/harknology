@@ -37,10 +37,13 @@ export default createRouter()
           id: input,
         },
       });
+      if((await cls) == null) {
+        throw "No such class";
+      }
       if ((await cls)?.teacherEmail != session.user?.email) {
         throw "Not authorized";
       }
-      const codes = (await cls.joinCodes());
+      const codes = (await cls.joinCodes())!;
       let activeCodes: JoinCode[] = [];
       for (let code of codes) {
         if (code.expires > new Date()) {

@@ -8,14 +8,14 @@ import { withTRPC } from '@trpc/next';
 import { AppRouter } from '@~/server/router';
 import Loader from '@/components/Loader';
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
     useEffect(() => {
       if('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js');
       }
     })
     return (
-        <SessionProvider session={session}>
+        <SessionProvider>
             <Head>
                 <link rel="icon" href="/logo.svg" />
                 <link rel="manifest" href="/manifest.json"/>
@@ -75,11 +75,11 @@ function getBaseUrl() {
     /**
      * @link https://trpc.io/docs/ssr
      */
-    ssr: true,
+    //ssr: true,
     /**
      * @link https://trpc.io/docs/caching
      */
-    responseMeta({ ctx, clientErrors }) {
+    /*responseMeta({ ctx, clientErrors }) {
       if (clientErrors.length) {
         // propagate http first error from API calls
         return {
@@ -94,5 +94,5 @@ function getBaseUrl() {
           'cache-control': `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
         }
       };
-    },
+    },*/
   })(MyApp);
