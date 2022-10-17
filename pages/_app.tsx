@@ -6,7 +6,7 @@ import DashboardLayout from '@/components/DashboardLayout';
 import { useEffect } from 'react';
 import { withTRPC } from '@trpc/next';
 import { AppRouter } from '@~/server/router';
-import Loader from '@/components/Loader';
+import superjson from 'superjson';
 
 function MyApp({ Component, pageProps }: AppProps) {
     useEffect(() => {
@@ -66,6 +66,7 @@ function getBaseUrl() {
        */
       return {
         url: `${getBaseUrl()}/api/trpc`,
+        transformer: superjson,
         /**
          * @link https://react-query-v3.tanstack.com/reference/QueryClient
          */
