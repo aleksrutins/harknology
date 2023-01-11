@@ -11,7 +11,11 @@ import styles from '@~/styles/Sidebar.module.css';
 
 const SidebarLink: FunctionComponent<PropsWithChildren<{ href: string, isActive: boolean, isMobile: boolean }>> = (props) => {
 
-  return <Link href={props.href}><a className={(props.isActive ? "bg-green-500 hover:bg-green-700 hover:shadow-green-700/50 text-white shadow-green-500/50 shadow-md" : "hover:bg-gray-200") + ` transition ${props.isMobile && 'py-2 px-3 my-1 rounded-md' || 'rounded-lg p-3 m-1'} block text-center`}>{props.children}</a></Link>;
+  return (
+    <Link
+      href={props.href}
+      className={(props.isActive ? "bg-green-500 hover:bg-green-700 hover:shadow-green-700/50 text-white shadow-green-500/50 shadow-md" : "hover:bg-gray-200") + ` transition ${props.isMobile && 'py-2 px-3 my-1 rounded-md' || 'rounded-lg p-3 m-1'} block text-center`}>{props.children}</Link>
+  );
 }
 
 export default function Sidebar() {

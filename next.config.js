@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
-const withPreact = require('next-plugin-preact');
-module.exports = withPreact({
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   // webpack5: true,
@@ -13,4 +12,4 @@ module.exports = withPreact({
   webpack(config, options) {
     return config;
   }
-});
+};

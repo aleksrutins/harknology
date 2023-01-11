@@ -18,7 +18,7 @@ const Card: FunctionComponent<PropsWithChildren<{
         {props.children}
     </a>;
     if (props.href != undefined) {
-        return <Link href={props.href}>{a}</Link>;
+        return <Link href={props.href} legacyBehavior>{a}</Link>;
     } else return a;
 }
 

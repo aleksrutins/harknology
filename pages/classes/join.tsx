@@ -13,16 +13,18 @@ export default function JoinClass() {
         await mutation.mutateAsync(router.query.code as string);
         router.push('/classes/' + data?.class.id);
     }
-    return <Loader borderColor="black" depends={data} center>
-        <div className="flex justify-center items-center w-full h-full">
-            <div className="text-center">
-                <h1 className="text-xl font-light text-center">Joining &ldquo;{data?.class.name}&rdquo;</h1>
-                <span className="text-[0.75rem]">Taught by</span>
-                <span className="flex flex-row justify-center text-[0.75rem]"> <UserDisplay email={data?.teacher.email!} /></span>
-                <p>Would you like to join this class?</p>
-                <Button buttonStyle="primary" onClick={join}>Join</Button>
-                <Link href="/classes" passHref><Button buttonStyle="danger">Cancel</Button></Link>
+    return (
+        <Loader borderColor="black" depends={data} center>
+            <div className="flex justify-center items-center w-full h-full">
+                <div className="text-center">
+                    <h1 className="text-xl font-light text-center">Joining &ldquo;{data?.class.name}&rdquo;</h1>
+                    <span className="text-[0.75rem]">Taught by</span>
+                    <span className="flex flex-row justify-center text-[0.75rem]"> <UserDisplay email={data?.teacher.email!} /></span>
+                    <p>Would you like to join this class?</p>
+                    <Button buttonStyle="primary" onClick={join}>Join</Button>
+                    <Link href="/classes" passHref legacyBehavior><Button buttonStyle="danger">Cancel</Button></Link>
+                </div>
             </div>
-        </div>
-    </Loader>
+        </Loader>
+    );
 }

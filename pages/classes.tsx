@@ -22,35 +22,45 @@ export default function Classes() {
       classes.refetch();
     }});
   }
-  return <DashboardContent>
-    <Head>
-      <title>Classes | Harknology</title>
-    </Head>
-    <h1 className="text-2xl font-light text-center">Classes</h1>
-    <h2 className="text-xl font-light text-center">Classes You Teach</h2>
-    <Loader depends={classes.isFetched} borderColor="black" center>
-      <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
-        {classes.data?.classesTeaching?.map(classroom => <Link key={classroom.id} href={"/classes/" + classroom.id} passHref>
-          <Card title={classroom.name} href={`/classes/${classroom.id}`}>
-            <UserDisplay email={classroom.teacherEmail} />
-            <p>{truncate(classroom.description, 100)}</p>
-          </Card>
-        </Link>)}
-        <Card onClick={() => setCreateClassOpen(true)} title="Create Class" cardType="placeholder" icon={PlusIcon} />
-      </div>
-    </Loader>
-    <h2 className="text-xl font-light text-center">Your Classes</h2>
-    <Loader depends={classes.isFetched} borderColor="black" center>
-      <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
-        {classes?.data?.classes?.map(classroom => <Link key={classroom.id} href={"/classes/" + classroom.id} passHref>
-          <Card title={classroom.name} href={`/classes/${classroom.id}`}>
-            <UserDisplay email={classroom.teacherEmail} />
-            <p>{truncate(classroom.description, 100)}</p>
-          </Card>
-        </Link>)}
-      </div>
-    </Loader>
+  return (
+    <DashboardContent>
+      <Head>
+        <title>Classes | Harknology</title>
+      </Head>
+      <h1 className="text-2xl font-light text-center">Classes</h1>
+      <h2 className="text-xl font-light text-center">Classes You Teach</h2>
+      <Loader depends={classes.isFetched} borderColor="black" center>
+        <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
+          {classes.data?.classesTeaching?.map(classroom => <Link
+            key={classroom.id}
+            href={"/classes/" + classroom.id}
+            passHref
+            legacyBehavior>
+            <Card title={classroom.name} href={`/classes/${classroom.id}`}>
+              <UserDisplay email={classroom.teacherEmail} />
+              <p>{truncate(classroom.description, 100)}</p>
+            </Card>
+          </Link>)}
+          <Card onClick={() => setCreateClassOpen(true)} title="Create Class" cardType="placeholder" icon={PlusIcon} />
+        </div>
+      </Loader>
+      <h2 className="text-xl font-light text-center">Your Classes</h2>
+      <Loader depends={classes.isFetched} borderColor="black" center>
+        <div className="flex flex-row flex-wrap max-w-[800px] mx-auto justify-center">
+          {classes?.data?.classes?.map(classroom => <Link
+            key={classroom.id}
+            href={"/classes/" + classroom.id}
+            passHref
+            legacyBehavior>
+            <Card title={classroom.name} href={`/classes/${classroom.id}`}>
+              <UserDisplay email={classroom.teacherEmail} />
+              <p>{truncate(classroom.description, 100)}</p>
+            </Card>
+          </Link>)}
+        </div>
+      </Loader>
 
-    <CreateClassDialog open={createClassOpen} onSubmit={createClass} onCancel={() => setCreateClassOpen(false)} />
-  </DashboardContent>
+      <CreateClassDialog open={createClassOpen} onSubmit={createClass} onCancel={() => setCreateClassOpen(false)} />
+    </DashboardContent>
+  );
 }
