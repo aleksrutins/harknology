@@ -76,11 +76,11 @@ export default withTRPC<AppRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    */
-  //ssr: true,
+  ssr: true,
   /**
    * @link https://trpc.io/docs/caching
    */
-  /*responseMeta({ ctx, clientErrors }) {
+  responseMeta({ ctx, clientErrors }) {
     if (clientErrors.length) {
       // propagate http first error from API calls
       return {
@@ -95,5 +95,5 @@ export default withTRPC<AppRouter>({
         'cache-control': `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
       }
     };
-  },*/
+  },
 })(MyApp);

@@ -17,7 +17,7 @@ export default NextAuth({
   theme: {
     colorScheme: 'auto',
     brandColor: 'rgb(0, 157, 53)',
-    logo: '/banner.svg'
+    logo: '/logo.svg'
   },
   secret: process.env.NEXT_AUTH_SECRET
 })
