@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider>
       <Head>
-        <link rel="icon" href="/logo.svg" />
+        <link rel="icon" href="/logo.png" />
         <link rel="manifest" href="/manifest.json" />
 
         <meta name="mobile-web-app-capable" content="yes" />
