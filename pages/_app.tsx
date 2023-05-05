@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider>
       <Head>
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo.192.png" />
         <link rel="manifest" href="/manifest.json" />
 
         <meta name="mobile-web-app-capable" content="yes" />
@@ -30,8 +30,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="msapplication-starturl" content="/" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <link rel="icon" type="image/svg+xml" sizes="192x192 32x32 16x16 256x256" href="/logo.svg" />
-        <link rel="apple-touch-icon" type="image/svg+xml" sizes="192x192 32x32 16x16 256x256" href="/logo.svg" />
+        <link rel="icon" type="image/svg+xml" sizes="32x32" href="/logo.32.png" />
+        <link rel="apple-touch-icon" type="image/svg+xml" sizes="32x32" href="/logo.32.png" />
+        <link rel="icon" type="image/svg+xml" sizes="16x16" href="/logo.16.png" />
+        <link rel="apple-touch-icon" type="image/svg+xml" sizes="16x16" href="/logo.16.png" />
+        <link rel="icon" type="image/svg+xml" sizes="192x192" href="/logo.192.png" />
+        <link rel="apple-touch-icon" type="image/svg+xml" sizes="192x192" href="/logo.192.png" />
+        <link rel="icon" type="image/svg+xml" sizes="256x256" href="/logo.256.png" />
+        <link rel="apple-touch-icon" type="image/svg+xml" sizes="256x256" href="/logo.256.png" />
       </Head>
       <DashboardLayout>
         <Component {...pageProps} />
