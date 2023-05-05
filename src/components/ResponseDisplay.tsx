@@ -13,6 +13,15 @@ export type Props = {
 const ResponseDisplay: FC<Props> = (props) => {
     const responses = props.query.data?.filter(r => r.connectsFrom.some(conn => conn.fromId == props.response.id));
 
+    const scrollToResponse = (ev: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        ev.preventDefault();
+        const el = ev.currentTarget as HTMLAnchorElement;
+        const targetEl = document.querySelector(`#response-${el.getAttribute('data-response-id')}`);
+        targetEl?.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
     return (
         <div>
             <div>
@@ -21,7 +30,7 @@ const ResponseDisplay: FC<Props> = (props) => {
                         const response = props.query.data?.find((resp) => resp.id == conn.fromId);
                         if(!response) return <></>
                         return (
-                            <a key={conn.id} className="text-xs text-green-300 overflow-hidden block" href={`#response-${response.id}`}>
+                            <a key={conn.id} className="text-xs text-green-300 overflow-hidden block" href={`#response-${response.id}`} data-response-id={response.id} onClick={scrollToResponse}>
                             <ArrowRightIcon className="w-2 h-2 mr-1 inline"></ArrowRightIcon>
                             {response.userEmail}
                             <span className="text-xs text-gray-600 overflow-ellipsis"> {response.content.replace(/(<([^>]+)>)/ig, "").substring(0, 70)}</span>

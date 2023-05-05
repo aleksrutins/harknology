@@ -15,6 +15,7 @@ export default function DiscussionView() {
     const { data, error } = trpc.useQuery(['discussion.get', router.query.id as string]);
     const responses = trpc.useQuery(['discussion.responses', router.query.id as string]);
     const [parents, setParents] = useState(new Map<string, boolean>())
+    
     return <DashboardContent>
         {error && <Toast background="#ef4444">Error loading discussion</Toast>}
         <Loader depends={data} borderColor="black" center>
