@@ -5,7 +5,7 @@ import Head from 'next/head'
 import Link from 'next/link';
 import Image from 'next/image'
 import Card from '@component:Basic/Card';
-import { DashboardContent } from '@/components/DashboardLayout';
+import { DashboardContent } from './components/DashboardLayout';
 
 const Home = () => {
     const {data: session, status} = useSession();
