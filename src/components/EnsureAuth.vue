@@ -7,7 +7,7 @@
         is: VNode
     }>();
     
-    const uid = (await supabase.from('auth.users').select('user_id')).data?.[0].user_id as string | null | undefined
+    const user = (await supabase.auth.getUser()).data.user
 
     const signIn = () => {
         signInWithGoogle();
@@ -15,7 +15,7 @@
 </script>
 
 <template>
-    <component :is="props.is" v-if="uid"/>
+    <component :is="props.is" v-if="user"/>
     <div class="absolute top-0 left-0 w-screen h-screen bg-gray-100/50 backdrop-blur flex justify-center items-center" v-else>
         <div class="bg-white rounded-lg p-10 shadow flex flex-col items-center">
             <h1 class="text-2xl pb-2">Please Log In</h1>
