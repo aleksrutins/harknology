@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { HomeIcon, AcademicCapIcon } from '@heroicons/vue/20/solid'
 import LoadingIndicator from './components/LoadingIndicator.vue';
+import EnsureAuth from './components/EnsureAuth.vue';
 const routes = [
   { path: '/', icon: HomeIcon, title: 'Home' },
   { path: '/classes', icon: AcademicCapIcon, title: 'Classes' }
@@ -24,7 +25,7 @@ const routes = [
         </div>
         <div class="flex-grow">
           <Suspense>
-            <component v-bind:is="Component"/>
+            <EnsureAuth :is="Component"/>
             <template #fallback>
               <LoadingIndicator border-color="black"/>
             </template>
