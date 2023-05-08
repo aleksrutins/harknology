@@ -1,6 +1,3 @@
 {
-  "recommendations": [
-    "denoland.vscode-deno",
-    "sastan.twind-intellisense"
-  ]
+  "recommendations": ["Vue.volar", "Vue.vscode-typescript-vue-plugin"]
 }
