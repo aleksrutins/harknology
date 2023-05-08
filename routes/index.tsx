@@ -1,7 +1,16 @@
 import { Head } from "$fresh/runtime.ts";
 import Counter from "../islands/Counter.tsx";
+import { supabase } from "#util/supabase.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 
-export default function Home() {
+export const handler: Handlers<string> = {
+  async GET(_, ctx) {
+    const resp = await supabase.from('test-data').select('*')
+    return ctx.render(((resp.data ?? [])[0]['value']) as string);
+  }
+}
+
+export default function Home({data}: PageProps<string>) {
   return (
     <>
       <Head>
@@ -16,6 +25,8 @@ export default function Home() {
         <p class="my-6">
           Welcome to `fresh`. Try updating this message in the ./routes/index.tsx
           file, and refresh.
+          <br/><br/>
+          {data}
         </p>
         <Counter start={3} />
       </div>
