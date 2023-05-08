@@ -27,7 +27,7 @@ const routes = [
           <Suspense>
             <EnsureAuth :is="Component"/>
             <template #fallback>
-              <LoadingIndicator border-color="black"/>
+              <LoadingIndicator border-color="black" center/>
             </template>
           </Suspense>
         </div>
