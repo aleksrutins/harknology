@@ -1,8 +1,8 @@
 create table classes (
     id uuid primary key default gen_random_uuid(),
-    name varchar(255),
+    name varchar(255) not null,
     description text,
-    teacher_id UUID REFERENCES auth.users(id)
+    teacher_id uuid references auth.users(id)
 );
 
 alter table classes
@@ -33,3 +33,27 @@ create policy "Students can view classes they have joined."
             where class_id == id
         )
     );
+
+create table discussions (
+    id uuid primary key default gen_random_uuid(),
+    class_id uuid references classes(id),
+    description text,
+    name varchar(255) not null,
+);
+
+alter table discussions
+    enable row level security;
+
+create policy "Teachers can view and create discussions in their classes."
+    on discussions
+    for all using (auth.uid() in (
+        select teacher_id from classes
+        where id == class_id
+    ));
+
+create policy "Students can view discussions in their classes."
+    on discussions
+    for select using (auth.uid() in (
+        select student_id from student_classes
+        where class_id == class_id
+    ));
