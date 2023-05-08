@@ -1,10 +1,10 @@
 <script setup lang="ts">
-    import { FunctionalComponent } from 'vue';
+    import { VNode } from 'vue';
     import { supabase, signInWithGoogle } from '../util/supabase';
     import { IconBrandGoogle } from '@tabler/icons-vue';
 
     const props = defineProps<{
-        is: FunctionalComponent
+        is: VNode
     }>();
     
     const uid = (await supabase.from('auth.users').select('user_id')).data?.[0].user_id as string | null | undefined
