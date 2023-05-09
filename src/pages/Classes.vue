@@ -1,8 +1,12 @@
 <script setup lang="ts">
-    import { supabase } from '../util/supabase';
+//     import { ref } from 'vue';
+// import { supabase } from '../util/supabase';
 
-    const classes = await supabase.from('classes').select('*');
-    classes;
+//     const classes = ref([])
+
+//     async function getClasses() {
+//         classes.value = (await supabase.from('classes').select()).data;
+//     }
 </script>
 <template>
     <div class="flex flex-col items-center p-2">

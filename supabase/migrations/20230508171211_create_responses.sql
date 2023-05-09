@@ -23,3 +23,9 @@ create policy "Students can view and create responses in their classes."
         left join discussions on discussions.class_id = student_classes.class_id
         where discussions.id = discussion_id
     ));
+
+create or replace function respond_to(discussion_id uuid, content text) returns uuid as $$
+    insert into responses (user_id, content, discussion_id)
+    values (auth.uid(), content, discussion_id)
+    returning id;
+$$ language sql;

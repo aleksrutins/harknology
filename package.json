@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update-types": "npx supabase gen types typescript --project-id \"$PROJECT_ID\" --schema public > src/util/supabase/database.types.ts"
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.17",

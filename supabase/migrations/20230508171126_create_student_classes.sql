@@ -19,3 +19,8 @@ create policy "Students can view classes they have joined."
             where class_id = classes.id
         )
     );
+
+create policy "Students can join classes."
+    on student_classes
+    for insert to public
+    with check (auth.uid() = student_id);
