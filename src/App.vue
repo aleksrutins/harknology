@@ -3,6 +3,7 @@ import { HomeIcon, AcademicCapIcon } from '@heroicons/vue/24/outline'
 import { HomeIcon as HomeSolid, AcademicCapIcon as AcademicSolid } from '@heroicons/vue/24/solid'
 import LoadingIndicator from './components/LoadingIndicator.vue';
 import EnsureAuth from './components/EnsureAuth.vue';
+import ProfileDisplay from './components/ProfileDisplay.vue';
 const routes = [
   { path: '/', name: 'home', icon: [HomeIcon, HomeSolid], title: 'Home' },
   { path: '/classes', name: 'classes', icon: [AcademicCapIcon, AcademicSolid], title: 'Classes' }
@@ -22,7 +23,11 @@ const routes = [
               </p>
             </router-link>
           </div>
-          <div></div>
+          <div class="flex flex-col">
+            <Suspense>
+              <ProfileDisplay/>
+            </Suspense>
+          </div>
         </div>
         <div class="flex-grow">
           <Suspense>
