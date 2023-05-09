@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import { onMounted, ref } from 'vue';
+    import { ref } from 'vue';
     import { supabase } from '../util/supabase';
 
-    const classes = ref<{ created_at: string | null; description: string | null; id: string; name: string; teacher_id: string | null; updated_at: string | null; }[]>([])
+    const classes = ref((await supabase.from('classes').select()).data ?? [])
 
     const addClassName = ref("My Class")
     const addClassDesc = ref("This is a class about learning things.")
@@ -15,10 +15,6 @@
         await supabase.rpc('create_class', {name: addClassName.value, description: addClassDesc.value});
         await getClasses();
     }
-
-    onMounted(() => {
-        getClasses();
-    });
 </script>
 <template>
     <div class="flex flex-col items-center p-2">
