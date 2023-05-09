@@ -1,0 +1,41 @@
+{
+    "name": "Harknology",
+    "short_name": "Harknology",
+    "lang": "en-US",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "rgb(243 244 246)",
+    "icons": [
+      {
+        "src": "/logo.256.png",
+        "sizes": "256x256",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/logo.192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/logo.32.png",
+        "sizes": "32x32",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/logo.16.png",
+        "sizes": "16x16",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/logo.256-maskable.png",
+        "sizes": "256x256",
+        "type": "image/png",
+        "purpose": "maskable"
+      }
+    ],
+    "display_override": ["window-controls-overlay"]
+  }
