@@ -20,6 +20,7 @@ async function fetchInfo(uid: string): Promise<UserInfo | undefined> {
 }
 
 export default defineComponent({
+    name: 'UserDisplay',
     props: {
         uid: String
     },
