@@ -30,7 +30,7 @@
                 </a>
                 <a class="border border-dashed hover:border-solid p-3 m-3 rounded flex flex-col justify-center items-stretch transition-all">
                     <input type="text" class="border shadow-sm rounded block mb-2 p-2 text-lg" placeholder="Class Name" v-model="addClassName">
-                    <textarea class="border shadow-sm rounded block mb-2 p-2" placeholder="Class Description" v-model="addClassDesc"></textarea>
+                    <textarea class="border shadow-sm rounded block mb-2 p-2" placeholder="Class description" v-model="addClassDesc"></textarea>
                     <button class="cursor-pointer border rounded hover:border-gray-700 p-1 transition-all self-center" @click="addClass()">Add Class</button>
                 </a>
             </div>
