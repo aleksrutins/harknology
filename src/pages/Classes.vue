@@ -21,9 +21,9 @@ import { ellipsize } from '../util/ellipsize';
     }
 </script>
 <template>
-    <div class="flex flex-col items-center p-2">
+    <div class="flex flex-col items-center p-3">
         <div class="max-w-6xl flex flex-col items-center flex-grow">
-            <h1 class="text-2xl">Classes</h1>
+            <h1 class="text-2xl font-bold">Classes</h1>
 
             <div class="flex flex-col sm:flex-row sm:flex-wrap justify-start">
                 <router-link :to="`/classes/${classData.id}`" class="cursor-pointer border hover:shadow p-3 m-3 rounded flex flex-col items-start transition-all sm:w-80" :key="classData.id" v-for="classData in classes">
