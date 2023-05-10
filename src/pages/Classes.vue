@@ -4,8 +4,8 @@
 
     const classes = ref((await supabase.from('classes').select()).data ?? [])
 
-    const addClassName = ref("My Class")
-    const addClassDesc = ref("This is a class about learning things.")
+    const addClassName = ref("")
+    const addClassDesc = ref("")
 
     async function getClasses() {
         classes.value = (await supabase.from('classes').select()).data ?? [];
@@ -13,6 +13,8 @@
 
     async function addClass() {
         await supabase.rpc('create_class', {name: addClassName.value, description: addClassDesc.value});
+        addClassName.value = ""
+        addClassDesc.value = ""
         await getClasses();
     }
 </script>
