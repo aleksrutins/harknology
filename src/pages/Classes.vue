@@ -25,11 +25,11 @@
             <h1 class="text-2xl">Classes</h1>
 
             <div class="flex flex-col sm:flex-row sm:flex-wrap justify-start">
-                <a class="cursor-pointer border hover:shadow p-3 m-3 rounded flex flex-col items-start transition-all sm:w-80" :key="classData.id" v-for="classData in classes">
+                <router-link :to="`/classes/${classData.id}`" class="cursor-pointer border hover:shadow p-3 m-3 rounded flex flex-col items-start transition-all sm:w-80" :key="classData.id" v-for="classData in classes">
                     <h2 class="text-lg">{{ classData.name }}</h2>
                     <UserDisplay :uid="classData.teacher_id ?? ''"/>
                     <p>{{ classData.description }}</p>
-                </a>
+                </router-link>
                 <a class="border border-dashed hover:border-solid p-3 m-3 rounded flex flex-col justify-center items-stretch transition-all w-80">
                     <input type="text" class="border shadow-sm rounded block mb-2 p-2 text-lg" placeholder="Class Name" v-model="addClassName">
                     <textarea class="border shadow-sm rounded block mb-2 p-2" placeholder="Class description" v-model="addClassDesc"></textarea>
