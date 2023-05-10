@@ -5,7 +5,8 @@ import App from './App.vue'
 
 const routes: RouteRecordRaw[] = [
     { path: '/', name: 'home', component: () => import('./pages/Home.vue') },
-    { path: '/classes', name: 'classes', component: () => import('./pages/Classes.vue') }
+    { path: '/classes', name: 'classes', component: () => import('./pages/Classes.vue') },
+    { path: '/me', name: 'me', component: () => import('./pages/ProfileDisplay.vue') }
 ]
 
 const router = createRouter({
