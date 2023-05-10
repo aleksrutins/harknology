@@ -14,7 +14,7 @@ const routes = [
       <div class="w-screen h-screen flex sm:flex-row flex-col-reverse justify-stretch">
         <div class="flex-shrink flex-grow-0 h-screen bg-gray-100 flex sm:flex-col flex-row justify-center sm:justify-between p-4" style="flex-basis: 0">
           <div class="flex flex-row sm:flex-col">
-            <router-link v-for="route in routes" v-bind:to="route.path"
+            <router-link v-for="route in routes" :key="route.name" v-bind:to="route.path"
               class="rounded-lg flex flex-col sm:flex-row items-center py-3 px-4 m-2 hover:bg-gray-300 transition">
               <component v-bind:is="$route.matched.some(({ name }) => name == route.name) ? route.icon[1] : route.icon[0]" style="width: 20px;" />
               <p class="sm:pl-2 text-sm sm:text-base">

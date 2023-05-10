@@ -25,7 +25,7 @@
             <h1 class="text-2xl">Classes</h1>
 
             <div class="flex flex-col sm:flex-row sm:flex-wrap justify-start">
-                <a class="cursor-pointer border hover:shadow p-3 m-3 rounded flex flex-col items-start transition-all sm:w-80" v-for="classData in classes">
+                <a class="cursor-pointer border hover:shadow p-3 m-3 rounded flex flex-col items-start transition-all sm:w-80" :key="classData.id" v-for="classData in classes">
                     <h2 class="text-lg">{{ classData.name }}</h2>
                     <UserDisplay :uid="classData.teacher_id ?? ''"/>
                     <p>{{ classData.description }}</p>
