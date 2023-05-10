@@ -1,4 +1,4 @@
-import { h } from "vue"
+import { defineComponent, h } from "vue"
 import { supabase } from "../util/supabase"
 
 type UserInfo = { email: string }
@@ -19,13 +19,15 @@ async function fetchInfo(uid: string): Promise<UserInfo | undefined> {
     }
 }
 
-export default {
-    props: ['uid'],
-    async setup({ uid }: { uid: string }, _: any) {
-        const email = (await fetchInfo(uid))?.email
+export default defineComponent({
+    props: {
+        uid: String
+    },
+    async setup({ uid }) {
+        const email = (await fetchInfo(uid ?? ""))?.email
 
         return () => email
             ? h('p', { 'class': 'text-sm' }, email)
             : h('p', { 'class': 'text-sm' }, "Unknown User")
     }
-}
+})
