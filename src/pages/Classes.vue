@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { ref } from 'vue';
     import { supabase } from '../util/supabase';
+    import UserDisplay from '../components/UserDisplay';
 
     const classes = ref((await supabase.from('classes').select()).data ?? [])
 
@@ -26,6 +27,7 @@
             <div class="flex flex-col sm:flex-row sm:flex-wrap justify-start">
                 <a class="cursor-pointer border hover:shadow p-3 m-3 rounded flex flex-col items-start transition-all sm:w-80" v-for="classData in classes">
                     <h2 class="text-lg">{{ classData.name }}</h2>
+                    <UserDisplay :uid="classData.teacher_id ?? ''"/>
                     <p>{{ classData.description }}</p>
                 </a>
                 <a class="border border-dashed hover:border-solid p-3 m-3 rounded flex flex-col justify-center items-stretch transition-all w-80">
