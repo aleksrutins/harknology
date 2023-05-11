@@ -4,13 +4,19 @@ create table join_codes (
     created_at timestamp default now()
 );
 
+create or replace procedure delete_expired_codes()
+language sql
+as $$
+    delete from join_codes where created_at < (now() - interval '2 hours');
+$$;
+
 create or replace function generate_join_code(class_id uuid) returns text as $$
 declare
     code text := substr(md5(random()::text), 0, 5);
 begin
 
     -- delete all expired codes (codes expire 2hr after creation)
-    delete from join_codes where created_at < (now() - interval '2 hours');
+    call delete_expired_codes();
     
     -- insert the new code
     insert into join_codes (code, class_id)
@@ -25,6 +31,8 @@ declare
     class_id uuid;
     student_id uuid := auth.uid();
 begin
+    call delete_expired_codes();
+
     select join_codes.class_id into class_id from join_codes where code = code;
     
     insert into student_classes (student_id, class_id)
