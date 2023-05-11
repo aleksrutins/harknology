@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
 import './style.css'
 import App from './App.vue'
+import registrar from './components/basic/registrar'
 
 const routes: RouteRecordRaw[] = [
     { path: '/', name: 'home', component: () => import('./pages/Home.vue') },
@@ -15,7 +16,6 @@ const router = createRouter({
     routes
 });
 
-(await import('./components/basic/registrar'))
-    .default(createApp(App))
+registrar(createApp(App))
     .use(router)
     .mount('#app')
