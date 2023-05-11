@@ -13,8 +13,9 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
     history: createWebHistory(),
     routes
-})
+});
 
-createApp(App)
+(await import('./components/basic/registrar'))
+    .default(createApp(App))
     .use(router)
     .mount('#app')
