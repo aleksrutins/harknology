@@ -43,10 +43,11 @@ end
 $$ language plpgsql;
 
 create or replace function get_join_code(class_id uuid) returns text as $$
+#variable_conflict use_variable
 declare
     code text;
 begin
-    select join_codes.code into code from join_codes where class_id = class_id;
+    select join_codes.code into code from join_codes where join_codes.class_id = class_id;
 
     if code is null then
         code := generate_join_code(class_id);

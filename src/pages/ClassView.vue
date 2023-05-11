@@ -24,6 +24,9 @@
 
         , deleteDialogOpen = ref(false)
 
+        , joinDialogOpen = ref(false)
+        , joinCode       = ref("")
+
 
     async function getDiscussions() {
         discussions.value = (await supabase.from('discussions')
@@ -48,13 +51,23 @@
         deleteDialogOpen.value = false;
         router.push('/classes')
     }
+
+    async function openJoinDialog() {
+        const { data, error } = await supabase.rpc('get_join_code', { class_id: props.id })
+        if(error != null) {
+            console.error(error)
+            return
+        }
+        joinCode.value = data ?? ""
+        joinDialogOpen.value = true
+    }
 </script>
 
 <template>
     <div class="flex h-full flex-col items-center">
         <div v-if="data" class="flex flex-col p-3 max-w-6xl items-center">
             <div class="absolute top-3 right-3 flex flex-col">
-                <button class="bg-green-500 hover:shadow-sm shadow-green-300 text-white p-2 rounded">
+                <button class="bg-green-500 hover:shadow-sm shadow-green-300 text-white p-2 rounded" @click="openJoinDialog()">
                     <UserPlusIcon class="h-6 w-6"/>
                 </button>
                 <button class="bg-red-500 mt-2 hover:shadow-sm shadow-red-300 text-white p-2 rounded" @click="deleteDialogOpen = true">
@@ -97,5 +110,13 @@
                 Delete
             </button>
         </div>
+    </x-dialog>
+
+    <x-dialog :open="joinDialogOpen" :modal="true" title="Join Class">
+        <h2 class="text-3xl text-center my-3">{{ joinCode }}</h2>
+        <p>Share this code with your students. It expires in two hours.</p>
+        <button class="block border mt-2 hover:bg-gray-100 shadow-red-300 p-2 mr-2 w-full rounded" @click="joinDialogOpen = false">
+            Close
+        </button>
     </x-dialog>
 </template>
