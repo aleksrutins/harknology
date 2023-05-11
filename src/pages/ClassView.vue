@@ -2,6 +2,7 @@
     import { supabase } from '../util/supabase';
     import UserDisplay from '../components/UserDisplay';
 import { ref } from 'vue';
+import { TrashIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
 
     const props = defineProps<{
                 id: string
@@ -40,6 +41,15 @@ import { ref } from 'vue';
 <template>
     <div class="flex h-full flex-col items-center">
         <div v-if="data" class="flex flex-col p-3 max-w-6xl items-center">
+            <div class="absolute top-3 right-3 flex flex-col">
+                <button class="bg-green-500 hover:shadow-sm shadow-green-300 text-white p-2 rounded">
+                    <UserPlusIcon class="h-6 w-6"/>
+                </button>
+                <button class="bg-red-500 mt-2 hover:shadow-sm shadow-red-300 text-white p-2 rounded">
+                    <TrashIcon class="h-6 w-6"/>
+                </button>
+            </div>
+
             <h1 class="font-bold text-2xl">{{ data.name }}</h1>
             <UserDisplay :uid="data.teacher_id"/>
             <p class="mt-3">{{ data.description }}</p>
