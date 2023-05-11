@@ -1,12 +1,15 @@
 <script setup lang="ts">
     import { supabase } from '../util/supabase';
     import UserDisplay from '../components/UserDisplay';
-import { ref } from 'vue';
-import { TrashIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
+    import { ref } from 'vue';
+    import { TrashIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
+    import { useRouter } from 'vue-router';
 
     const props = defineProps<{
                 id: string
             }>()
+
+        , router = useRouter()
 
         , data = (await supabase.from('classes')
                                .select()
@@ -18,6 +21,8 @@ import { TrashIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
 
         , addDiscussionName = ref("")
         , addDiscussionDesc = ref("")
+
+        , deleteDialogOpen = ref(false)
 
 
     async function getDiscussions() {
@@ -36,6 +41,13 @@ import { TrashIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
         addDiscussionDesc.value = ""
         await getDiscussions()
     }
+
+    async function deleteClass() {
+        const { error } = await supabase.from('classes').delete().eq('id', props.id)
+        if(error != null) console.error(error)
+        deleteDialogOpen.value = false;
+        router.push('/classes')
+    }
 </script>
 
 <template>
@@ -45,7 +57,7 @@ import { TrashIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
                 <button class="bg-green-500 hover:shadow-sm shadow-green-300 text-white p-2 rounded">
                     <UserPlusIcon class="h-6 w-6"/>
                 </button>
-                <button class="bg-red-500 mt-2 hover:shadow-sm shadow-red-300 text-white p-2 rounded">
+                <button class="bg-red-500 mt-2 hover:shadow-sm shadow-red-300 text-white p-2 rounded" @click="deleteDialogOpen = true">
                     <TrashIcon class="h-6 w-6"/>
                 </button>
             </div>
@@ -74,4 +86,16 @@ import { TrashIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
             <h1 class="text-xl font-bold">Error: not authorized</h1>
         </div>
     </div>
+
+    <x-dialog :open="deleteDialogOpen" :modal="true" title="Delete Class">
+        <p>Are you sure you want to delete the class "{{ data?.name }}"?</p>
+        <div class="flex flex-row justify-evenly mt-2">
+            <button class="block border mt-2 hover:bg-gray-100 shadow-red-300 p-2 mr-2 flex-grow rounded" @click="deleteDialogOpen = false">
+                Cancel
+            </button>
+            <button class="block bg-red-500 mt-2 hover:bg-red-600 shadow-red-300 text-white p-2 rounded flex-grow" @click="deleteClass()">
+                Delete
+            </button>
+        </div>
+    </x-dialog>
 </template>

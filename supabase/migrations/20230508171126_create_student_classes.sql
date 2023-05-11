@@ -1,7 +1,7 @@
 create table student_classes (
     id serial primary key,
-    student_id uuid references auth.users(id),
-    class_id uuid references classes(id)
+    student_id uuid references auth.users(id) on delete cascade,
+    class_id uuid references classes(id) on delete cascade
 );
 
 alter table student_classes

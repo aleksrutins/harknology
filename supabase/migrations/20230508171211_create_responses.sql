@@ -2,7 +2,7 @@ create table responses (
     id uuid primary key default gen_random_uuid(),
     user_id uuid references auth.users(id),
     content text not null,
-    discussion_id uuid references discussions(id)
+    discussion_id uuid references discussions(id) on delete cascade
 );
 
 alter table responses

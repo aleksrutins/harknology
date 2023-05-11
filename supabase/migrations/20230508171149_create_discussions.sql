@@ -1,6 +1,6 @@
 create table discussions (
     id uuid primary key default gen_random_uuid(),
-    class_id uuid references classes(id),
+    class_id uuid references classes(id) on delete cascade,
     description text,
     name varchar(255) not null
 );
