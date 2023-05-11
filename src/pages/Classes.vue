@@ -31,7 +31,7 @@ import { ellipsize } from '../util/ellipsize';
                     <UserDisplay :uid="classData.teacher_id ?? ''"/>
                     <p>{{ ellipsize(classData.description ?? '', 200) }}</p>
                 </router-link>
-                <a class="border border-dashed hover:border-solid p-3 m-3 rounded flex flex-col justify-center items-stretch transition-all w-80">
+                <a class="border border-dashed hover:border-solid p-3 m-3 rounded flex flex-col justify-center items-stretch transition-all sm:w-80">
                     <input type="text" class="border shadow-sm rounded block mb-2 p-2 text-lg" placeholder="Class Name" v-model="addClassName">
                     <textarea class="border shadow-sm rounded block mb-2 p-2" placeholder="Class description" v-model="addClassDesc"></textarea>
                     <button class="cursor-pointer border rounded hover:bg-gray-100 py-1 px-2 transition-all self-center" @click="addClass()">Add Class</button>
