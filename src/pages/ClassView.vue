@@ -3,7 +3,7 @@
     import UserDisplay from '../components/UserDisplay';
     import { ref } from 'vue';
     import { TrashIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
-    import { useRouter } from 'vue-router';
+    import { RouterLink, useRouter } from 'vue-router';
 
     const props = defineProps<{
                 id: string
@@ -82,7 +82,7 @@
             <div class="mt-3 flex-col w-full">
                 <h2 class="block font-semibold text-xl">Discussions</h2>
                 <div class="flex flex-col sm:flex-row sm:flex-wrap justify-start">
-                    <x-card v-for="discussion in discussions" :key="discussion.id">
+                    <x-card :component="RouterLink" v-for="discussion in discussions" :to="`/discussions/${discussion.id}`" :key="discussion.id">
                         <h3 class="text-lg">{{ discussion.name }}</h3>
                         <p>{{ discussion.description }}</p>
                     </x-card>
