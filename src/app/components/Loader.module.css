@@ -1,6 +1,8 @@
 .loadingIndicator {
+    --loader-border: black;
+
     display: flex;
-    border: 2px solid white;
+    border: 2px solid var(--loader-border);
     border-radius: 30%;
     height: 32px;
     width: 32px;
@@ -12,9 +14,15 @@
     align-items: center;
 }
 
+@media (prefers-color-scheme: dark) {
+    .loadingIndicator {
+        --loader-border: white;
+    }
+}
+
 .loadingIndicatorCenter {
     display: block;
-    border: 2px solid white;
+    border: 2px solid var(--loader-border);
     border-radius: 30%;
     height: 16px;
     width: 16px;

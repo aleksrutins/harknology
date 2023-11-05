@@ -26,7 +26,7 @@ export default async function ClassLayout({ children, params }: { children: Reac
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent variant="soft">
-                    <Suspense fallback={<Loader borderColor="black" center/>}>
+                    <Suspense fallback={<Loader center/>}>
                         <ClassesMenu/>
                     </Suspense>
                 </DropdownMenuContent>
@@ -39,7 +39,7 @@ export default async function ClassLayout({ children, params }: { children: Reac
 
             <h5 style={{textAlign: 'center'}}>Discussions</h5>
 
-            <Suspense fallback={<Loader center borderColor="black"/>}>
+            <Suspense fallback={<Loader center/>}>
                 <SidebarDiscussionList classId={params.id}/>
             </Suspense>
         </Flex>

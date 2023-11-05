@@ -28,7 +28,7 @@ export default function RootLayout({
         <body className={inter.className} style={{padding: 0, margin: 0}}>
           <Providers>
             <Theme accentColor="jade" radius="large">
-              <PageSuspense color='black'>
+              <PageSuspense>
                 {children}
               </PageSuspense>
               {process.env.NODE_ENV == 'development' && <ThemePanel />}
