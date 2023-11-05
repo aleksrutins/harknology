@@ -6,6 +6,8 @@ import { Button, Container, Flex, TextArea, TextField, TextFieldInput } from "@r
 import { revalidateTag } from "next/cache";
 import { cache } from "react";
 import styles from './home.module.css';
+import UserProfile from "./components/UserProfile";
+import Link from "next/link";
 
 export default async function Home() {
   const { userId } = auth();
@@ -34,10 +36,11 @@ export default async function Home() {
         </Flex>
         <Flex direction="row" wrap="wrap" gap="5">
           {classes.map(cls =>
-            <a key={cls.id} className={styles.classCard}>
+            <Link href={`/c/${cls.id}`} key={cls.id} className={styles.classCard}>
               <h2 style={{margin: 0}}>{cls.name}</h2>
+              <UserProfile userId={cls.teacher_id}/>
               <p>{cls.description}</p>
-            </a>
+            </Link>
           )}
 
           <form action={createClass} className={styles.classCard}>

@@ -15,3 +15,9 @@ export const getClasses = cache(async (userId: string) => await prisma.class.fin
         ]
     }
 }))
+
+export const getClass = cache(async (id: string) => await prisma.class.findUnique({
+    where: {
+        id
+    }
+}))
