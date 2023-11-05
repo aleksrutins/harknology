@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id String @id @unique
+
+  username     String @unique
+
+  auth_session Session[]
+  key          Key[]
+
+  classesTeaching Class[]    @relation("ClassTeacher")
+  classes         Class[]    @relation("ClassStudents")
+  responses       Response[]
+}
+
+model Session {
+  id             String @id @unique
+  user_id        String
+  active_expires BigInt
+  idle_expires   BigInt
+  user           User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+}
+
+model Key {
+  id              String  @id @unique
+  hashed_password String?
+  user_id         String
+  user            User    @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+}
+
+model Class {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  teacher_id  String
+  teacher     User   @relation("ClassTeacher", references: [id], fields: [teacher_id], onDelete: Cascade)
+  students    User[] @relation("ClassStudents")
+
+  discussions Discussion[]
+}
+
+model Discussion {
+  id          String     @id @default(cuid())
+  class_id    String
+  class       Class      @relation(references: [id], fields: [class_id], onDelete: Cascade)
+  description String
+  name        String
+  responses   Response[]
+}
+
+model Response {
+  id            String     @id @default(cuid())
+  user_id       String
+  user          User       @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  content       String
+  discussion_id String
+  discussion    Discussion @relation(references: [id], fields: [discussion_id], onDelete: Cascade)
+}
