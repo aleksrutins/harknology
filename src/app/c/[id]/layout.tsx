@@ -44,7 +44,7 @@ export default async function ClassLayout({ children, params }: { children: Reac
             </Suspense>
         </Flex>
         <div style={{ flex: 1 }}>
-            <PageSuspense color="black">
+            <PageSuspense>
                 {children}
             </PageSuspense>
         </div>
