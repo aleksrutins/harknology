@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Theme, ThemePanel } from '@radix-ui/themes'
+import { ClerkProvider } from '@clerk/nextjs'
+import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,13 +18,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Theme>
-          {children}
-          { process.env.NODE_ENV == 'development' && <ThemePanel/> }
-        </Theme>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className} style={{padding: 0, margin: 0}}>
+          <Providers>
+            <Theme accentColor="jade" radius="large">
+              {children}
+              {process.env.NODE_ENV == 'development' && <ThemePanel />}
+            </Theme>
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

@@ -1,0 +1,9 @@
+.classCard {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background-color: var(--gray-a3);
+    padding: 15px;
+    border-radius: var(--radius-3);
+    flex: 1;
+}
