@@ -1,5 +1,5 @@
 import Loader, { PageSuspense } from "@/app/components/Loader";
-import { getClass, getClasses } from "@/utils/classes";
+import { canAccessClass, getClass, getClasses } from "@/utils/classes";
 import { auth } from "@clerk/nextjs";
 import { CaretDownIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button, DropdownMenuContent, DropdownMenuRoot, DropdownMenuTrigger, Flex, Separator } from "@radix-ui/themes";
@@ -8,11 +8,12 @@ import ClassesMenu from "./ClassesMenu";
 import SidebarLink from "./SidebarLink";
 import SidebarDiscussionList from "./SidebarDiscussionList";
 import Link from "next/link";
+import ErrorDisplay from "@/app/components/ErrorDisplay";
 
 export default async function ClassLayout({ children, params }: { children: ReactNode, params: { id: string } }) {
     const { userId } = auth();
     const cls = await getClass(params.id);
-    if(!cls) return <div>Invalid class ID</div>
+    if(!cls || !canAccessClass(params.id, userId!)) return <ErrorDisplay err="Class not found"/>;
     return <Flex direction="row" style={{ height: '100vh', width: '100vw' }}>
         <Flex direction="column" align="stretch" gap='3' style={{ backgroundColor: 'var(--gray-2)', padding: '20px' }}>
             <Link href="/" style={{display: 'block', textAlign: 'center'}}><HomeIcon/></Link>
