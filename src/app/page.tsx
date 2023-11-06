@@ -8,6 +8,8 @@ import { cache } from "react";
 import styles from './home.module.css';
 import UserProfile from "./components/UserProfile";
 import Link from "next/link";
+import Image from "next/image";
+import logo from '@/../public/logo.svg'
 
 export default async function Home() {
   const { userId } = auth();
@@ -31,7 +33,10 @@ export default async function Home() {
     <Flex align="center" justify="center" style={{ backgroundColor: 'var(--gray-a2)', width: '100vw', height: '100vh', padding: '20px' }}>
       <Container size="3" style={{ minHeight: "50vh", maxWidth: '90vw' }}>
         <Flex direction="row" justify="between" align="center">
-          <h1>Your Classes</h1>
+          <Flex direction="row" align="center" gap="3">
+            <Image src={logo} alt="Harknology" width="48" height="48"/>
+            <h1>Your Classes</h1>
+          </Flex>
           <UserButton afterSignOutUrl="/" />
         </Flex>
         <Flex direction="row" wrap="wrap" gap="5">

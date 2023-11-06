@@ -1,7 +1,7 @@
 import Loader, { PageSuspense } from "@/app/components/Loader";
 import { canAccessClass, getClass, getClasses } from "@/utils/classes";
-import { auth } from "@clerk/nextjs";
-import { CaretDownIcon, HomeIcon, PersonIcon, PlusIcon } from "@radix-ui/react-icons";
+import { UserButton, auth } from "@clerk/nextjs";
+import { CaretDownIcon, HomeIcon, PersonIcon } from "@radix-ui/react-icons";
 import { Button, DropdownMenuContent, DropdownMenuRoot, DropdownMenuTrigger, Flex, Separator } from "@radix-ui/themes";
 import { ReactNode, Suspense } from "react";
 import ClassesMenu from "./ClassesMenu";
@@ -10,6 +10,8 @@ import SidebarDiscussionList from "./SidebarDiscussionList";
 import Link from "next/link";
 import ErrorDisplay from "@/app/components/ErrorDisplay";
 import CreateDiscussionDialog from "./CreateDiscussionDialog";
+import Image from "next/image";
+import logo from "@/../public/logo.svg";
 
 export default async function ClassLayout({ children, params }: { children: ReactNode, params: { id: string } }) {
     const { userId } = auth();
@@ -18,7 +20,12 @@ export default async function ClassLayout({ children, params }: { children: Reac
     
     return <Flex direction="row" style={{ height: '100vh', width: '100vw' }}>
         <Flex direction="column" align="stretch" gap='3' style={{ backgroundColor: 'var(--gray-2)', padding: '20px' }}>
-            <Link href="/" style={{display: 'block', textAlign: 'center'}}><HomeIcon/></Link>
+            <Flex direction="row" justify="between" align="center">
+                <Link href="/" style={{display: 'block', textAlign: 'center'}} title="Home">
+                    <Image src={logo} alt="Harknology" height="48" width="48"/>
+                </Link>
+                <UserButton afterSignOutUrl="/"/>
+            </Flex>
 
             <DropdownMenuRoot>
                 <DropdownMenuTrigger>
