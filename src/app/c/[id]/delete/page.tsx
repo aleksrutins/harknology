@@ -26,7 +26,7 @@ export default async function ConfirmDelete({ params: { id } }: { params: { id: 
 
     return <Flex direction="column" align="center" gap="2" px="6" style={{backgroundColor: 'var(--red-a3)', width: '100%', height: '100%'}}>
         <ExclamationTriangleIcon height={64} width={64} style={{padding: '20px'}}/> 
-        <h1>Are you sure you want to delete '{cls.name}'?</h1>
+        <h1>Are you sure you want to delete &quot;{cls.name}&quot;?</h1>
         <Flex direction="row" gap="2">
             <a href={`/c/${id}`}>
                 <Button variant="soft">

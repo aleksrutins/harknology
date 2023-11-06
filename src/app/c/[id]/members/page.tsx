@@ -11,7 +11,7 @@ export default async function ClassMembers({ params: { id: classId } }: { params
         
         <h2>Students</h2>
         <Flex direction="row" gap="3" wrap="wrap">
-            {members.students.map(({ student_id: id }) => <UserProfile userId={id} />)}
+            {members.students.map(({ student_id: id }) => <UserProfile key={id} userId={id} />)}
         </Flex>
     </Container>
 }
