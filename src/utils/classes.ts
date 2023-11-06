@@ -22,4 +22,9 @@ export const getClass = cache(async (id: string) => await prisma.class.findUniqu
     }
 }))
 
+export const getMembers = cache(async (id: string) => await prisma.class.findUnique({
+    where: { id },
+    select: { teacher_id: true, students: { select: { student_id: true } } }
+}))
+
 export const canAccessClass = cache(async (classId: string, userId: string) => (!!(await getClasses(userId)).find(c => c.id == classId)))

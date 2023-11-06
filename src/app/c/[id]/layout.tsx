@@ -22,7 +22,7 @@ export default async function ClassLayout({ children, params }: { children: Reac
 
             <DropdownMenuRoot>
                 <DropdownMenuTrigger>
-                    <Button variant="soft" style={{marginBottom: '10px'}}>
+                    <Button variant="soft" mb='2' style={{cursor: 'pointer'}}>
                         {cls.name}
                         <CaretDownIcon/>
                     </Button>
