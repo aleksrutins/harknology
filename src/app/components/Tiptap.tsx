@@ -11,7 +11,7 @@ import Loader from "./Loader";
 const TiptapControls = () => {
     const { editor } = useCurrentEditor();
 
-    return <Flex style={{overflowX: 'scroll', maxWidth: '100%'}} gap="3">
+    return <Flex style={{overflowX: 'scroll', maxWidth: '100%', marginBottom: 'var(--space-3)', flexShrink: 0}} gap="3">
         <Button type="button" onClick={() => editor?.chain()?.focus()?.toggleBold()?.run()} variant={editor?.isActive('bold') ? 'solid' : 'soft'}>
             <FontBoldIcon/>
         </Button>
@@ -48,7 +48,7 @@ const TiptapControls = () => {
 const TiptapContent = () => {
     const { editor } = useCurrentEditor();
 
-    return <EditorContent editor={editor} style={{display: 'block'}} />;
+    return <EditorContent editor={editor} style={{display: 'block', overflow: 'auto'}} />;
 }
 
 const TiptapFormCompat = () => {

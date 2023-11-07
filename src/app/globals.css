@@ -5,6 +5,28 @@ a {
     color: inherit;
 }
 
+div:has(> .tiptap) {
+    background-color: var(--gray-a3);
+    border: 1px solid var(--gray-a4);
+    border-radius: var(--radius-3);
+    overflow: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tiptap {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+}
+
 .tiptap:focus {
     outline: none;
+}
+
+blockquote {
+    border-left: 2px solid var(--gray-a4);
+    margin-left: 0;
+    padding-left: var(--space-4);
+    color: var(--gray-11)
 }

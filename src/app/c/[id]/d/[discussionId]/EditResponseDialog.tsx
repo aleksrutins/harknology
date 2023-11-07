@@ -9,7 +9,7 @@ export default function EditResponseDialog({ discussionId, responseId }: { discu
                 <Pencil1Icon />
             </Button>
         </DialogTrigger>
-        <DialogContent style={{maxWidth: '75vw', maxHeight: '75vh', overflow: 'auto'}}>
+        <DialogContent style={{maxWidth: '75vw', maxHeight: '75vh', display: 'flex', flexDirection: 'column'}}>
             <ResponseEditor discussionId={discussionId} responseId={responseId} cardVariant="ghost" shouldCloseDialog/>
         </DialogContent>
     </DialogRoot>

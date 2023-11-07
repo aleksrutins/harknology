@@ -6,7 +6,7 @@ import { Button, Card, Flex } from "@radix-ui/themes";
 import { revalidateTag } from "next/cache";
 import ResponseEditorClient from "./ResponseEditorClient";
 
-const ResponseEditor = async ({ discussionId, responseId, cardVariant, shouldCloseDialog }: { discussionId: string, responseId?: string, cardVariant?: 'surface' | 'ghost', shouldCloseDialog?: boolean }) => {
+const ResponseEditor = async ({ discussionId, responseId, shouldCloseDialog }: { discussionId: string, responseId?: string, cardVariant?: 'surface' | 'ghost', shouldCloseDialog?: boolean }) => {
     const { userId } = auth();
     const currentText = responseId ? (await getResponse(responseId))?.content : '';
 
@@ -37,7 +37,7 @@ const ResponseEditor = async ({ discussionId, responseId, cardVariant, shouldClo
         revalidateTag('responses');
     }
 
-    return <ResponseEditorClient currentText={currentText} save={save} cardVariant={cardVariant} shouldCloseDialog={shouldCloseDialog} />
+    return <ResponseEditorClient currentText={currentText} save={save} shouldCloseDialog={shouldCloseDialog} />
 }
 
 export default ResponseEditor;

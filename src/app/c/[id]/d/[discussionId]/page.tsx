@@ -3,7 +3,7 @@ import Loader from "@/app/components/Loader";
 import { canAccessClass } from "@/utils/classes";
 import { getDiscussion } from "@/utils/discussions";
 import { auth } from "@clerk/nextjs";
-import { Container, Text, Flex } from "@radix-ui/themes";
+import { Container, Text, Flex, Card } from "@radix-ui/themes";
 import { Suspense } from "react";
 import ResponsesList from "./responses";
 import ResponseEditor from "./ResponseEditor";
@@ -21,7 +21,9 @@ export default async function DiscussionView({ params }: { params: { id: string,
             <Suspense fallback={<Loader center />}>
                 <ResponsesList discussionId={params.discussionId} />
             </Suspense>
-            <ResponseEditor discussionId={params.discussionId} />
+            <Card>
+                <ResponseEditor discussionId={params.discussionId} />
+            </Card>
         </Flex>
     </>
 }
