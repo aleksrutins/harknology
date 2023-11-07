@@ -6,8 +6,8 @@ a {
 }
 
 div:has(> .tiptap) {
-    background-color: var(--gray-a1);
-    border: 1px solid var(--gray-a2);
+    background-color: var(--gray-a2);
+    border: 1px solid var(--gray-a3);
     border-radius: var(--radius-3);
     overflow: auto;
     flex: 1;
