@@ -8,6 +8,7 @@ import { revalidateTag } from "next/cache";
 import EditResponseDialog from "./EditResponseDialog";
 import DateTimeView from "@/app/components/DateTimeView";
 import ReplyButton from "./ReplyButton";
+import styles from './ResponseView.module.css';
 
 export function ResponseView({ response }: { response: Response & { repliesFrom: (Reply & { to: { poster_id: string } })[] } }) {
     const { userId } = auth();
@@ -24,7 +25,7 @@ export function ResponseView({ response }: { response: Response & { repliesFrom:
         revalidateTag('responses')
     }
 
-    return <Card id={`response-${response.id}`}>
+    return <Card className={styles.responseCard} id={`response-${response.id}`}>
         <Flex direction="column">
             <Flex direction="row" align="center" justify="between" gap="2">
                 <Flex gap="1">

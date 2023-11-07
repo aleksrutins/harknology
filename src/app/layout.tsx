@@ -31,7 +31,6 @@ export default function RootLayout({
               <PageSuspense>
                 {children}
               </PageSuspense>
-              {process.env.NODE_ENV == 'development' && <ThemePanel />}
             </Theme>
           </Providers>
         </body>

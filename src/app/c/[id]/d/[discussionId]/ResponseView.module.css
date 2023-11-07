@@ -1,0 +1,8 @@
+.responseCard {
+    transition-property: outline-width;
+    transition-duration: 0.2s;
+}
+
+.responseCard:target {
+    outline: 3px solid var(--accent-8);
+}
