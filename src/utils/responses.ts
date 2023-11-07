@@ -6,6 +6,9 @@ export const tags = ['responses'];
 export const getResponses = cache(async (discussionId: string) => await prisma.response.findMany({
     where: {
         discussion_id: discussionId
+    },
+    orderBy: {
+        created_at: 'asc'
     }
 }));
 

@@ -6,14 +6,16 @@ import { Button, Card, Flex } from "@radix-ui/themes";
 import { revalidateTag } from "next/cache";
 import ResponseEditorClient from "./ResponseEditorClient";
 
-const ResponseEditor = async ({ discussionId, responseId }: { discussionId: string, responseId?: string }) => {
+const ResponseEditor = async ({ discussionId, responseId, cardVariant, shouldCloseDialog }: { discussionId: string, responseId?: string, cardVariant?: 'surface' | 'ghost', shouldCloseDialog?: boolean }) => {
     const { userId } = auth();
     const currentText = responseId ? (await getResponse(responseId))?.content : '';
 
     async function save(formData: FormData) {
         'use server';
 
-        if(responseId) {
+        if(formData.get('content') == currentText) return;
+
+        if (responseId) {
             await prisma.response.update({
                 where: {
                     id: responseId
@@ -35,7 +37,7 @@ const ResponseEditor = async ({ discussionId, responseId }: { discussionId: stri
         revalidateTag('responses');
     }
 
-    return <ResponseEditorClient currentText={currentText} save={save}/>
+    return <ResponseEditorClient currentText={currentText} save={save} cardVariant={cardVariant} shouldCloseDialog={shouldCloseDialog} />
 }
 
 export default ResponseEditor;

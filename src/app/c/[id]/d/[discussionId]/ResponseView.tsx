@@ -3,8 +3,10 @@ import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs";
 import { Response } from "@prisma/client";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-import { Button, Card, Flex, Text } from "@radix-ui/themes";
+import { Button, Card, DialogClose, DropdownMenuRoot, DropdownMenuTrigger, Flex, Text } from "@radix-ui/themes";
 import { revalidateTag } from "next/cache";
+import EditResponseDialog from "./EditResponseDialog";
+import DateTimeView from "@/app/components/DateTimeView";
 
 export function ResponseView({ response }: { response: Response }) {
     const { userId } = auth();
@@ -24,12 +26,18 @@ export function ResponseView({ response }: { response: Response }) {
     return <Card>
         <Flex direction="column">
             <Flex direction="row" align="center" justify="between" gap="2">
-                <UserProfile userId={response.poster_id} />
+                <Flex gap="1">
+                    <UserProfile userId={response.poster_id} />
+                    •
+                    <DateTimeView date={response.created_at} />
+                    { (response.updated_at && response.updated_at.toLocaleString() != response.created_at.toLocaleString()) && <>
+                        • updated
+                        <DateTimeView date={response.updated_at} />
+                    </> }
+                </Flex>
                 {(userId == response.poster_id) && <form>
                     <Flex gap="2">
-                        <Button>
-                            <Pencil1Icon />
-                        </Button>
+                        <EditResponseDialog discussionId={response.discussion_id} responseId={response.id}/>
                         <Button type="submit" formAction={deleteResponse} color="red">
                             <TrashIcon />
                         </Button>
