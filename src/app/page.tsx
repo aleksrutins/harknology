@@ -10,36 +10,27 @@ import UserProfile from "./components/UserProfile";
 import Link from "next/link";
 import Image from "next/image";
 import logo from '@/../public/logo.svg'
+import CreateClassDialog from "./CreateClassDialog";
 
 export default async function Home() {
   const { userId } = auth();
   const classes = await getClasses(userId!)
 
-  async function createClass(data: FormData) {
-    'use server'
-
-    await prisma.class.create({
-      data: {
-        name: data.get('name') as string,
-        description: data.get('description') as string,
-        teacher_id: userId!
-      }
-    });
-
-    revalidateTag('classes')
-  }
-
   return (
-    <Flex align="center" justify="center" style={{ backgroundColor: 'var(--gray-a2)', width: '100vw', height: '100vh', padding: '20px' }}>
+    <Flex direction="column" align="center" px="2" style={{ backgroundColor: 'var(--gray-a2)', width: '100vw', height: '100vh' }}>
+      <Flex direction="row" justify="between" align="center" gap="2" style={{alignSelf: 'stretch'}} px="2">
+        <Flex direction="row" align="center" gap="2">
+          <Image src={logo} alt="Harknology" width="32" height="32"/>
+          <h2>Harknology</h2>
+        </Flex>
+        <UserButton afterSignOutUrl="/" />
+      </Flex>
       <Container size="3" style={{ minHeight: "50vh", maxWidth: '90vw' }}>
         <Flex direction="row" justify="between" align="center">
-          <Flex direction="row" align="center" gap="3">
-            <Image src={logo} alt="Harknology" width="48" height="48"/>
-            <h1>Your Classes</h1>
-          </Flex>
-          <UserButton afterSignOutUrl="/" />
+          <h1>Your Classes</h1>
+          <CreateClassDialog teacherId={userId!}/>
         </Flex>
-        <Flex direction="row" wrap="wrap" gap="5">
+        <Flex direction="row" justify="start" wrap="wrap" gap="5">
           {classes.map(cls =>
             <Link href={`/c/${cls.id}`} key={cls.id} className={styles.classCard}>
               <h2 style={{margin: 0}}>{cls.name}</h2>
@@ -47,12 +38,6 @@ export default async function Home() {
               <p>{cls.description}</p>
             </Link>
           )}
-
-          <form action={createClass} className={styles.classCard}>
-            <TextFieldInput placeholder="Name" name="name" />
-            <TextArea placeholder="Description" name="description" />
-            <Button type="submit" variant="solid">Create Class</Button>
-          </form>
         </Flex>
       </Container>
     </Flex>

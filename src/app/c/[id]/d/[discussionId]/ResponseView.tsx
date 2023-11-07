@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs";
 import { Reply, Response } from "@prisma/client";
 import { Pencil1Icon, ResetIcon, TrashIcon } from "@radix-ui/react-icons";
-import { Button, Card, DialogClose, DropdownMenuRoot, DropdownMenuTrigger, Flex, Text } from "@radix-ui/themes";
+import { Button, Card, DialogClose, DropdownMenuRoot, DropdownMenuTrigger, Flex, IconButton, Text } from "@radix-ui/themes";
 import { revalidateTag } from "next/cache";
 import EditResponseDialog from "./EditResponseDialog";
 import DateTimeView from "@/app/components/DateTimeView";
@@ -41,9 +41,9 @@ export function ResponseView({ response }: { response: Response & { repliesFrom:
                     <Flex gap="2">
                         {(userId == response.poster_id) && <>
                             <EditResponseDialog discussionId={response.discussion_id} responseId={response.id} />
-                            <Button type="submit" formAction={deleteResponse} color="red">
+                            <IconButton type="submit" formAction={deleteResponse} color="red">
                                 <TrashIcon />
-                            </Button></>
+                            </IconButton></>
                         }
                         <ReplyButton replyTo={response.id}>
                             <ResetIcon />
