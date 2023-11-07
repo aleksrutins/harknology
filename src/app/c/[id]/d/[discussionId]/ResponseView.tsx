@@ -9,7 +9,7 @@ import EditResponseDialog from "./EditResponseDialog";
 import DateTimeView from "@/app/components/DateTimeView";
 import ReplyButton from "./ReplyButton";
 
-export function ResponseView({ response }: { response: Response & { repliesFrom: (Reply & { to: Response })[] } }) {
+export function ResponseView({ response }: { response: Response & { repliesFrom: (Reply & { to: { poster_id: string } })[] } }) {
     const { userId } = auth();
 
     async function deleteResponse() {
