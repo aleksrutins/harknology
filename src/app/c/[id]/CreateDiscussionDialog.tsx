@@ -2,19 +2,21 @@ import prisma from "@/lib/prisma";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { Button, DialogClose, DialogContent, DialogDescription, DialogRoot, DialogTitle, DialogTrigger, Flex, TextArea, TextFieldInput } from "@radix-ui/themes";
 import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export default function CreateDiscussionDialog({ classId }: { classId: string }) {
     async function createDiscussion(form: FormData) {
         'use server';
-        await prisma.discussion.create({
+        const { id } = await prisma.discussion.create({
             data: {
                 name: form.get('name') as string,
                 description: form.get('description') as string,
                 class_id: classId
-            }
+            },
         });
 
         revalidateTag('discussions');
+        redirect(`/c/${classId}/d/${id}`);
     }
     
     return <DialogRoot>
