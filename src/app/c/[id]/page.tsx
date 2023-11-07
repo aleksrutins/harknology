@@ -37,13 +37,13 @@ export default async function ClassHome({ params: { id: classId } }: { params: {
         redirect('/');
     }
 
-    return <Container px="3">
-        <h1>{classData.name}</h1>
-        <Flex direction='row' gap='2'>
+    return <>
+        <Text size="8" weight="bold">{classData.name}</Text>
+        <Text as="p" size="2" color="gray">{classData.description}</Text>
+        <Flex direction='row' gap='2' my="2">
             Taught by
             <UserProfile userId={classData.teacher_id}/>
         </Flex>
-        <Text as="p">{classData.description}</Text>
 
         {classData.teacher_id == auth().userId &&
             <Card style={{maxWidth: 300, marginTop: 10}}>
@@ -61,5 +61,5 @@ export default async function ClassHome({ params: { id: classId } }: { params: {
                 </Flex>
             </Card>
         }
-    </Container>
+    </>
 }

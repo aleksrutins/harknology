@@ -2,7 +2,7 @@ import Loader, { PageSuspense } from "@/app/components/Loader";
 import { canAccessClass, getClass, getClasses } from "@/utils/classes";
 import { UserButton, auth } from "@clerk/nextjs";
 import { CaretDownIcon, HomeIcon, PersonIcon } from "@radix-ui/react-icons";
-import { Button, DropdownMenuContent, DropdownMenuRoot, DropdownMenuTrigger, Flex, Separator } from "@radix-ui/themes";
+import { Button, Container, DropdownMenuContent, DropdownMenuRoot, DropdownMenuTrigger, Flex, Separator } from "@radix-ui/themes";
 import { ReactNode, Suspense } from "react";
 import ClassesMenu from "./ClassesMenu";
 import SidebarLink from "./SidebarLink";
@@ -62,10 +62,14 @@ export default async function ClassLayout({ children, params }: { children: Reac
                 <SidebarDiscussionList classId={params.id}/>
             </Suspense>
         </Flex>
-        <div style={{ flex: 1 }}>
+        <Flex px="3" style={{ flex: 1, overflow: 'auto' }}>
             <PageSuspense>
-                {children}
+                <Container>
+                    <div style={{paddingTop: 'var(--space-6)', paddingBottom: 'var(--space-6)'}}>
+                        {children}
+                    </div>
+                </Container>
             </PageSuspense>
-        </div>
+        </Flex>
     </Flex>
 }

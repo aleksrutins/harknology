@@ -4,3 +4,7 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+.tiptap:focus {
+    outline: none;
+}
