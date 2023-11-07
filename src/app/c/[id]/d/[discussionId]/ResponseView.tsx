@@ -39,15 +39,15 @@ export function ResponseView({ response }: { response: Response & { repliesFrom:
                 </Flex>
                 <form>
                     <Flex gap="2">
-                        <ReplyButton replyTo={response.id}>
-                            <ResetIcon />
-                        </ReplyButton>
                         {(userId == response.poster_id) && <>
                             <EditResponseDialog discussionId={response.discussion_id} responseId={response.id} />
                             <Button type="submit" formAction={deleteResponse} color="red">
                                 <TrashIcon />
                             </Button></>
                         }
+                        <ReplyButton replyTo={response.id}>
+                            <ResetIcon />
+                        </ReplyButton>
                     </Flex>
                 </form>
             </Flex>
