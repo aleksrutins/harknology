@@ -7,6 +7,17 @@ export const getResponses = cache(async (discussionId: string) => await prisma.r
     where: {
         discussion_id: discussionId
     },
+    include: {
+        repliesFrom: {
+            include: {
+                to: {
+                    select: {
+                        poster_id: true
+                    }
+                }
+            }
+        }
+    },
     orderBy: {
         created_at: 'asc'
     }

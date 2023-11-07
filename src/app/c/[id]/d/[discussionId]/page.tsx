@@ -7,6 +7,7 @@ import { Container, Text, Flex, Card } from "@radix-ui/themes";
 import { Suspense } from "react";
 import ResponsesList from "./responses";
 import ResponseEditor from "./ResponseEditor";
+import { ReplyContext, ReplyProvider } from "./replies";
 
 export default async function DiscussionView({ params }: { params: { id: string, discussionId: string } }) {
     const { userId } = auth();
@@ -18,12 +19,14 @@ export default async function DiscussionView({ params }: { params: { id: string,
         <Text size="8" weight="bold">{discussion.name}</Text>
         <Text as="p" size="2" color="gray">{discussion.description}</Text>
         <Flex direction="column" gap="3" pt="3">
-            <Suspense fallback={<Loader center />}>
-                <ResponsesList discussionId={params.discussionId} />
-            </Suspense>
-            <Card>
-                <ResponseEditor discussionId={params.discussionId} />
-            </Card>
+            <ReplyProvider>
+                <Suspense fallback={<Loader center />}>
+                    <ResponsesList discussionId={params.discussionId} />
+                </Suspense>
+                <Card>
+                    <ResponseEditor discussionId={params.discussionId} />
+                </Card>
+            </ReplyProvider>
         </Flex>
     </>
 }

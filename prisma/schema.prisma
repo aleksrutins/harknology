@@ -43,4 +43,15 @@ model Response {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  repliesFrom Reply[] @relation("replyFrom")
+  repliesTo   Reply[] @relation("replyTo")
+}
+
+model Reply {
+  id      String   @id @default(cuid())
+  from_id String
+  to_id   String
+  from    Response @relation("replyFrom", references: [id], fields: [from_id], onDelete: Cascade)
+  to      Response @relation("replyTo", references: [id], fields: [to_id], onDelete: Cascade)
 }
