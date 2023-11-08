@@ -1,2 +1,2 @@
 [start]
-cmd = "npx prisma db push && npm start"
+cmd = "sleep 2 && npx prisma db push && npm start"
