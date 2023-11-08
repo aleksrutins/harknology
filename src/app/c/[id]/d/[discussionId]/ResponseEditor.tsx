@@ -31,7 +31,8 @@ const ResponseEditor = async ({ discussionId, responseId, shouldCloseDialog }: {
                     content: formData.get('content') as string,
                     poster_id: userId!,
                     repliesFrom: {
-                        create: (formData.get('replyTo') as string)
+                        create: formData.get('replyTo') == '' ? [] : 
+                            (formData.get('replyTo') as string)
                             .split(';')
                             .map(reply => ({ to_id: reply }))
                     }
