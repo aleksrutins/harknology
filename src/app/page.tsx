@@ -26,7 +26,7 @@ export default async function Home() {
         <UserButton afterSignOutUrl="/" />
       </Flex>
       <Container size="3" style={{ minHeight: "50vh", maxWidth: '90vw' }}>
-        <Flex direction="row" justify="between" align="center">
+        <Flex direction="row" justify="between" align="center" gap="2">
           <h1>Your Classes</h1>
           <CreateClassDialog teacherId={userId!}/>
         </Flex>
