@@ -18,13 +18,17 @@ export async function getJoinCode(classId: string) {
 
     while(true)
         try {
-            return await prisma.joinCode.create({
-                data: {
+            return await prisma.joinCode.upsert({
+                create: {
+                    classId
+                },
+                update: {},
+                where: {
                     classId
                 }
             })
         } catch(e) {
-
+            console.log(e);
         }
 }
 
