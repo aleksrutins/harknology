@@ -19,7 +19,7 @@ CREATE TABLE "StudentClass" (
 
 -- CreateTable
 CREATE TABLE "JoinCode" (
-    "code" TEXT NOT NULL DEFAULT substr(md5(random()::text), 0, 5),
+    "code" TEXT NOT NULL DEFAULT substr(md5(random()::text), 0, 7),
     "classId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -57,6 +57,9 @@ CREATE TABLE "Reply" (
     CONSTRAINT "Reply_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateIndex
+CREATE UNIQUE INDEX "JoinCode_classId_key" ON "JoinCode"("classId");
+
 -- AddForeignKey
 ALTER TABLE "StudentClass" ADD CONSTRAINT "StudentClass_class_id_fkey" FOREIGN KEY ("class_id") REFERENCES "Class"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -74,3 +77,4 @@ ALTER TABLE "Reply" ADD CONSTRAINT "Reply_from_id_fkey" FOREIGN KEY ("from_id") 
 
 -- AddForeignKey
 ALTER TABLE "Reply" ADD CONSTRAINT "Reply_to_id_fkey" FOREIGN KEY ("to_id") REFERENCES "Response"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
