@@ -9,8 +9,8 @@ async function InviteDialogContent({ classId }: { classId: string }) {
     const code = await getJoinCode(classId);
     const joinURL = `https://harknology.app/join?code=${code.code}`;
 
-    return <Flex align="stretch" gap="5">
-        <QRCode value={joinURL}/>
+    return <Flex direction={{ initial: 'column', md: 'row' }} align="stretch" gap="5">
+        <QRCode value={joinURL} style={{alignSelf: 'center'}}/>
         <Flex direction="column" style={{flex: 1}}>
             <code style={{alignSelf: 'center', paddingLeft: '10px', paddingRight: '10px', border: '1px solid var(--gray-4)', borderRadius: 'var(--radius-3)', backgroundColor: 'var(--gray-3)', fontSize: '24pt'}}>{code.code}</code>
             <p>Enter the above code at <Link href="/join" style={{color: 'var(--blue-11)', textDecoration: 'underline'}}>harknology.app/join</Link>, or use the below link:</p>
