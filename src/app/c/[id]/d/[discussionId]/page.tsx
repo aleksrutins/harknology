@@ -9,6 +9,7 @@ import ResponsesList from "./responses";
 import ResponseEditor from "./ResponseEditor";
 import { ReplyContext, ReplyProvider } from "./replies";
 import DiscussionSettings from "./DiscussionSettings";
+import { LockClosedIcon } from "@radix-ui/react-icons";
 
 export default async function DiscussionView({
     params,
@@ -29,6 +30,14 @@ export default async function DiscussionView({
                 </Text>
                 {userId === discussion.class.teacher_id && (
                     <DiscussionSettings discussion={discussion} />
+                )}
+                {discussion.locked && (
+                    <Text size="2" color="gray">
+                        <Flex align="center" gap="1">
+                            <LockClosedIcon />
+                            Locked
+                        </Flex>
+                    </Text>
                 )}
             </Flex>
             <Text
