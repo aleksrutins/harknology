@@ -28,7 +28,6 @@ export default async function DiscussionView({
             <Text
                 as="p"
                 size="2"
-                color="gray"
                 dangerouslySetInnerHTML={{ __html: discussion.description }}
             />
             <Flex direction="column" gap="3" pt="3">
