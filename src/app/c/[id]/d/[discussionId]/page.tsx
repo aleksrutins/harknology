@@ -27,7 +27,9 @@ export default async function DiscussionView({
                 <Text size="8" weight="bold">
                     {discussion.name}
                 </Text>
-                <DiscussionSettings discussion={discussion} />
+                {userId === discussion.class.teacher_id && (
+                    <DiscussionSettings discussion={discussion} />
+                )}
             </Flex>
             <Text
                 as="p"
@@ -40,11 +42,16 @@ export default async function DiscussionView({
                         <ResponsesList
                             discussionId={params.discussionId}
                             isTeacher={discussion.class.teacher_id === userId}
+                            isLocked={discussion.locked}
                         />
                     </Suspense>
-                    <Card>
-                        <ResponseEditor discussionId={params.discussionId} />
-                    </Card>
+                    {!discussion.locked && (
+                        <Card>
+                            <ResponseEditor
+                                discussionId={params.discussionId}
+                            />
+                        </Card>
+                    )}
                 </ReplyProvider>
             </Flex>
         </>

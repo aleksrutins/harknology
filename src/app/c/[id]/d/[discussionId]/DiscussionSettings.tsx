@@ -8,6 +8,7 @@ import { GearIcon } from "@radix-ui/react-icons";
 import {
     Button,
     Card,
+    Checkbox,
     DialogClose,
     DialogContent,
     DialogRoot,
@@ -15,6 +16,7 @@ import {
     DialogTrigger,
     Flex,
     IconButton,
+    Text,
     TextFieldInput,
 } from "@radix-ui/themes";
 import { revalidateTag } from "next/cache";
@@ -29,10 +31,11 @@ export default function DiscussionSettings({
         "use server";
         const name = formData.get("name") as string;
         const description = formData.get("content") as string;
+        const locked = formData.get("locked") === "on";
 
         await prisma.discussion.update({
             where: { id: discussion.id },
-            data: { name, description },
+            data: { name, description, locked },
         });
 
         revalidateTag("discussions");
@@ -72,6 +75,16 @@ export default function DiscussionSettings({
                                 <TiptapFormCompat />
                             </Tiptap>
                         </Card>
+
+                        <Text as="label">
+                            <Flex gap="2" align="center">
+                                <Checkbox
+                                    defaultChecked={discussion.locked}
+                                    name="locked"
+                                />
+                                Locked
+                            </Flex>
+                        </Text>
 
                         <Flex gap="3" mt="4" justify="between">
                             <DialogClose>
