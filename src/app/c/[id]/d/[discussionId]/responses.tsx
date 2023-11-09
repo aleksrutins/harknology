@@ -4,9 +4,11 @@ import { ResponseView } from "./ResponseView";
 
 export default async function ResponsesList({
     discussionId,
+    isLocked,
     isTeacher,
 }: {
     discussionId: string;
+    isLocked: boolean;
     isTeacher: boolean;
 }) {
     const responses = await getResponses(discussionId);
@@ -18,6 +20,7 @@ export default async function ResponsesList({
                     key={response.id}
                     response={response}
                     isTeacher={isTeacher}
+                    isLocked={isLocked}
                 />
             ))}
         </Flex>

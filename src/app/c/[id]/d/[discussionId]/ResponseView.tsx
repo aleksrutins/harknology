@@ -22,11 +22,13 @@ import styles from "./ResponseView.module.css";
 export function ResponseView({
     response,
     isTeacher,
+    isLocked,
 }: {
     response: Response & {
         repliesFrom: (Reply & { to: { poster_id: string } })[];
     };
     isTeacher: boolean;
+    isLocked: boolean;
 }) {
     const { userId } = auth();
 
@@ -61,24 +63,31 @@ export function ResponseView({
                     </Flex>
                     <form>
                         <Flex gap="2">
-                            {(userId == response.poster_id || isTeacher) && (
+                            {!isLocked && (
                                 <>
-                                    <EditResponseDialog
-                                        discussionId={response.discussion_id}
-                                        responseId={response.id}
-                                    />
-                                    <IconButton
-                                        type="submit"
-                                        formAction={deleteResponse}
-                                        color="red"
-                                    >
-                                        <TrashIcon />
-                                    </IconButton>
+                                    {(userId == response.poster_id ||
+                                        isTeacher) && (
+                                        <>
+                                            <EditResponseDialog
+                                                discussionId={
+                                                    response.discussion_id
+                                                }
+                                                responseId={response.id}
+                                            />
+                                            <IconButton
+                                                type="submit"
+                                                formAction={deleteResponse}
+                                                color="red"
+                                            >
+                                                <TrashIcon />
+                                            </IconButton>
+                                        </>
+                                    )}
+                                    <ReplyButton replyTo={response.id}>
+                                        <ResetIcon />
+                                    </ReplyButton>
                                 </>
                             )}
-                            <ReplyButton replyTo={response.id}>
-                                <ResetIcon />
-                            </ReplyButton>
                         </Flex>
                     </form>
                 </Flex>
