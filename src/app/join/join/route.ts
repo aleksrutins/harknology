@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs";
 
 export async function POST(req: Request) {
   const { userId } = auth();
+  if (!userId) return new Response("Not authenticated", { status: 403 });
   const params = new URL(req.url).searchParams;
   const code = params.get("code") as string | undefined;
   if (!code) return new Response("Invalid code", { status: 400 });
@@ -13,8 +14,8 @@ export async function POST(req: Request) {
 
   await prisma.studentClass.create({
     data: {
-      classId: classData.id,
-      studentId: userId,
+      class_id: classData.id,
+      student_id: userId,
     },
   });
 
