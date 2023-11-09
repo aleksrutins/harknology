@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { getClassInfo } from "@/app/join/join";
 import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export async function GET(req: Request) {
     const { userId } = auth();
@@ -19,5 +20,5 @@ export async function GET(req: Request) {
         },
     });
 
-    return Response.redirect(`/c/${classData.id}`);
+    redirect(`/c/${classData.id}`);
 }
