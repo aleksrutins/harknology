@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { getClasses } from "@/utils/classes";
 import { UserButton, auth } from "@clerk/nextjs";
 import { Class } from "@prisma/client";
-import { Button, Container, Flex, TextArea, TextField, TextFieldInput } from "@radix-ui/themes";
+import { Button, Container, Flex, IconButton, TextArea, TextField, TextFieldInput } from "@radix-ui/themes";
 import { revalidateTag } from "next/cache";
 import { cache } from "react";
 import styles from './home.module.css';
@@ -11,6 +11,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from '@/../public/logo.svg'
 import CreateClassDialog from "./CreateClassDialog";
+import { EnterIcon } from "@radix-ui/react-icons";
 
 export default async function Home() {
   const { userId } = auth();
@@ -28,7 +29,14 @@ export default async function Home() {
       <Container size="3" style={{ minHeight: "50vh", maxWidth: '90vw' }}>
         <Flex direction="row" justify="between" align="center" gap="4">
           <h1>Your Classes</h1>
-          <CreateClassDialog teacherId={userId!}/>
+          <Flex gap="3">
+            <CreateClassDialog teacherId={userId!}/>
+            <Link href="/join">
+              <IconButton radius="full" size="3" title="Join" style={{cursor: 'pointer'}}>
+                <EnterIcon width={24} height={24}/>
+              </IconButton>
+            </Link>
+          </Flex>
         </Flex>
         <Flex direction="row" justify="start" wrap="wrap" gap="5">
           {classes.map(cls =>

@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Class {
@@ -12,9 +12,10 @@ model Class {
   name        String
   description String
   teacher_id  String
-
+  
   discussions Discussion[]
   students    StudentClass[]
+  joinCodes   JoinCode[]
 }
 
 model StudentClass {
@@ -22,6 +23,14 @@ model StudentClass {
   student_id String
   class_id   String
   class      Class  @relation(references: [id], fields: [class_id], onDelete: Cascade)
+}
+
+model JoinCode {
+  code      String   @id @default(dbgenerated("substr(md5(random()::text), 0, 5)"))
+  classId   String
+  createdAt DateTime @default(now())
+
+  class Class @relation(references: [id], fields: [classId], onDelete: Cascade)
 }
 
 model Discussion {
