@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import ResponsesList from "./responses";
 import ResponseEditor from "./ResponseEditor";
 import { ReplyContext, ReplyProvider } from "./replies";
+import DiscussionSettings from "./DiscussionSettings";
 
 export default async function DiscussionView({
     params,
@@ -22,9 +23,12 @@ export default async function DiscussionView({
 
     return (
         <>
-            <Text size="8" weight="bold">
-                {discussion.name}
-            </Text>
+            <Flex gap="2" align="center">
+                <Text size="8" weight="bold">
+                    {discussion.name}
+                </Text>
+                <DiscussionSettings discussion={discussion} />
+            </Flex>
             <Text
                 as="p"
                 size="2"
