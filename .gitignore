@@ -9,10 +9,6 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
 /build
 
@@ -37,3 +33,10 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# moon
+.moon/cache
+.moon/docker
+
+# rust
+target/

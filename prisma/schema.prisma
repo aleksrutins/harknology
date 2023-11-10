@@ -1,5 +1,8 @@
 generator client {
-  provider = "prisma-client-js"
+  // Corresponds to the cargo alias created earlier
+  provider = "cargo prisma"
+  // The location to generate the client. Is relative to the position of the schema
+  output   = "../apps/server/src/prisma.rs"
 }
 
 datasource db {
