@@ -1,4 +1,4 @@
-import { getResponses } from "@/utils/responses";
+import { getResponses } from "@/utils/queries/responses";
 import { Flex } from "@radix-ui/themes";
 import { ResponseView } from "./ResponseView";
 

@@ -3,6 +3,7 @@ import Tiptap, {
     TiptapFormCompat,
 } from "@/app/components/Tiptap";
 import prisma from "@/lib/prisma";
+import { deleteDiscussion, save } from "@/utils/mutations/discussions";
 import { Discussion } from "@prisma/client";
 import { GearIcon } from "@radix-ui/react-icons";
 import {
@@ -27,30 +28,6 @@ export default function DiscussionSettings({
 }: {
     discussion: Discussion;
 }) {
-    async function saveInfo(formData: FormData) {
-        "use server";
-        const name = formData.get("name") as string;
-        const description = formData.get("content") as string;
-        const locked = formData.get("locked") === "on";
-
-        await prisma.discussion.update({
-            where: { id: discussion.id },
-            data: { name, description, locked },
-        });
-
-        revalidateTag("discussions");
-    }
-
-    async function deleteDiscussion() {
-        "use server";
-        await prisma.discussion.delete({
-            where: { id: discussion.id },
-        });
-
-        revalidateTag("discussions");
-        redirect(`/c/${discussion.class_id}`);
-    }
-
     return (
         <DialogRoot>
             <DialogTrigger>
@@ -61,7 +38,7 @@ export default function DiscussionSettings({
             <DialogContent>
                 <DialogTitle>Edit {discussion.name}</DialogTitle>
 
-                <form action={saveInfo}>
+                <form action={save(discussion.class_id, discussion.id)}>
                     <Flex direction="column" gap="2">
                         <TextFieldInput
                             placeholder="Name"
@@ -92,7 +69,7 @@ export default function DiscussionSettings({
                                     type="submit"
                                     variant="soft"
                                     color="red"
-                                    formAction={deleteDiscussion}
+                                    formAction={deleteDiscussion(discussion.id)}
                                 >
                                     Delete
                                 </Button>
