@@ -18,6 +18,7 @@ import EditResponseDialog from "./EditResponseDialog";
 import DateTimeView from "@/app/components/DateTimeView";
 import ReplyButton from "./ReplyButton";
 import styles from "./ResponseView.module.css";
+import { deleteResponse } from "@/utils/mutations/responses";
 
 export function ResponseView({
     response,
@@ -31,18 +32,6 @@ export function ResponseView({
     isLocked: boolean;
 }) {
     const { userId } = auth();
-
-    async function deleteResponse() {
-        "use server";
-
-        await prisma.response.delete({
-            where: {
-                id: response.id,
-            },
-        });
-
-        revalidateTag("responses");
-    }
 
     return (
         <Card className={styles.responseCard} id={`response-${response.id}`}>
@@ -76,7 +65,9 @@ export function ResponseView({
                                             />
                                             <IconButton
                                                 type="submit"
-                                                formAction={deleteResponse}
+                                                formAction={deleteResponse(
+                                                    response.id,
+                                                )}
                                                 color="red"
                                             >
                                                 <TrashIcon />

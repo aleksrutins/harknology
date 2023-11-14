@@ -1,7 +1,7 @@
 import ErrorDisplay from "@/app/components/ErrorDisplay";
 import Loader from "@/app/components/Loader";
-import { canAccessClass } from "@/utils/classes";
-import { getDiscussion } from "@/utils/discussions";
+import { canAccessClass } from "@/utils/queries/classes";
+import { getDiscussion } from "@/utils/queries/discussions";
 import { auth } from "@clerk/nextjs";
 import { Container, Text, Flex, Card } from "@radix-ui/themes";
 import { Suspense } from "react";
